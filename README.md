@@ -42,8 +42,8 @@ solve-for-ai/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/solve-for-ai.git
-cd solve-for-ai
+git clone https://github.com/ROOK-KNIGHT/SolveforAI.git
+cd SolveforAI
 ```
 
 2. Install dependencies:
