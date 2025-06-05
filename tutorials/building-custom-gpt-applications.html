@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to build custom GPT applications using OpenAI's API. This comprehensive tutorial covers everything from API setup to advanced prompting techniques.">
+    <title>Building Custom GPT Applications: A Complete Guide | Solve for AI</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <!-- AdSense placeholder - Replace with your actual AdSense code in production -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html">Solve<span> for AI</span></a>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../tutorials.html">Tutorials</a></li>
+                    <li><a href="../learning-paths.html">Learning Paths</a></li>
+                    <li><a href="../tools.html">AI Tools</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            
+            <div class="dark-mode-toggle" title="Toggle Dark Mode">🌙</div>
+            <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+        </div>
+        
+        <!-- Header Banner Ad -->
+        <div class="container">
+            <div class="ad-container header-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+    </header>
+    
+    <!-- Tutorial Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Main Tutorial Content -->
+            <div class="tutorial-full">
+                <div class="tutorial-header">
+                    <h1>Building Custom GPT Applications: A Complete Guide</h1>
+                    <div class="tutorial-meta">
+                        <span class="tutorial-level">Advanced</span>
+                        <span class="tutorial-time"><i class="far fa-clock"></i> 25 min read</span>
+                        <span class="tutorial-date">Updated: June 1, 2025</span>
+                    </div>
+                    <div class="tutorial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author photo">
+                        <div>
+                            <p class="author-name">Alex Johnson</p>
+                            <p class="author-title">AI Research Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Image -->
+                <div class="tutorial-featured-image">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="GPT Applications">
+                </div>
+                
+                <!-- Table of Contents -->
+                <div class="tutorial-toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#introduction">Introduction to GPT and its Capabilities</a></li>
+                        <li><a href="#setup">Setting Up Your OpenAI API Access</a></li>
+                        <li><a href="#basics">Basic API Calls and Response Handling</a></li>
+                        <li><a href="#prompt-engineering">Advanced Prompt Engineering Techniques</a></li>
+                        <li><a href="#application">Building a Real-world Application</a></li>
+                        <li><a href="#optimization">Optimization and Cost Management</a></li>
+                        <li><a href="#conclusion">Conclusion and Next Steps</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Introduction Section -->
+                <section id="introduction">
+                    <h2>Introduction to GPT and its Capabilities</h2>
+                    <p>GPT (Generative Pre-trained Transformer) models have revolutionized natural language processing and artificial intelligence. These large language models can understand context, generate human-like text, translate languages, write different kinds of creative content, and answer your questions in an informative way.</p>
+                    
+                    <p>In this tutorial, we'll explore how to leverage OpenAI's GPT models through their API to build custom applications that can:</p>
+                    
+                    <ul>
+                        <li>Generate creative content (stories, articles, poems, scripts)</li>
+                        <li>Answer questions based on specific knowledge domains</li>
+                        <li>Translate and summarize text</li>
+                        <li>Write code and debug programming issues</li>
+                        <li>Create conversational agents and chatbots</li>
+                    </ul>
+                    
+                    <p>By the end of this tutorial, you'll have the knowledge to create applications that use GPT's capabilities in a controlled and efficient way, tailored to your specific needs.</p>
+                </section>
+                
+                <!-- Mid-content ad -->
+                <div class="ad-container content-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Setup Section -->
+                <section id="setup">
+                    <h2>Setting Up Your OpenAI API Access</h2>
+                    <p>Before we can start building with GPT, we need to set up our API access. Follow these steps to get started:</p>
+                    
+                    <h3>1. Create an OpenAI Account</h3>
+                    <p>If you don't already have an OpenAI account, visit <a href="https://platform.openai.com/signup" target="_blank">OpenAI's website</a> to sign up. You'll need to provide some basic information and verify your email address.</p>
+                    
+                    <h3>2. Generate an API Key</h3>
+                    <p>Once logged in, navigate to the API section and create a new API key. This key will be used to authenticate your requests to the GPT API.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+# Store your API key safely
+# Never hardcode it directly in your application files
+# Example of loading from environment variable
+
+import os
+import openai
+
+# Set your API key
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+# Verify your API key is working
+try:
+    models = openai.Model.list()
+    print("API connection successful!")
+except Exception as e:
+    print(f"Error connecting to OpenAI API: {e}")
+                        </code></pre>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Important Security Note</h4>
+                        <p>Never expose your API key in client-side code or public repositories. Use environment variables or secure vaults to store your key. OpenAI API usage incurs costs based on the number of tokens processed, so a leaked key could result in unauthorized charges to your account.</p>
+                    </div>
+                    
+                    <h3>3. Install the OpenAI Python Library</h3>
+                    <p>We'll use the official OpenAI Python library to interact with the API. Install it using pip:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>pip install openai</code></pre>
+                    </div>
+                </section>
+                
+                <!-- Basics Section -->
+                <section id="basics">
+                    <h2>Basic API Calls and Response Handling</h2>
+                    <p>Now that we have our environment set up, let's start with some basic API calls to understand how the GPT models work.</p>
+                    
+                    <h3>Making Your First API Call</h3>
+                    <p>The simplest way to interact with the GPT API is through the chat completions endpoint. Here's a basic example:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+import openai
+
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Explain quantum computing in simple terms."}
+    ]
+)
+
+# Extract the response text
+assistant_reply = response.choices[0].message['content']
+print(assistant_reply)
+                        </code></pre>
+                    </div>
+                    
+                    <h3>Understanding the Response Structure</h3>
+                    <p>When you make an API call, you'll receive a response object with several important components:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+# Sample response structure
+{
+  "id": "chatcmpl-123ABC...",
+  "object": "chat.completion",
+  "created": 1677858242,
+  "model": "gpt-4",
+  "usage": {
+    "prompt_tokens": 13,
+    "completion_tokens": 150,
+    "total_tokens": 163
+  },
+  "choices": [
+    {
+      "message": {
+        "role": "assistant",
+        "content": "Quantum computing is like..."
+      },
+      "finish_reason": "stop",
+      "index": 0
+    }
+  ]
+}
+                        </code></pre>
+                    </div>
+                    
+                    <p>Key parts of the response to pay attention to:</p>
+                    <ul>
+                        <li><strong>choices[0].message.content</strong>: The actual text response from the model</li>
+                        <li><strong>usage</strong>: Token count information (important for monitoring costs)</li>
+                        <li><strong>finish_reason</strong>: Why the model stopped generating (e.g., "stop" for normal completion, "length" if it hit the token limit)</li>
+                    </ul>
+                </section>
+                
+                <!-- Mid-content ad -->
+                <div class="ad-container content-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Prompt Engineering Section -->
+                <section id="prompt-engineering">
+                    <h2>Advanced Prompt Engineering Techniques</h2>
+                    <p>Prompt engineering is the art and science of designing inputs to get the best possible outputs from GPT models. This section covers techniques to significantly improve your results.</p>
+                    
+                    <h3>The Role System</h3>
+                    <p>When working with chat models, you can use different message roles to structure your conversation:</p>
+                    <ul>
+                        <li><strong>System</strong>: Sets the behavior and context for the assistant</li>
+                        <li><strong>User</strong>: Represents the user's inputs</li>
+                        <li><strong>Assistant</strong>: Represents previous responses from the assistant</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Example: Creating a Specialized Assistant</h4>
+                        <div class="code-block">
+                            <pre><code>
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a senior Python developer specializing in data science. Provide code examples and explain technical concepts in detail. When suggesting code, optimize for readability and performance."},
+        {"role": "user", "content": "Show me how to efficiently load and preprocess a large CSV dataset using pandas."}
+    ]
+)
+                            </code></pre>
+                        </div>
+                    </div>
+                    
+                    <h3>Few-Shot Learning</h3>
+                    <p>One of the most powerful techniques is few-shot learning, where you provide examples of the desired input-output pairs before asking your actual question:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You translate English text to French."},
+        {"role": "user", "content": "English: Hello, how are you?"},
+        {"role": "assistant", "content": "French: Bonjour, comment allez-vous?"},
+        {"role": "user", "content": "English: I would like to book a table for two people."},
+        {"role": "assistant", "content": "French: Je voudrais réserver une table pour deux personnes."},
+        {"role": "user", "content": "English: What time does the museum close today?"}
+    ]
+)
+                        </code></pre>
+                    </div>
+                    
+                    <h3>Output Formatting Control</h3>
+                    <p>You can request specific output formats to make parsing responses easier:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a JSON formatting assistant. Always respond with valid JSON following the format provided."},
+        {"role": "user", "content": """
+            Extract the following information from this text and return as JSON with keys:
+            - person_name
+            - company
+            - job_title
+            - contact_info (an object with email and phone)
+            
+            Text: "John Smith is a Senior Software Engineer at TechCorp. Reach him at john.smith@techcorp.com or call (555) 123-4567."
+        """}
+    ]
+)
+                        </code></pre>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                        <p>When requesting structured data, always specify the exact format you want. Providing a schema or example of the expected output dramatically improves consistency. Consider using json.loads() to parse the response into a Python dictionary.</p>
+                    </div>
+                </section>
+                
+                <!-- Application Section -->
+                <section id="application">
+                    <h2>Building a Real-world Application</h2>
+                    <p>Let's put our knowledge into practice by building a simple but practical application: a smart content generator for technical blog posts.</p>
+                    
+                    <h3>Project Setup</h3>
+                    <p>We'll create a Flask application that generates technical blog outlines and drafts based on user input:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+# app.py
+from flask import Flask, render_template, request, jsonify
+import openai
+import os
+import json
+
+app = Flask(__name__)
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/generate', methods=['POST'])
+def generate_content():
+    # Get form data
+    topic = request.form.get('topic')
+    target_audience = request.form.get('audience')
+    word_count = request.form.get('word_count', 800)
+    
+    # Generate outline first
+    outline = generate_outline(topic, target_audience)
+    
+    # Then generate the full draft based on the outline
+    draft = generate_draft(topic, target_audience, outline, word_count)
+    
+    return jsonify({
+        'outline': outline,
+        'draft': draft
+    })
+
+def generate_outline(topic, audience):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an expert content strategist who creates well-structured outlines for technical blog posts."},
+            {"role": "user", "content": f"Create a detailed outline for a technical blog post about '{topic}' for {audience}. Include an introduction, 4-6 main sections with subsections, and a conclusion. Format as a JSON array of sections, where each section has a 'title' and 'subsections' array."}
+        ],
+        temperature=0.7
+    )
+    
+    # Extract and parse the JSON
+    outline_text = response.choices[0].message['content']
+    # Clean the response to ensure it's valid JSON
+    outline_text = outline_text.strip()
+    if outline_text.startswith('```json'):
+        outline_text = outline_text[7:-3].strip()
+    elif outline_text.startswith('```'):
+        outline_text = outline_text[3:-3].strip()
+    
+    try:
+        outline = json.loads(outline_text)
+        return outline
+    except json.JSONDecodeError:
+        # Fallback if JSON parsing fails
+        return {"error": "Failed to parse outline", "raw_response": outline_text}
+
+def generate_draft(topic, audience, outline, word_count):
+    # Convert outline to text format for the prompt
+    outline_text = "Outline:\n"
+    for i, section in enumerate(outline):
+        outline_text += f"{i+1}. {section['title']}\n"
+        for j, subsection in enumerate(section.get('subsections', [])):
+            outline_text += f"   {i+1}.{j+1}. {subsection}\n"
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": f"You are an expert technical writer creating content for {audience}."},
+            {"role": "user", "content": f"Write a comprehensive, engaging blog post about '{topic}' following this outline:\n\n{outline_text}\n\nThe post should be approximately {word_count} words, include relevant examples, and maintain a technical but accessible tone for {audience}."}
+        ],
+        temperature=0.7,
+        max_tokens=2000
+    )
+    
+    return response.choices[0].message['content']
+
+if __name__ == '__main__':
+    app.run(debug=True)
+                        </code></pre>
+                    </div>
+                    
+                    <h3>Front-end Template</h3>
+                    <p>A simple HTML template for our application:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Technical Blog Content Generator</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Generate Content</div>
+                    <div class="card-body">
+                        <form id="generate-form">
+                            <div class="mb-3">
+                                <label for="topic" class="form-label">Blog Topic</label>
+                                <input type="text" class="form-control" id="topic" name="topic" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="audience" class="form-label">Target Audience</label>
+                                <select class="form-control" id="audience" name="audience" required>
+                                    <option value="software developers">Software Developers</option>
+                                    <option value="data scientists">Data Scientists</option>
+                                    <option value="AI researchers">AI Researchers</option>
+                                    <option value="tech managers">Tech Managers</option>
+                                    <option value="beginners in programming">Programming Beginners</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="word_count" class="form-label">Approximate Word Count</label>
+                                <input type="number" class="form-control" id="word_count" name="word_count" value="800" min="300" max="2000">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Generate Content</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Generated Outline</div>
+                    <div class="card-body">
+                        <div id="outline-result">
+                            <p class="text-muted">Your outline will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Generated Draft</div>
+                    <div class="card-body">
+                        <div id="draft-result">
+                            <p class="text-muted">Your draft will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#generate-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                $('#outline-result').html('<p>Generating outline...</p>');
+                $('#draft-result').html('<p>Waiting for outline...</p>');
+                
+                $.ajax({
+                    url: '/generate',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Display outline
+                        let outlineHtml = '<ul class="list-group">';
+                        for (let i = 0; i < response.outline.length; i++) {
+                            const section = response.outline[i];
+                            outlineHtml += `<li class="list-group-item">
+                                <strong>${i+1}. ${section.title}</strong>`;
+                            
+                            if (section.subsections && section.subsections.length > 0) {
+                                outlineHtml += '<ul>';
+                                for (let j = 0; j < section.subsections.length; j++) {
+                                    outlineHtml += `<li>${section.subsections[j]}</li>`;
+                                }
+                                outlineHtml += '</ul>';
+                            }
+                            outlineHtml += '</li>';
+                        }
+                        outlineHtml += '</ul>';
+                        $('#outline-result').html(outlineHtml);
+                        
+                        // Display draft with formatting
+                        const formattedDraft = response.draft.replace(/\n/g, '<br>');
+                        $('#draft-result').html(formattedDraft);
+                    },
+                    error: function(error) {
+                        $('#outline-result').html('<p class="text-danger">Error generating outline.</p>');
+                        $('#draft-result').html('<p class="text-danger">Error generating draft.</p>');
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+                        </code></pre>
+                    </div>
+                </section>
+                
+                <!-- Mid-content ad -->
+                <div class="ad-container content-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Optimization Section -->
+                <section id="optimization">
+                    <h2>Optimization and Cost Management</h2>
+                    <p>API usage costs can add up quickly, especially when building production applications. Here are strategies to optimize your implementation:</p>
+                    
+                    <h3>Token Optimization</h3>
+                    <p>GPT models process text as tokens, and you pay for both input and output tokens. A token is roughly 4 characters in English text.</p>
+                    
+                    <div class="tip-box">
+                        <h4><i class="fas fa-coins"></i> Cost-Saving Tips</h4>
+                        <ul>
+                            <li>Be concise in your prompts. Remove unnecessary context.</li>
+                            <li>Use the smallest model that meets your needs (e.g., GPT-3.5 Turbo vs GPT-4).</li>
+                            <li>Set appropriate max_tokens to limit response length.</li>
+                            <li>Cache responses for common queries.</li>
+                            <li>Implement rate limiting to prevent accidental overuse.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Token Counting</h3>
+                    <p>Use the tiktoken library to count tokens before sending requests:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+import tiktoken
+
+def num_tokens_from_string(string, model="gpt-4"):
+    """Returns the number of tokens in a text string."""
+    encoding = tiktoken.encoding_for_model(model)
+    num_tokens = len(encoding.encode(string))
+    return num_tokens
+
+prompt = "This is a sample prompt to analyze."
+token_count = num_tokens_from_string(prompt)
+print(f"Token count: {token_count}")
+                        </code></pre>
+                    </div>
+                    
+                    <h3>Caching Implementation</h3>
+                    <p>A simple caching mechanism to avoid redundant API calls:</p>
+                    
+                    <div class="code-block">
+                        <pre><code>
+import hashlib
+import json
+import os
+from functools import lru_cache
+
+# Create a unique hash for the request parameters
+def create_request_hash(model, messages, temperature, max_tokens):
+    request_data = {
+        "model": model,
+        "messages": messages,
+        "temperature": temperature,
+        "max_tokens": max_tokens
+    }
+    request_str = json.dumps(request_data, sort_keys=True)
+    return hashlib.md5(request_str.encode()).hexdigest()
+
+# Cache for OpenAI completions
+@lru_cache(maxsize=100)
+def cached_chat_completion(request_hash, model, messages_str, temperature, max_tokens):
+    # Convert messages from string back to list
+    messages = json.loads(messages_str)
+    
+    return openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        temperature=temperature,
+        max_tokens=max_tokens
+    )
+
+# Wrapper function to use the cache
+def get_completion(model, messages, temperature=0.7, max_tokens=None):
+    # Create a hash for this specific request
+    request_hash = create_request_hash(model, messages, temperature, max_tokens)
+    
+    # Convert messages to string for caching (lru_cache requires hashable arguments)
+    messages_str = json.dumps(messages)
+    
+    # Get response from cache or API
+    response = cached_chat_completion(
+        request_hash, 
+        model, 
+        messages_str, 
+        temperature, 
+        max_tokens
+    )
+    
+    return response
+                        </code></pre>
+                    </div>
+                </section>
+                
+                <!-- Conclusion Section -->
+                <section id="conclusion">
+                    <h2>Conclusion and Next Steps</h2>
+                    <p>In this tutorial, we've covered the essentials of building custom GPT applications, from API setup to advanced prompt engineering and optimization techniques. You now have the knowledge to create sophisticated AI-powered solutions using OpenAI's GPT models.</p>
+                    
+                    <h3>Next Steps</h3>
+                    <p>To continue your journey with GPT application development, consider exploring these advanced topics:</p>
+                    
+                    <ul>
+                        <li>Fine-tuning GPT models on your specific data</li>
+                        <li>Implementing streaming responses for real-time applications</li>
+                        <li>Building multi-modal applications that combine text, images, and other media</li>
+                        <li>Exploring function calling capabilities for tool use and structured outputs</li>
+                        <li>Implementing safety measures and content moderation</li>
+                    </ul>
+                    
+                    <div class="resource-box">
+                        <h4>Additional Resources</h4>
+                        <ul>
+                            <li><a href="https://platform.openai.com/docs/guides/gpt" target="_blank">OpenAI's Official Documentation</a></li>
+                            <li><a href="https://github.com/openai/openai-cookbook" target="_blank">OpenAI Cookbook</a> - Example code for common tasks</li>
+                            <li><a href="https://platform.openai.com/tokenizer" target="_blank">OpenAI Tokenizer</a> - Visualize how text is tokenized</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- Tutorial Rating -->
+                <div class="tutorial-rating" data-tutorial-id="gpt-applications-guide">
+                    <h3>Was this tutorial helpful?</h3>
+                    <div class="stars">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <p class="rating-message"></p>
+                </div>
+                
+                <!-- Related Tutorials -->
+                <div class="related-tutorials">
+                    <h3>Related Tutorials</h3>
+                    <div class="tutorial-carousel">
+                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="carousel-item">
+                                <a href="../tutorials/embeddings-semantic-search.html">
+                                    <img src="https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Embeddings Tutorial">
+                                    <h4>Using Embeddings for Semantic Search</h4>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="../tutorials/langchain-framework-guide.html">
+                                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="

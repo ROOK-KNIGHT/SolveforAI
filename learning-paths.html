@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Follow structured learning paths to master AI and Machine Learning skills">
+    <title>AI Learning Paths | Solve for AI</title>
+
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/learning-paths.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    
+    <!-- AdSense placeholder - Replace with your actual AdSense code in production -->
+    <link rel="stylesheet" href="assets/css/ads.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Solve for AI</a>
+                <span class="tagline">Your AI Solution Engine</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li class="active"><a href="learning-paths.html">Learning Paths</a></li>
+                    <li><a href="tools.html">AI Tools</a></li>
+                    <li><a href="metaphors.html">Metaphors</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="site-content">
+        <section class="page-header learning-paths-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>AI & Machine Learning Learning Paths</h1>
+                        <p class="hero-subtitle">Structured learning journeys to guide your AI education</p>
+                        <p class="hero-description">Follow carefully designed pathways from beginner to expert with our comprehensive learning tracks.</p>
+                        <a href="#popular-paths" class="btn btn-primary">Browse Learning Paths</a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="learning-path-illustration">
+                            <i class="fas fa-map-signs"></i>
+                            <div class="path-nodes">
+                                <span class="path-node"></span>
+                                <span class="path-node"></span>
+                                <span class="path-node"></span>
+                                <span class="path-node active"></span>
+                                <span class="path-node"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ad Banner -->
+        <div class="container">
+            <div class="ad-container header-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="learning-paths-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>Personalized Learning Journeys</h2>
+                    <p>Follow structured learning paths designed to take you from beginner to expert in various AI disciplines.</p>
+                    <p>Each path consists of carefully sequenced tutorials, hands-on projects, and knowledge checks to ensure you're making steady progress.</p>
+                    
+                    <div class="skill-assessment">
+                        <h3>Find Your Path <span class="beta-tag">BETA</span></h3>
+                        <p>Take a quick assessment to discover which learning path matches your current skills and goals.</p>
+                        <button id="start-assessment" class="btn btn-primary">Start Skill Assessment</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="popular-paths" class="learning-paths-list">
+            <div class="container">
+                <h2>Popular Learning Paths</h2>
+                <p class="section-description">Choose from our most popular structured learning journeys</p>
+                
+                <div class="paths-grid">
+                    <!-- Path 1: Machine Learning Fundamentals -->
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-icon"><i class="fas fa-brain"></i></div>
+                            <div class="path-info">
+                                <h3>Machine Learning Fundamentals</h3>
+                                <div class="path-meta">
+                                    <span class="difficulty beginner">Beginner</span>
+                                    <span class="duration">8 weeks</span>
+                                    <span class="modules">12 modules</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="path-content">
+                            <p>Master the core concepts and techniques of machine learning, from basic algorithms to model evaluation.</p>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">Not started</span>
+                            </div>
+                            <div class="path-actions">
+                                <button class="btn btn-secondary path-details-btn" data-path="ml-fundamentals">View Details</button>
+                                <button class="btn btn-primary start-path-btn" data-path="ml-fundamentals">Start Path</button>
+                            </div>
+                        </div>
+                        <div class="path-footer">
+                            <div class="user-count"><i class="fas fa-user"></i> 1,247 learners</div>
+                            <div class="rating"><i class="fas fa-star"></i> 4.8/5</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Path 2: Deep Learning Specialist -->
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="path-info">
+                                <h3>Deep Learning Specialist</h3>
+                                <div class="path-meta">
+                                    <span class="difficulty intermediate">Intermediate</span>
+                                    <span class="duration">10 weeks</span>
+                                    <span class="modules">15 modules</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="path-content">
+                            <p>Dive deep into neural networks, from CNNs and RNNs to transformers and advanced architectures.</p>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">Not started</span>
+                            </div>
+                            <div class="path-actions">
+                                <button class="btn btn-secondary path-details-btn" data-path="deep-learning">View Details</button>
+                                <button class="btn btn-primary start-path-btn" data-path="deep-learning">Start Path</button>
+                            </div>
+                        </div>
+                        <div class="path-footer">
+                            <div class="user-count"><i class="fas fa-user"></i> 892 learners</div>
+                            <div class="rating"><i class="fas fa-star"></i> 4.9/5</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Path 3: NLP Expert -->
+                    <div class="path-card">
+                        <div class="path-header">
+                            <div class="path-icon"><i class="fas fa-comment-dots"></i></div>
+                            <div class="path-info">
+                                <h3>Natural Language Processing Expert</h3>
+                                <div class="path-meta">
+                                    <span class="difficulty advanced">Advanced</span>
+                                    <span class="duration">12 weeks</span>
+                                    <span class="modules">18 modules</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="path-content">
+                            <p>Learn to build sophisticated language models, chatbots, and text analysis systems using modern NLP techniques.</p>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">Not started</span>
+                            </div>
+                            <div class="path-actions">
+                                <button class="btn btn-secondary path-details-btn" data-path="nlp-expert">View Details</button>
+                                <button class="btn btn-primary start-path-btn" data-path="nlp-expert">Start Path</button>
+                            </div>
+                        </div>
+                        <div class="path-footer">
+                            <div class="user-count"><i class="fas fa-user"></i> 623 learners</div>
+                            <div class="rating"><i class="fas fa-star"></i> 4.7/5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paths-coming-soon">
+                    <h3>More Paths Coming Soon</h3>
+                    <div class="upcoming-paths">
+                        <span class="upcoming-path">Computer Vision Specialist</span>
+                        <span class="upcoming-path">MLOps & Deployment</span>
+                        <span class="upcoming-path">AI Ethics & Responsible AI</span>
+                        <span class="upcoming-path">Reinforcement Learning</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid-content ad placement -->
+        <div class="container">
+            <div class="ad-container content-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="path-features">
+            <div class="container">
+                <h2>What Makes Our Learning Paths Special</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-route"></i></div>
+                        <h3>Structured Progression</h3>
+                        <p>Carefully designed learning sequences that build your knowledge step by step, ensuring you have the right foundation before moving to advanced topics.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-hands-on"></i></div>
+                        <h3>Hands-On Projects</h3>
+                        <p>Real-world projects and coding exercises that reinforce your learning and build a portfolio of work to showcase your skills.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Progress Tracking</h3>
+                        <p>Visual dashboards and checkpoints that help you monitor your advancement and celebrate your achievements along the way.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-puzzle-piece"></i></div>
+                        <h3>Interactive Learning</h3>
+                        <p>Engaging quizzes, challenges, and interactive elements that make learning active rather than passive.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3>Community Support</h3>
+                        <p>Connect with fellow learners on the same path to share insights, ask questions, and collaborate on challenges.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                        <h3>Path Completion Certificate</h3>
+                        <p>Earn certificates for each completed learning path that you can share with employers or on your professional profiles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="signup-prompt">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-text">
+                        <h2>Track Your Progress</h2>
+                        <p>Create a free account to track your progress, save your place, and earn certificates as you complete learning paths.</p>
+                    </div>
+                    <div class="signup-action">
+                        <button id="create-account" class="btn btn-primary">Create Free Account</button>
+                        <button id="sign-in" class="btn btn-secondary">Sign In</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ad section styled as a "Learning Resources" section -->
+        <section class="learning-resources">
+            <div class="container">
+                <h2>Learning Resources</h2>
+                <div class="resources-container">
+                    <div class="resource-card sponsored">
+                        <div class="resource-content">
+                            <span class="sponsored-tag">Sponsored</span>
+                            <h3>Accelerate Your Learning with TensorFlow</h3>
+                            <p>Access premium TensorFlow courses and certification to boost your machine learning skills.</p>
+                            <a href="#" class="resource-link">Learn More <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-content">
+                            <h3>Free AI Tools for Beginners</h3>
+                            <p>Explore our curated collection of free tools to help you get started with AI projects.</p>
+                            <a href="tools.html" class="resource-link">View Tools <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card sponsored">
+                        <div class="resource-content">
+                            <span class="sponsored-tag">Sponsored</span>
+                            <h3>Cloud Credits for Your AI Projects</h3>
+                            <p>Get started with $300 in free credits for your machine learning deployments.</p>
+                            <a href="#" class="resource-link">Claim Offer <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated with AI Advancements</h2>
+                    <p>Subscribe to our newsletter to receive the latest tutorials, tips, and AI news.</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>About Solve for AI</h3>
+                    <p>We provide high-quality, AI-generated tutorials to help you navigate the complex world of artificial intelligence and machine learning.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="learning-paths.html">Learning Paths</a></li>
+                        <li><a href="tools.html">AI Tools</a></li>
+                        <li><a href="metaphors.html">Metaphors</a></li>
+                        <li><a href="#newsletter-form">Subscribe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Have questions or suggestions? Reach out to us!</p>
+                    <a href="mailto:contact@solveforai.com">contact@solveforai.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/learning-paths.js"></script>
+</body>
+</html>

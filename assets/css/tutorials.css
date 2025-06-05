@@ -1,0 +1,341 @@
+/* Tutorials Specific Styles */
+
+/* Hero Section */
+.tutorials-hero {
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 0;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.tutorials-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    gap: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    height: 100%;
+}
+
+.tutorials-illustration i {
+    animation: pulse 3s infinite alternate;
+}
+
+.tutorials-illustration i:nth-child(2) {
+    font-size: 2.5rem;
+    animation-delay: 0.5s;
+}
+
+.tutorials-illustration i:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Section Description */
+.section-description {
+    text-align: center;
+    margin: 0 auto 2rem;
+    max-width: 800px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Tutorial List Section */
+.tutorials-list {
+    padding: 3rem 0;
+}
+
+/* Search and Filter */
+.search-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+#tutorial-search {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: 'Roboto', sans-serif;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+}
+
+.filters select {
+    min-width: 180px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+
+/* Tutorial Grid */
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.tutorial-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-img {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tutorial-card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.level-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.beginner {
+    background-color: #4caf50;
+}
+
+.intermediate {
+    background-color: #2196f3;
+}
+
+.advanced {
+    background-color: #ff9800;
+}
+
+.card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.card-content h3 a {
+    color: var(--dark-color);
+    text-decoration: none;
+}
+
+.card-content h3 a:hover {
+    color: var(--primary-color);
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.card-content p {
+    margin-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.read-more {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.read-more i {
+    margin-left: 0.25rem;
+    transition: transform 0.2s ease;
+}
+
+.read-more:hover i {
+    transform: translateX(3px);
+}
+
+/* More Coming Soon */
+.more-coming-soon {
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 350px;
+}
+
+.placeholder-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+.placeholder-content i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.placeholder-content h3 {
+    margin-bottom: 0.75rem;
+}
+
+.placeholder-content p {
+    color: #666;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pagination a, .pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.pagination a {
+    background-color: white;
+    color: var(--dark-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pagination a:hover:not(.disabled) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.pagination .current {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+.pagination .disabled {
+    background-color: #f0f0f0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-visual {
+        display: none;
+    }
+    
+    .search-filter {
+        flex-direction: column;
+    }
+    
+    .filters {
+        flex-direction: column;
+    }
+    
+    .tutorial-grid {
+        grid-template-columns: 1fr;
+    }
+}

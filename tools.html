@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover useful AI tools and resources to enhance your projects">
+    <title>AI Tools | Solve for AI</title>
+
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <link rel="stylesheet" href="assets/css/tools.css">
+    
+    <!-- AdSense placeholder - Replace with your actual AdSense code in production -->
+    <link rel="stylesheet" href="assets/css/ads.css">
+    
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Solve for AI</a>
+                <span class="tagline">Your AI Solution Engine</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="learning-paths.html">Learning Paths</a></li>
+                    <li class="active"><a href="tools.html">AI Tools</a></li>
+                    <li><a href="metaphors.html">Metaphors</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="site-content">
+        <section class="page-header tools-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>AI & Machine Learning Tools</h1>
+                        <p class="hero-subtitle">Useful resources to accelerate your AI projects</p>
+                        <p class="hero-description">Leverage our interactive tools designed to simplify and enhance your AI development workflow.</p>
+                        <a href="#prompt-generator-section" class="btn btn-primary">Try Project Generator</a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="tools-illustration">
+                            <i class="fas fa-tools"></i>
+                            <i class="fas fa-cog spin-clockwise"></i>
+                            <i class="fas fa-cog spin-counter-clockwise"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ad Banner -->
+        <div class="container">
+            <div class="ad-container header-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="tools-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>Deep Learning Project Prompt Generator</h2>
+                    <p>Jumpstart your AI projects with our interactive prompt generator. Create tailored, effective prompts for deep learning projects across different domains and complexity levels.</p>
+                    <p>Simply configure your project parameters below, and we'll generate a comprehensive prompt to guide your development process.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="prompt-generator-section" class="prompt-generator">
+            <div class="container">
+                <div class="generator-grid">
+                    <div class="generator-options">
+                        <div class="option-card">
+                            <h3>Project Category</h3>
+                            <div class="option-content">
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="category" value="computer-vision" checked>
+                                        <span class="radio-label">Computer Vision</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="category" value="nlp">
+                                        <span class="radio-label">Natural Language Processing</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="category" value="time-series">
+                                        <span class="radio-label">Time Series Analysis</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="category" value="reinforcement">
+                                        <span class="radio-label">Reinforcement Learning</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="category" value="generative">
+                                        <span class="radio-label">Generative Models</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="option-card">
+                            <h3>Complexity Level</h3>
+                            <div class="option-content">
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="complexity" value="beginner" checked>
+                                        <span class="radio-label">Beginner</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="complexity" value="intermediate">
+                                        <span class="radio-label">Intermediate</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="complexity" value="advanced">
+                                        <span class="radio-label">Advanced</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="option-card">
+                            <h3>Application Domain</h3>
+                            <div class="option-content">
+                                <div class="select-container">
+                                    <select id="domain-select">
+                                        <option value="general">General Purpose</option>
+                                        <option value="healthcare">Healthcare</option>
+                                        <option value="finance">Finance</option>
+                                        <option value="retail">Retail & E-commerce</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="entertainment">Entertainment & Media</option>
+                                        <option value="education">Education</option>
+                                        <option value="environmental">Environmental Science</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="option-card">
+                            <h3>Resource Constraints</h3>
+                            <div class="option-content">
+                                <div class="slider-group">
+                                    <div class="slider-item">
+                                        <label for="compute-power">Computing Power:</label>
+                                        <input type="range" id="compute-power" min="1" max="5" value="3">
+                                        <div class="slider-labels">
+                                            <span>Limited</span>
+                                            <span>Moderate</span>
+                                            <span>High</span>
+                                        </div>
+                                    </div>
+                                    <div class="slider-item">
+                                        <label for="data-availability">Data Availability:</label>
+                                        <input type="range" id="data-availability" min="1" max="5" value="3">
+                                        <div class="slider-labels">
+                                            <span>Limited</span>
+                                            <span>Moderate</span>
+                                            <span>Abundant</span>
+                                        </div>
+                                    </div>
+                                    <div class="slider-item">
+                                        <label for="time-constraint">Time Constraint:</label>
+                                        <input type="range" id="time-constraint" min="1" max="5" value="3">
+                                        <div class="slider-labels">
+                                            <span>Tight</span>
+                                            <span>Moderate</span>
+                                            <span>Flexible</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="option-card">
+                            <h3>Project Focus</h3>
+                            <div class="option-content">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="focus" value="accuracy" checked>
+                                        <span class="checkbox-label">Model Accuracy</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="focus" value="interpretability">
+                                        <span class="checkbox-label">Interpretability</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="focus" value="efficiency">
+                                        <span class="checkbox-label">Computational Efficiency</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="focus" value="deployment">
+                                        <span class="checkbox-label">Deployment Readiness</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="focus" value="research">
+                                        <span class="checkbox-label">Research Novelty</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="generate-prompt" class="btn btn-primary">Generate Project Prompt</button>
+                    </div>
+                    
+                    <div class="generated-prompt">
+                        <div class="prompt-container">
+                            <div class="prompt-header">
+                                <h3>Your Project Prompt</h3>
+                                <div class="prompt-actions">
+                                    <button id="copy-prompt" class="btn btn-small"><i class="fas fa-copy"></i> Copy</button>
+                                    <button id="save-prompt" class="btn btn-small"><i class="fas fa-save"></i> Save</button>
+                                    <button id="share-prompt" class="btn btn-small"><i class="fas fa-share-alt"></i> Share</button>
+                                </div>
+                            </div>
+                            <div class="prompt-content">
+                                <div id="prompt-placeholder">
+                                    <p class="placeholder-text">Your generated prompt will appear here after you configure the options and click the "Generate Project Prompt" button.</p>
+                                </div>
+                                <div id="prompt-result" style="display: none;">
+                                    <div class="prompt-section">
+                                        <h4>Project Objective</h4>
+                                        <p id="project-objective"></p>
+                                    </div>
+                                    
+                                    <div class="prompt-section">
+                                        <h4>Dataset Recommendations</h4>
+                                        <p id="dataset-recommendations"></p>
+                                        <ul id="dataset-list"></ul>
+                                    </div>
+                                    
+                                    <div class="prompt-section">
+                                        <h4>Model Architecture</h4>
+                                        <p id="model-architecture"></p>
+                                        <div class="code-block">
+                                            <pre><code id="model-code" class="python"></code></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="prompt-section">
+                                        <h4>Evaluation Metrics</h4>
+                                        <ul id="evaluation-metrics"></ul>
+                                    </div>
+                                    
+                                    <div class="prompt-section">
+                                        <h4>Challenges & Considerations</h4>
+                                        <ul id="challenges"></ul>
+                                    </div>
+                                    
+                                    <div class="prompt-section">
+                                        <h4>Next Steps</h4>
+                                        <ol id="next-steps"></ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sponsored resources section -->
+                        <div class="sponsored-resources">
+                            <div class="resources-header">
+                                <h3>Recommended Resources <span class="sponsored-tag">Sponsored</span></h3>
+                            </div>
+                            <div id="recommended-resources">
+                                <!-- Resources will be dynamically inserted here based on prompt -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="prompt-examples">
+            <div class="container">
+                <h2>Example Project Prompts</h2>
+                <p>Browse some of our pre-configured prompts for popular deep learning projects.</p>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-icon"><i class="fas fa-camera"></i></div>
+                            <h3>Image Classification with CNN</h3>
+                        </div>
+                        <div class="example-content">
+                            <p>Build an image classification system using convolutional neural networks to categorize images into predefined classes.</p>
+                            <div class="example-meta">
+                                <span class="example-category">Computer Vision</span>
+                                <span class="example-level">Beginner</span>
+                            </div>
+                        </div>
+                        <div class="example-footer">
+                            <button class="btn btn-secondary load-example" data-example="image-classification">Load this Prompt</button>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-icon"><i class="fas fa-comment-alt"></i></div>
+                            <h3>Sentiment Analysis with BERT</h3>
+                        </div>
+                        <div class="example-content">
+                            <p>Develop a sentiment analysis model using BERT to analyze and classify text based on emotional tone.</p>
+                            <div class="example-meta">
+                                <span class="example-category">NLP</span>
+                                <span class="example-level">Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="example-footer">
+                            <button class="btn btn-secondary load-example" data-example="sentiment-analysis">Load this Prompt</button>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-icon"><i class="fas fa-robot"></i></div>
+                            <h3>Reinforcement Learning for Game AI</h3>
+                        </div>
+                        <div class="example-content">
+                            <p>Create an AI agent using reinforcement learning that can learn to play and master simple video games.</p>
+                            <div class="example-meta">
+                                <span class="example-category">Reinforcement Learning</span>
+                                <span class="example-level">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="example-footer">
+                            <button class="btn btn-secondary load-example" data-example="rl-game-ai">Load this Prompt</button>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card premium">
+                        <div class="premium-badge">PREMIUM</div>
+                        <div class="example-header">
+                            <div class="example-icon"><i class="fas fa-brain"></i></div>
+                            <h3>Generative Adversarial Network for Art</h3>
+                        </div>
+                        <div class="example-content">
+                            <p>Build a GAN to generate artwork in specific artistic styles, with detailed architecture guidance and optimization techniques.</p>
+                            <div class="example-meta">
+                                <span class="example-category">Generative Models</span>
+                                <span class="example-level">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="example-footer">
+                            <button class="btn btn-premium load-premium-example" data-example="gan-art">Unlock Premium Prompt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tools-resources">
+            <div class="container">
+                <h2>Additional Tools & Resources</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-code"></i></div>
+                        <div class="resource-content">
+                            <h3>Code Templates Library</h3>
+                            <p>Access starter code templates for various deep learning projects to accelerate your development.</p>
+                            <a href="#" class="resource-link">Browse Templates <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-database"></i></div>
+                        <div class="resource-content">
+                            <h3>Dataset Finder</h3>
+                            <p>Find the perfect datasets for your machine learning projects across various domains.</p>
+                            <a href="#" class="resource-link">Search Datasets <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card sponsored">
+                        <div class="resource-icon"><i class="fas fa-cloud"></i></div>
+                        <div class="resource-content">
+                            <span class="sponsored-tag">Sponsored</span>
+                            <h3>Cloud GPU Credits</h3>
+                            <p>Get started with $300 in free GPU credits for training your deep learning models.</p>
+                            <a href="#" class="resource-link">Claim Offer <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-book"></i></div>
+                        <div class="resource-content">
+                            <h3>Model Architecture Guide</h3>
+                            <p>Interactive guide to selecting the right neural network architecture for your specific problem.</p>
+                            <a href="#" class="resource-link">Open Guide <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid-content ad placement -->
+        <div class="container">
+            <div class="ad-container content-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated with AI Advancements</h2>
+                    <p>Subscribe to our newsletter to receive the latest tutorials, tips, and AI news.</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>About Solve for AI</h3>
+                    <p>We provide high-quality, AI-generated tutorials to help you navigate the complex world of artificial intelligence and machine learning.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="learning-paths.html">Learning Paths</a></li>
+                        <li><a href="tools.html">AI Tools</a></li>
+                        <li><a href="metaphors.html">Metaphors</a></li>
+                        <li><a href="#newsletter-form">Subscribe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Have questions or suggestions? Reach out to us!</p>
+                    <a href="mailto:contact@solveforai.com">contact@solveforai.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/tools.js"></script>
+    
+    <!-- Code syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+</body>
+</html>

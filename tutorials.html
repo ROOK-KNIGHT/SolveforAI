@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse our comprehensive collection of AI and Machine Learning tutorials">
+    <title>AI Tutorials | Solve for AI</title>
+
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tutorials.css">
+    
+    <!-- AdSense placeholder - Replace with your actual AdSense code in production -->
+    <link rel="stylesheet" href="assets/css/ads.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Solve for AI</a>
+                <span class="tagline">Your AI Solution Engine</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="learning-paths.html">Learning Paths</a></li>
+                    <li><a href="tools.html">AI Tools</a></li>
+                    <li><a href="metaphors.html">Metaphors</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="site-content">
+        <section class="page-header tutorials-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>AI & Machine Learning Tutorials</h1>
+                        <p class="hero-subtitle">Comprehensive guides to help you master AI concepts and techniques</p>
+                        <p class="hero-description">Dive into detailed, step-by-step tutorials covering everything from basic algorithms to cutting-edge AI applications.</p>
+                        <a href="#tutorial-grid" class="btn btn-primary">Browse Tutorials</a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="tutorials-illustration">
+                            <i class="fas fa-code"></i>
+                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-robot"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ad Banner -->
+        <div class="container">
+            <div class="ad-container header-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="tutorials-list">
+            <div class="container">
+                <div class="search-filter">
+                    <input type="text" id="tutorial-search" placeholder="Search tutorials...">
+                    <div class="filters">
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="deep-learning">Deep Learning</option>
+                            <option value="nlp">Natural Language Processing</option>
+                            <option value="computer-vision">Computer Vision</option>
+                            <option value="reinforcement-learning">Reinforcement Learning</option>
+                        </select>
+                        <select id="level-filter">
+                            <option value="">All Levels</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="tutorial-grid" class="tutorial-grid">
+                    <!-- Tutorial Card for the newly generated tutorial -->
+                    <article class="tutorial-card">
+                        <div class="card-img">
+                            <img src="assets/images/transformer-architecture.jpg" alt="Advanced Transformer Architectures">
+                            <span class="level-badge advanced">Advanced</span>
+                        </div>
+                        <div class="card-content">
+                            <h3><a href="tutorials/advanced-transformer-architectures.html">Advanced Transformer Architectures</a></h3>
+                            <div class="meta">
+                                <span class="category">Deep Learning</span>
+                                <span class="date">June 3, 2025</span>
+                            </div>
+                            <p>Explore cutting-edge transformer architectures that are pushing the boundaries of natural language processing and beyond.</p>
+                            <a href="tutorials/advanced-transformer-architectures.html" class="read-more">Read Tutorial <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <!-- Existing tutorial -->
+                    <article class="tutorial-card">
+                        <div class="card-img">
+                            <img src="assets/images/custom-gpt-applications.jpg" alt="Building Custom GPT Applications">
+                            <span class="level-badge intermediate">Intermediate</span>
+                        </div>
+                        <div class="card-content">
+                            <h3><a href="tutorials/building-custom-gpt-applications.html">Building Custom GPT Applications</a></h3>
+                            <div class="meta">
+                                <span class="category">NLP</span>
+                                <span class="date">May 25, 2025</span>
+                            </div>
+                            <p>Learn how to build and deploy customized GPT applications for specific business use cases.</p>
+                            <a href="tutorials/building-custom-gpt-applications.html" class="read-more">Read Tutorial <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <!-- Placeholder for future generated tutorials -->
+                    <div class="more-coming-soon">
+                        <div class="placeholder-content">
+                            <i class="fas fa-robot"></i>
+                            <h3>More Tutorials Coming Soon</h3>
+                            <p>Our AI is hard at work creating new tutorials. Check back soon!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pagination">
+                    <span class="current">1</span>
+                    <a href="#" class="disabled">2</a>
+                    <a href="#" class="disabled">3</a>
+                    <a href="#" class="disabled">Next <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid-content ad placement -->
+        <div class="container">
+            <div class="ad-container content-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated with AI Advancements</h2>
+                    <p>Subscribe to our newsletter to receive the latest tutorials, tips, and AI news.</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>About Solve for AI</h3>
+                    <p>We provide high-quality, AI-generated tutorials to help you navigate the complex world of artificial intelligence and machine learning.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="learning-paths.html">Learning Paths</a></li>
+                        <li><a href="tools.html">AI Tools</a></li>
+                        <li><a href="metaphors.html">Metaphors</a></li>
+                        <li><a href="#newsletter-form">Subscribe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Have questions or suggestions? Reach out to us!</p>
+                    <a href="mailto:contact@solveforai.com">contact@solveforai.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

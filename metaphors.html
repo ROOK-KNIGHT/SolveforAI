@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn complex AI concepts through intuitive metaphors and analogies">
+    <title>AI Metaphorical Explanations | Solve for AI</title>
+
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <link rel="stylesheet" href="assets/css/metaphors.css">
+    
+    <!-- AdSense placeholder - Replace with your actual AdSense code in production -->
+    <link rel="stylesheet" href="assets/css/ads.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Solve for AI</a>
+                <span class="tagline">Your AI Solution Engine</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tutorials.html">Tutorials</a></li>
+                    <li><a href="learning-paths.html">Learning Paths</a></li>
+                    <li><a href="tools.html">AI Tools</a></li>
+                    <li class="active"><a href="metaphors.html">Metaphors</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="site-content">
+        <section class="page-header metaphors-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>AI Concepts Through Metaphors</h1>
+                        <p class="hero-subtitle">Understanding complex AI concepts through intuitive analogies</p>
+                        <p class="hero-description">Our metaphorical explanations make abstract AI concepts concrete by connecting them to everyday experiences.</p>
+                        <a href="#concept-categories" class="btn btn-primary">Explore Metaphors</a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="metaphor-illustration-hero">
+                            <i class="fas fa-brain"></i>
+                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ad Banner -->
+        <div class="container">
+            <div class="ad-container header-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <section class="metaphors-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>Why Metaphors Matter in AI</h2>
+                    <p>Complex AI and machine learning concepts can often seem abstract and difficult to grasp. Metaphors provide an intuitive bridge, connecting these abstract ideas to familiar concepts we encounter in everyday life.</p>
+                    <p>Our metaphorical explanations break down complex AI topics into digestible analogies that help you build a strong mental model of how these systems actually work.</p>
+                    
+                    <div class="concept-finder">
+                        <h3>Find the Right Explanation</h3>
+                        <p>Looking for a specific concept? Use our concept finder to quickly locate metaphorical explanations.</p>
+                        <div class="finder-controls">
+                            <input type="text" id="concept-search" placeholder="Search concepts...">
+                            <select id="category-select">
+                                <option value="all">All Categories</option>
+                                <option value="neural-networks">Neural Networks</option>
+                                <option value="deep-learning">Deep Learning</option>
+                                <option value="reinforcement-learning">Reinforcement Learning</option>
+                                <option value="nlp">Natural Language Processing</option>
+                                <option value="computer-vision">Computer Vision</option>
+                            </select>
+                            <button id="search-concepts" class="btn btn-primary">Find Concept</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="concept-categories" class="concept-categories">
+            <div class="container">
+                <h2>Explore Concepts by Category</h2>
+                <p class="section-description">Select a category below to explore AI concepts explained through intuitive metaphors</p>
+                
+                <div class="categories-grid">
+                    <div class="category-card" data-category="neural-networks">
+                        <div class="category-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Neural Networks</h3>
+                        <p>Understand the fundamental building blocks of deep learning</p>
+                        <a href="#neural-networks-section" class="category-link">Explore Neural Networks</a>
+                    </div>
+                    
+                    <div class="category-card" data-category="deep-learning">
+                        <div class="category-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Deep Learning</h3>
+                        <p>Grasp advanced neural architectures and training methods</p>
+                        <a href="#deep-learning-section" class="category-link">Explore Deep Learning</a>
+                    </div>
+                    
+                    <div class="category-card" data-category="reinforcement-learning">
+                        <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+                        <h3>Reinforcement Learning</h3>
+                        <p>Learn how AI agents learn from their environment</p>
+                        <a href="#reinforcement-learning-section" class="category-link">Explore Reinforcement Learning</a>
+                    </div>
+                    
+                    <div class="category-card" data-category="nlp">
+                        <div class="category-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h3>Natural Language Processing</h3>
+                        <p>Decode how machines understand and generate human language</p>
+                        <a href="#nlp-section" class="category-link">Explore NLP</a>
+                    </div>
+                    
+                    <div class="category-card" data-category="computer-vision">
+                        <div class="category-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Computer Vision</h3>
+                        <p>See how computers process and understand visual information</p>
+                        <a href="#computer-vision-section" class="category-link">Explore Computer Vision</a>
+                    </div>
+                    
+                    <div class="category-card" data-category="general-ml">
+                        <div class="category-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>General ML Concepts</h3>
+                        <p>Understand foundational machine learning principles</p>
+                        <a href="#general-ml-section" class="category-link">Explore General ML</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Neural Networks Section -->
+        <section id="neural-networks-section" class="metaphor-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-brain"></i></div>
+                    <h2>Neural Networks</h2>
+                </div>
+                
+                <div class="metaphors-grid">
+                    <!-- Neuron Metaphor -->
+                    <div class="metaphor-card">
+                        <div class="metaphor-header">
+                            <h3>Artificial Neurons: The Office Workers</h3>
+                        </div>
+                        <div class="metaphor-content">
+                            <div class="metaphor-illustration">
+                                <img src="assets/images/metaphors/neuron-office-worker.jpg" alt="Office worker metaphor for neurons" class="placeholder-image">
+                                <button class="btn-toggle-interactive" data-target="neuron-interactive">
+                                    <i class="fas fa-play-circle"></i> Interactive Visualization
+                                </button>
+                            </div>
+                            <div class="metaphor-explanation">
+                                <div class="metaphor-description">
+                                    <h4>The Metaphor</h4>
+                                    <p>Imagine an artificial neuron as an office worker sitting at a desk. This worker receives multiple incoming memos (inputs) from colleagues, each with varying levels of importance (weights).</p>
+                                    <p>The worker reviews all memos, applying importance factors to each one, then adds up all the information to decide whether the combined message passes a certain threshold of importance. If it does, they send out their own memo (activation) to the next department.</p>
+                                </div>
+                                <div class="metaphor-reality">
+                                    <h4>The Technical Reality</h4>
+                                    <p>An artificial neuron takes multiple numerical inputs, multiplies each by a weight value, sums these weighted inputs, and then applies an activation function to determine its output. If the weighted sum exceeds a threshold, the neuron "fires" by outputting a non-zero value.</p>
+                                    <div class="code-snippet">
+                                        <pre><code>output = activation_function(sum(inputs * weights) + bias)</code></pre>
+                                    </div>
+                                </div>
+                                <div class="metaphor-limitations">
+                                    <h4>Limitations of the Metaphor</h4>
+                                    <p>Unlike office workers who can make nuanced decisions, neurons follow strictly mathematical operations. Real biological neurons are also far more complex than this simplified model suggests, with temporal dynamics and complex biochemical processes.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="neuron-interactive" class="interactive-element" style="display: none;">
+                                <!-- Interactive elements would be implemented with JavaScript -->
+                                <div class="interactive-placeholder">
+                                    <h4>Interactive Neuron Demonstration</h4>
+                                    <p>Adjust the input values and weights to see how a neuron's output changes.</p>
+                                    <div class="slider-group">
+                                        <div class="slider-item">
+                                            <label for="input1">Input 1:</label>
+                                            <input type="range" id="input1" min="0" max="1" step="0.1" value="0.5">
+                                            <span class="slider-value">0.5</span>
+                                        </div>
+                                        <div class="slider-item">
+                                            <label for="weight1">Weight 1:</label>
+                                            <input type="range" id="weight1" min="-1" max="1" step="0.1" value="0.5">
+                                            <span class="slider-value">0.5</span>
+                                        </div>
+                                        <!-- More sliders would be added here -->
+                                    </div>
+                                    <div class="neuron-output">
+                                        <div class="output-label">Neuron Output:</div>
+                                        <div class="output-value">0.75</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Neural Network Metaphor -->
+                    <div class="metaphor-card">
+                        <div class="metaphor-header">
+                            <h3>Neural Networks: The Corporate Hierarchy</h3>
+                        </div>
+                        <div class="metaphor-content">
+                            <div class="metaphor-illustration">
+                                <img src="assets/images/metaphors/neural-network-corporation.jpg" alt="Corporate hierarchy metaphor for neural networks" class="placeholder-image">
+                            </div>
+                            <div class="metaphor-explanation">
+                                <div class="metaphor-description">
+                                    <h4>The Metaphor</h4>
+                                    <p>A neural network is like a corporation with multiple departments. Information flows from the reception desk (input layer) through various departments (hidden layers) where it gets processed and refined at each stage, until it reaches the executive suite (output layer) where final decisions are made.</p>
+                                    <p>Each department has multiple workers (neurons) who specialize in recognizing specific patterns in the information. The corporation improves its decision-making by adjusting how much attention each worker gives to different aspects of information (weights).</p>
+                                </div>
+                                <div class="metaphor-reality">
+                                    <h4>The Technical Reality</h4>
+                                    <p>A neural network consists of multiple layers of interconnected neurons. Each layer transforms its inputs into higher-level features. Data flows forward from the input layer through hidden layers to the output layer, with each connection having an associated weight that is adjusted during training.</p>
+                                    <p>The network learns by adjusting these weights through backpropagation, minimizing the difference between predicted and actual outputs.</p>
+                                </div>
+                                <div class="metaphor-limitations">
+                                    <h4>Limitations of the Metaphor</h4>
+                                    <p>Unlike a corporation with deliberate planning, neural networks learn through mathematical optimization without explicit reasoning. There's no central executive directing the learning process, and the "decisions" made are purely mathematical transformations without conscious understanding.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sponsored-resources">
+                    <div class="resources-header">
+                        <h3>Related Learning Resources <span class="sponsored-tag">Sponsored</span></h3>
+                    </div>
+                    <div class="resources-content">
+                        <div class="resource-card sponsored">
+                            <div class="resource-content">
+                                <h4>Neural Networks Fundamentals Course</h4>
+                                <p>Master the fundamentals of neural networks with our comprehensive video course, featuring interactive exercises and real-world examples.</p>
+                                <a href="#" class="resource-link">Learn More <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Deep Learning Section -->
+        <section id="deep-learning-section" class="metaphor-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-network-wired"></i></div>
+                    <h2>Deep Learning</h2>
+                </div>
+                
+                <div class="metaphors-grid">
+                    <!-- Backpropagation Metaphor -->
+                    <div class="metaphor-card">
+                        <div class="metaphor-header">
+                            <h3>Backpropagation: The Assembly Line Inspector</h3>
+                        </div>
+                        <div class="metaphor-content">
+                            <div class="metaphor-illustration">
+                                <img src="assets/images/metaphors/backpropagation-assembly-line.jpg" alt="Assembly line inspector metaphor for backpropagation" class="placeholder-image">
+                            </div>
+                            <div class="metaphor-explanation">
+                                <div class="metaphor-description">
+                                    <h4>The Metaphor</h4>
+                                    <p>Imagine an assembly line where products pass through multiple stations. At the end, a quality inspector checks the final product and finds defects. Instead of scrapping the product, the inspector walks backward along the assembly line, informing each station how much they contributed to the defect.</p>
+                                    <p>Each station then makes small adjustments to their process. Over many iterations, the entire assembly line improves, producing better products with fewer defects.</p>
+                                </div>
+                                <div class="metaphor-reality">
+                                    <h4>The Technical Reality</h4>
+                                    <p>Backpropagation calculates the gradient of the error function with respect to the neural network's weights. It efficiently computes these gradients by applying the chain rule, working backward from the output layer to the input layer.</p>
+                                    <p>The network uses these gradients to update weights, incrementally reducing the error in predictions over multiple training iterations.</p>
+                                </div>
+                                <div class="metaphor-limitations">
+                                    <h4>Limitations of the Metaphor</h4>
+                                    <p>The metaphor simplifies the mathematical complexity of gradient-based optimization. Backpropagation involves complex calculus operations that happen simultaneously across the entire network, not sequentially like an inspector walking backward.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Convolutional Neural Network Metaphor -->
+                    <div class="metaphor-card">
+                        <div class="metaphor-header">
+                            <h3>CNNs: The Art Critic's Spotlight</h3>
+                        </div>
+                        <div class="metaphor-content">
+                            <div class="metaphor-illustration">
+                                <img src="assets/images/metaphors/cnn-art-spotlight.jpg" alt="Art critic metaphor for CNNs" class="placeholder-image">
+                                <button class="btn-toggle-interactive" data-target="cnn-interactive">
+                                    <i class="fas fa-play-circle"></i> Interactive Visualization
+                                </button>
+                            </div>
+                            <div class="metaphor-explanation">
+                                <div class="metaphor-description">
+                                    <h4>The Metaphor</h4>
+                                    <p>Think of a Convolutional Neural Network as an art critic examining a painting with a small spotlight. The critic systematically moves the spotlight across the painting, focusing on small regions at a time, looking for specific features like particular shapes or color patterns.</p>
+                                    <p>As the critic moves to deeper analysis, they look for increasingly complex patterns - first simple lines and colors, then shapes, then objects, and finally the overall composition.</p>
+                                </div>
+                                <div class="metaphor-reality">
+                                    <h4>The Technical Reality</h4>
+                                    <p>CNNs use convolutional filters (kernels) that slide across the input image, activating when they detect specific features. Early layers detect simple features like edges, while deeper layers combine these to recognize complex patterns like textures, parts of objects, and eventually whole objects.</p>
+                                    <p>The network uses pooling layers to reduce dimensionality while preserving important features, and fully-connected layers at the end for classification.</p>
+                                </div>
+                                <div class="metaphor-limitations">
+                                    <h4>Limitations of the Metaphor</h4>
+                                    <p>Unlike a critic who has prior knowledge about art, CNNs learn features purely from the data without any built-in understanding. The spotlight analogy also doesn't fully capture how convolutional layers share weights across the entire image, enabling translation invariance.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="cnn-interactive" class="interactive-element" style="display: none;">
+                                <!-- Interactive CNN demonstration would be implemented with JavaScript -->
+                                <div class="interactive-placeholder">
+                                    <h4>Interactive CNN Filter Visualization</h4>
+                                    <p>See how convolutional filters detect different features in an image.</p>
+                                    <div class="filter-visualization">
+                                        <div class="original-image">
+                                            <h5>Original Image</h5>
+                                            <div class="image-placeholder"></div>
+                                        </div>
+                                        <div class="filtered-image">
+                                            <h5>After Filter Application</h5>
+                                            <div class="filter-controls">
+                                                <select id="filter-select">
+                                                    <option value="edge-detection">Edge Detection</option>
+                                                    <option value="texture">Texture Recognition</option>
+                                                    <option value="object-part">Object Part Detection</option>
+                                                </select>
+                                            </div>
+                                            <div class="image-placeholder"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid-content ad placement -->
+        <div class="container">
+            <div class="ad-container content-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+        
+        <!-- Natural Language Processing Section -->
+        <section id="nlp-section" class="metaphor-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-comment-dots"></i></div>
+                    <h2>Natural Language Processing</h2>
+                </div>
+                
+                <div class="metaphors-grid">
+                    <!-- Word Embeddings Metaphor -->
+                    <div class="metaphor-card">
+                        <div class="metaphor-header">
+                            <h3>Word Embeddings: The Library Organization System</h3>
+                        </div>
+                        <div class="metaphor-content">
+                            <div class="metaphor-illustration">
+                                <img src="assets/images/metaphors/word-embeddings-library.jpg" alt="Library metaphor for word embeddings" class="placeholder-image">
+                            </div>
+                            <div class="metaphor-explanation">
+                                <div class="metaphor-description">
+                                    <h4>The Metaphor</h4>
+                                    <p>Imagine a magical library where books (words) are arranged in a multidimensional space rather than on linear shelves. Similar books are placed near each other, and the relationships between books are represented by their relative positions.</p>
+                                    <p>In this library, books about "kings" would be positioned in a similar relationship to "queens" as "men" are to "women." You could even "travel" from one book to another by following specific directions that represent conceptual relationships.</p>
+                                </div>
+                                <div class="metaphor-reality">
+                                    <h4>The Technical Reality</h4>
+                                    <p>Word embeddings map words to high-dimensional vectors in a continuous vector space. Words with similar meanings or that appear in similar contexts are mapped to nearby points in this space.</p>
+                                    <p>These embeddings capture semantic relationships, allowing for algebraic operations such as: vector("king") - vector("man") + vector("woman") ≈ vector("queen").</p>
+                                </div>
+                                <div class="metaphor-limitations">
+                                    <h4>Limitations of the Metaphor</h4>
+                                    <p>The library metaphor is limited by our ability to visualize only three dimensions, while actual word embeddings typically use hundreds of dimensions. Additionally, embeddings can encode biases present in the training data, which isn't conveyed by the neutral library metaphor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transformer Metaphor -->
+                    <div class="metaphor-card premium">
+                        <div class="premium-badge">PREMIUM</div>
+                        <div class="metaphor-header">
+                            <h3>Transformers: The Expert Panel Discussion</h3>
+                        </div>
+                        <div class="metaphor-content">
+                            <div class="metaphor-illustration">
+                                <img src="assets/images/metaphors/transformer-panel-discussion.jpg" alt="Panel discussion metaphor for transformers" class="placeholder-image">
+                            </div>
+                            <div class="metaphor-explanation">
+                                <div class="metaphor-description">
+                                    <h4>The Metaphor</h4>
+                                    <p>Imagine a panel of experts discussing a complex topic. Each expert (attention head) listens to the entire conversation but pays selective attention to different speakers and topics based on their relevance to the current point being discussed.</p>
+                                    <p>Some experts focus on connections between closely related points, while others track long-range dependencies. Their combined insights (multi-head attention) provide a comprehensive understanding of the discussion.</p>
+                                </div>
+                                <div class="metaphor-reality">
+                                    <h4>The Technical Reality</h4>
+                                    <p>Transformer models use self-attention mechanisms to weigh the importance of different words in a sequence when processing each word. Multiple attention heads focus on different aspects of the relationships between words.</p>
+                                    <p class="premium-content-teaser">This premium content includes detailed explanations of attention mechanisms, positional encodings, and how transformers revolutionized NLP tasks.</p>
+                                    <button class="btn btn-premium">Unlock Premium Content</button>
+                                </div>
+                                <div class="metaphor-limitations">
+                                    <h4>Limitations of the Metaphor</h4>
+                                    <p>The panel discussion metaphor doesn't fully capture the mathematical precision of attention mechanisms or how transformers process information in parallel rather than sequentially.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sponsored-resources">
+                    <div class="resources-header">
+                        <h3>NLP Learning Resources <span class="sponsored-tag">Sponsored</span></h3>
+                    </div>
+                    <div class="resources-content">
+                        <div class="resource-card sponsored">
+                            <div class="resource-content">
+                                <h4>Practical NLP with Python</h4>
+                                <p>Learn how to implement and fine-tune state-of-the-art NLP models for real-world applications.</p>
+                                <a href="#" class="resource-link">Access Course <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- More sections would be added for Reinforcement Learning, Computer Vision, and General ML Concepts -->
+        
+        <section class="metaphor-submission">
+            <div class="container">
+                <div class="submission-content">
+                    <h2>Have a Great Metaphor to Share?</h2>
+                    <p>We're always looking for intuitive ways to explain complex AI concepts. Share your metaphor ideas with our community!</p>
+                    <button id="submit-metaphor" class="btn btn-primary">Submit Your Metaphor</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated with AI Advancements</h2>
+                    <p>Subscribe to our newsletter to receive the latest tutorials, tips, and AI news.</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>About Solve for AI</h3>
+                    <p>We provide high-quality, AI-generated tutorials to help you navigate the complex world of artificial intelligence and machine learning.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="learning-paths.html">Learning Paths</a></li>
+                        <li><a href="tools.html">AI Tools</a></li>
+                        <li><a href="metaphors.html">Metaphors</a></li>
+                        <li><a href="#newsletter-form">Subscribe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Have questions or suggestions? Reach out to us!</p>
+                    <a href="mailto:contact@solveforai.com">contact@solveforai.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal for metaphor submission -->
+    <div id="metaphor-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Submit Your Metaphor</h2>
+            <form id="metaphor-form">
+                <div class="form-group">
+                    <label for="concept-name">AI Concept</label>
+                    <input type="text" id="concept-name" placeholder="e.g., Gradient Descent, LSTM, etc." required>
+                </div>
+                <div class="form-group">
+                    <label for="concept-category">Category</label>
+                    <select id="concept-category" required>
+                        <option value="">Select a category</option>
+                        <option value="neural-networks">Neural Networks</option>
+                        <option value="deep-learning">Deep Learning</option>
+                        <option value="reinforcement-learning">Reinforcement Learning</option>
+                        <option value="nlp">Natural Language Processing</option>
+                        <option value="computer-vision">Computer Vision</option>
+                        <option value="general-ml">General ML Concepts</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="metaphor-description">Your Metaphor</label>
+                    <textarea id="metaphor-description" rows="5" placeholder="Describe your metaphor..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="metaphor-connection">Connection to Technical Reality</label>
+                    <textarea id="metaphor-connection" rows="3" placeholder="Explain how your metaphor connects to the technical concept..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="submitter-email">Your Email (optional)</label>
+                    <input type="email" id="submitter-email" placeholder="We'll give you credit if we publish your metaphor">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Metaphor</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/metaphors.js"></script>
+</body>
+</html>

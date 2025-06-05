@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{description}}">
+    <meta name="keywords" content="{{keywords}}">
+    <meta name="author" content="{{author}}">
+    
+    <!-- OpenGraph tags for social sharing -->
+    <meta property="og:title" content="{{title}} | Solve for AI">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:image" content="{{featuredImage}}">
+    <meta property="og:url" content="https://solveforai.com/tutorials/{{slug}}.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}} | Solve for AI">
+    <meta name="twitter:description" content="{{description}}">
+    <meta name="twitter:image" content="{{featuredImage}}">
+    
+    <title>{{title}} | Solve for AI</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Syntax highlighting with Prism -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <!-- JSON-LD for rich snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "{{title}}",
+      "description": "{{description}}",
+      "image": "{{featuredImage}}",
+      "author": {
+        "@type": "Person",
+        "name": "{{author}}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Solve for AI",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://solveforai.com/assets/images/logo.png"
+        }
+      },
+      "datePublished": "{{date}}",
+      "dateModified": "{{date}}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://solveforai.com/tutorials/{{slug}}.html"
+      },
+      "keywords": "{{keywords}}"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html">Solve<span> for AI</span></a>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../tutorials.html" class="active">Tutorials</a></li>
+                    <li><a href="../learning-paths.html">Learning Paths</a></li>
+                    <li><a href="../tools.html">AI Tools</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            
+            <div class="dark-mode-toggle" title="Toggle Dark Mode">🌙</div>
+            <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+        </div>
+        
+        <!-- Header Banner Ad -->
+        <div class="container">
+            <div class="ad-container header-ad">
+                <p>Advertisement</p>
+                <!-- AdSense code would go here in production -->
+            </div>
+        </div>
+    </header>
+    
+    <!-- Tutorial Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Main Tutorial Content -->
+            <div class="tutorial-full">
+                <div class="tutorial-header">
+                    <h1>{{title}}</h1>
+                    <div class="tutorial-meta">
+                        <span class="tutorial-level">{{audience}}</span>
+                        <span class="tutorial-time"><i class="far fa-clock"></i> {{readingTime}} min read</span>
+                        <span class="tutorial-date">Updated: {{date}}</span>
+                    </div>
+                    <div class="tutorial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author photo">
+                        <div>
+                            <p class="author-name">{{author}}</p>
+                            <p class="author-title">AI Research Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Image -->
+                <div class="tutorial-featured-image">
+                    <img src="{{featuredImage}}" alt="{{title}}">
+                </div>
+                
+                <!-- Table of Contents -->
+                {{tableOfContents}}
+                
+                <!-- Introduction Section -->
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    {{introduction}}
+                </section>
+                
+                <!-- Mid-content ad -->
+                <div class="ad-container content-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Content Sections -->
+                {{sections}}
+                
+                <!-- Mid-content ad -->
+                <div class="ad-container content-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Conclusion Section -->
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    {{conclusion}}
+                </section>
+                
+                <!-- Code Examples Section -->
+                {{codeExamples}}
+                
+                <!-- Tutorial Rating -->
+                <div class="tutorial-rating" data-tutorial-id="{{slug}}">
+                    <h3>Was this tutorial helpful?</h3>
+                    <div class="stars">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <p class="rating-message"></p>
+                </div>
+                
+                <!-- Related Tutorials -->
+                <div class="related-tutorials">
+                    <h3>Related Tutorials</h3>
+                    <div class="tutorial-carousel">
+                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="carousel-item">
+                                <a href="../tutorials/building-custom-gpt-applications.html">
+                                    <img src="https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Building Custom GPT Applications">
+                                    <h4>Building Custom GPT Applications</h4>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="../tutorials/neural-networks-explained.html">
+                                    <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Neural Networks Explained">
+                                    <h4>Neural Networks Explained</h4>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="../tutorials/computer-vision-tensorflow.html">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Computer Vision with TensorFlow">
+                                    <h4>Computer Vision with TensorFlow</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="tutorial-newsletter">
+                    <h3>Subscribe for More AI & ML Tutorials</h3>
+                    <p>Get weekly tutorials, guides, and AI resources delivered directly to your inbox.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Ad -->
+                <div class="ad-container sidebar-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Category -->
+                <div class="sidebar-section">
+                    <h3>Category</h3>
+                    <div class="category-badge">
+                        <a href="../categories/{{category}}.html">{{category}}</a>
+                    </div>
+                </div>
+                
+                <!-- Popular Posts -->
+                <div class="sidebar-section">
+                    <h3>Popular Tutorials</h3>
+                    <ul class="popular-posts">
+                        <li>
+                            <a href="../tutorials/machine-learning-beginners-guide.html">Machine Learning: A Complete Beginner's Guide</a>
+                            <span><i class="far fa-eye"></i> 45K views</span>
+                        </li>
+                        <li>
+                            <a href="../tutorials/pytorch-vs-tensorflow.html">PyTorch vs TensorFlow: Which One Should You Learn?</a>
+                            <span><i class="far fa-eye"></i> 32K views</span>
+                        </li>
+                        <li>
+                            <a href="../tutorials/deep-learning-image-classification.html">Image Classification with Deep Learning</a>
+                            <span><i class="far fa-eye"></i> 28K views</span>
+                        </li>
+                        <li>
+                            <a href="../tutorials/natural-language-processing-basics.html">NLP Basics: Understanding Language with AI</a>
+                            <span><i class="far fa-eye"></i> 24K views</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Related Categories -->
+                <div class="sidebar-section">
+                    <h3>Explore Topics</h3>
+                    <ul class="category-list">
+                        <li><a href="../categories/deep-learning.html">Deep Learning <span>42</span></a></li>
+                        <li><a href="../categories/computer-vision.html">Computer Vision <span>38</span></a></li>
+                        <li><a href="../categories/nlp.html">Natural Language Processing <span>35</span></a></li>
+                        <li><a href="../categories/reinforcement-learning.html">Reinforcement Learning <span>24</span></a></li>
+                        <li><a href="../categories/data-science.html">Data Science <span>56</span></a></li>
+                        <li><a href="../categories/ai-ethics.html">AI Ethics <span>18</span></a></li>
+                    </ul>
+                </div>
+                
+                <!-- Sidebar Ad -->
+                <div class="ad-container sidebar-ad">
+                    <p>Advertisement</p>
+                    <!-- AdSense code would go here in production -->
+                </div>
+                
+                <!-- Share -->
+                <div class="sidebar-section">
+                    <h3>Share</h3>
+                    <div class="social-share">
+                        <a href="#" class="share-twitter" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="share-linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="share-reddit" title="Share on Reddit"><i class="fab fa-reddit-alien"></i></a>
+                        <a href="#" class="share-email" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Solve for AI</h4>
+                    <p>Your comprehensive resource for AI and machine learning tutorials, from basic concepts to advanced techniques.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="../tutorials.html">All Tutorials</a></li>
+                        <li><a href="../learning-paths.html">Learning Paths</a></li>
+                        <li><a href="../tools.html">AI Tools & Resources</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Popular Topics</h4>
+                    <ul class="footer-links">
+                        <li><a href="../topics/deep-learning.html">Deep Learning</a></li>
+                        <li><a href="../topics/computer-vision.html">Computer Vision</a></li>
+                        <li><a href="../topics/nlp.html">Natural Language Processing</a></li>
+                        <li><a href="../topics/reinforcement-learning.html">Reinforcement Learning</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Subscribe</h4>
+                    <p>Get weekly AI tutorials and resources delivered directly to your inbox.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+                <ul class="footer-links" style="display: flex; justify-content: center; margin-top: 1rem;">
+                    <li><a href="../privacy.html">Privacy Policy</a></li>
+                    <li><a href="../terms.html">Terms of Service</a></li>
+                    <li><a href="../contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../assets/js/main.js"></script>
+    
+    <!-- Initialize tutorial-specific functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize rating system
+            initRatingSystem();
+            
+            // Initialize tutorial carousel
+            initTutorialCarousel();
+            
+            // Set up social sharing links
+            setupSocialSharing();
+        });
+        
+        // Set up social sharing
+        function setupSocialSharing() {
+            const pageUrl = encodeURIComponent(window.location.href);
+            const pageTitle = encodeURIComponent(document.title);
+            
+            // Twitter
+            document.querySelector('.share-twitter').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+            
+            // Facebook
+            document.querySelector('.share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+            
+            // LinkedIn
+            document.querySelector('.share-linkedin').href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+            
+            // Reddit
+            document.querySelector('.share-reddit').href = `https://www.reddit.com/submit?url=${pageUrl}&title=${pageTitle}`;
+            
+            // Email
+            document.querySelector('.share-email').href = `mailto:?subject=${pageTitle}&body=Check out this article: ${pageUrl}`;
+        }
+    </script>
+</body>
+</html>

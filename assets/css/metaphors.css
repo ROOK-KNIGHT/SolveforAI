@@ -1,0 +1,533 @@
+/* Styling for AI Metaphors Page */
+
+/* Section Description */
+.section-description {
+    text-align: center;
+    margin: 0 auto 2rem;
+    max-width: 800px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Category Cards Section */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.category-card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.category-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.category-card h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.category-card p {
+    margin-bottom: 1.2rem;
+    color: #666;
+}
+
+.category-link {
+    margin-top: auto;
+    display: inline-block;
+    padding: 0.5rem 0;
+    font-weight: 500;
+}
+
+.category-link:hover {
+    color: var(--primary-color);
+}
+
+/* Metaphor Sections */
+.metaphor-section {
+    padding: 3rem 0;
+    border-top: 1px solid #eee;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+}
+
+/* Metaphor Cards */
+.metaphors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.metaphor-card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    position: relative;
+}
+
+.metaphor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.metaphor-card.premium {
+    border: 2px solid #f5c518;
+}
+
+.premium-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f5c518;
+    color: #000;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.metaphor-header {
+    padding: 1.2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.metaphor-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.metaphor-content {
+    padding: 0;
+}
+
+.metaphor-illustration {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f5f5f5;
+}
+
+.btn-toggle-interactive {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-toggle-interactive:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.metaphor-explanation {
+    padding: 1.5rem;
+}
+
+.metaphor-description,
+.metaphor-reality,
+.metaphor-limitations {
+    margin-bottom: 1.5rem;
+}
+
+.metaphor-description h4,
+.metaphor-reality h4,
+.metaphor-limitations h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.code-snippet {
+    background: var(--dark-color);
+    color: white;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.code-snippet pre {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.code-snippet code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+}
+
+/* Interactive Elements */
+.interactive-element {
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+.interactive-placeholder {
+    text-align: center;
+}
+
+.slider-group {
+    margin: 1.5rem 0;
+}
+
+.slider-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.slider-item label {
+    width: 80px;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.slider-item input {
+    flex: 1;
+}
+
+.slider-value {
+    width: 40px;
+    text-align: right;
+    margin-left: 1rem;
+}
+
+.neuron-output {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.output-value {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+/* Filter Visualization */
+.filter-visualization {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.original-image,
+.filtered-image {
+    text-align: center;
+}
+
+.image-placeholder {
+    height: 150px;
+    background: #e5e5e5;
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+}
+
+.filter-controls {
+    margin-bottom: 0.5rem;
+}
+
+/* Premium Content */
+.premium-content-teaser {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.btn-premium {
+    background: #f5c518;
+    color: #000;
+    font-weight: 500;
+}
+
+.btn-premium:hover {
+    background: #e0b216;
+}
+
+/* Sponsored Resources */
+.sponsored-resources {
+    background: #f9f9f9;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.resources-header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sponsored-tag {
+    font-size: 0.75rem;
+    color: #666;
+    background: #eee;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+}
+
+.resources-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.resource-card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.2rem;
+}
+
+.resource-card h4 {
+    margin-bottom: 0.5rem;
+}
+
+.resource-link {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-weight: 500;
+}
+
+/* Metaphor Submission Section */
+.metaphor-submission {
+    background: linear-gradient(135deg, var(--primary-color), #2980b9);
+    color: white;
+    padding: 3rem 0;
+    margin: 3rem 0 0;
+}
+
+.submission-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.submission-content h2 {
+    margin-bottom: 1rem;
+}
+
+.submission-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Modal Styles (extending modal.css) */
+#metaphor-form {
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Concept Finder */
+.concept-finder {
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-top: 2rem;
+}
+
+.finder-controls {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+#concept-search {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+
+#category-select {
+    width: 180px;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+
+/* Hero Section */
+.metaphors-hero {
+    background: linear-gradient(135deg, var(--primary-color), #9b59b6);
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 0;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.metaphor-illustration-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    gap: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    height: 100%;
+}
+
+.metaphor-illustration-hero i {
+    animation: pulse 3s infinite alternate;
+}
+
+.metaphor-illustration-hero i:nth-child(2) {
+    font-size: 3rem;
+    animation-delay: 0.5s;
+}
+
+.metaphor-illustration-hero i:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Intro Section */
+.metaphors-intro {
+    margin: 3rem 0;
+    padding: 2rem 0;
+}
+
+.intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.intro-content h2 {
+    margin-bottom: 1rem;
+}
+
+.intro-content p {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .metaphors-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-visualization {
+        grid-template-columns: 1fr;
+    }
+    
+    .finder-controls {
+        flex-direction: column;
+    }
+    
+    #category-select {
+        width: 100%;
+    }
+}
