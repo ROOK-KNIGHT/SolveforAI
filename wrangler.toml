@@ -1,0 +1,22 @@
+name = "solveforai"
+main = "src/index.js"
+compatibility_date = "2025-06-05"
+
+# Configure to serve static assets
+[site]
+bucket = "./"
+
+# Routes all requests to serve static assets
+[site.mounts]
+source = "./"
+destination = "/"
+
+# Define variables
+[vars]
+ENVIRONMENT = "production"
+
+# Configure for Pages deployment
+[build]
+command = ""  # No build command needed for static site
+upload.format = "directory"
+upload.dir = "./"
