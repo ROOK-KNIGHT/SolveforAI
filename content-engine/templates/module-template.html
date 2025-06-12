@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{module_title}} | Learning Path</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/module.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: {{progress_percentage}}%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>{{module_title}}</h1>
+            <p class="module-description">{{module_description}}</p>
+        </section>
+
+        <!-- Concept Template (Repeat for each concept, max 5) -->
+        {{#each concepts}}
+        <section class="concept-section">
+            <h2>{{title}}</h2>
+            
+            <!-- Core Explanation -->
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>{{explanation}}</p>
+            </div>
+
+            <!-- Metaphor -->
+            <div class="metaphor-box">
+                <h3>{{metaphor.title}}</h3>
+                <p>{{metaphor.description}}</p>
+                {{#if metaphor.points}}
+                <ul>
+                    {{#each metaphor.points}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+
+            <!-- Technical Example -->
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code>{{technical_example}}</code></pre>
+            </div>
+
+            <!-- Quick Quiz -->
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>{{quiz.question}}</p>
+                    <form>
+                        {{#each quiz.options}}
+                        <label>
+                            <input type="radio" name="q{{@index}}" value="{{@key}}">
+                            {{this}}
+                        </label>
+                        {{/each}}
+                    </form>
+                </div>
+            </div>
+        </section>
+        {{/each}}
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                {{#each key_takeaways}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            {{#if prev_module}}
+            <button class="btn btn-secondary prev-module" data-module="{{prev_module}}">Previous Module</button>
+            {{/if}}
+            {{#if next_module}}
+            <button class="btn btn-primary next-module" data-module="{{next_module}}">Continue to Next Module</button>
+            {{/if}}
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "{{module_id}}",
+        path: "{{learning_path}}",
+        concepts: {{concepts_json}},
+        progress: {{progress_percentage}}
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/assets/js/module.js"></script>
+</body>
+</html>

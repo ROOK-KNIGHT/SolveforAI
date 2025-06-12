@@ -1,0 +1,65 @@
+{
+    "module_id": "ml-fundamentals-1",
+    "module_title": "Introduction to Machine Learning",
+    "module_description": "Understand the core concepts of machine learning through intuitive explanations and practical examples.",
+    "learning_path": "ml-fundamentals",
+    "progress_percentage": 0,
+    "concepts": [
+        {
+            "title": "What is Machine Learning?",
+            "explanation": "Machine learning is a way for computers to learn from examples rather than following explicit instructions. Instead of writing rules for every situation, we show the computer many examples and let it discover patterns.",
+            "metaphor": {
+                "title": "The Recipe Book Metaphor",
+                "description": "Think of traditional programming as following a recipe book: you have specific instructions to follow step by step. Machine learning, on the other hand, is like having a chef taste thousands of dishes and learn to recognize what makes a good meal without explicit recipes.",
+                "points": [
+                    "Traditional Programming = Following a recipe exactly",
+                    "Machine Learning = Learning patterns from many examples",
+                    "Like a chef learning to cook by tasting rather than reading recipes"
+                ]
+            },
+            "technical_example": "# Traditional Programming\ndef is_spam(email):\n    if \"buy now\" in email.lower():\n        return True\n    if \"discount\" in email.lower():\n        return True\n    return False\n\n# Machine Learning Approach\nfrom sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.naive_bayes import MultinomialNB\n\n# Train on examples\nvectorizer = CountVectorizer()\nclassifier = MultinomialNB()\nclassifier.fit(vectorizer.fit_transform(training_emails), \n              training_labels)",
+            "quiz": {
+                "question": "Which statement best describes machine learning?",
+                "options": {
+                    "a": "A system that follows explicit rules",
+                    "b": "A program that learns patterns from examples",
+                    "c": "A database of pre-written solutions",
+                    "d": "A collection of if-else statements"
+                },
+                "correct": "b",
+                "explanation": "Machine learning systems learn patterns from data, rather than following explicit rules or pre-written solutions."
+            }
+        },
+        {
+            "title": "Types of Machine Learning",
+            "explanation": "There are three main types of machine learning: supervised learning (learning with labeled examples), unsupervised learning (finding patterns without labels), and reinforcement learning (learning through trial and error).",
+            "metaphor": {
+                "title": "The Learning Styles Metaphor",
+                "description": "Different types of machine learning are like different ways of teaching a student.",
+                "points": [
+                    "Supervised Learning = Learning with a teacher who provides correct answers",
+                    "Unsupervised Learning = Self-study by finding patterns in information",
+                    "Reinforcement Learning = Learning through practice and feedback, like playing a game"
+                ]
+            },
+            "technical_example": "# Supervised Learning Example\nfrom sklearn.linear_model import LinearRegression\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)  # Learning with labeled data\n\n# Unsupervised Learning Example\nfrom sklearn.cluster import KMeans\nclustering = KMeans(n_clusters=3)\nclustering.fit(X)  # Finding patterns without labels\n\n# Reinforcement Learning Example\ndef q_learning(state, action, reward, next_state):\n    old_value = Q[state][action]\n    next_max = np.max(Q[next_state])\n    Q[state][action] = old_value + alpha * (reward + gamma * next_max - old_value)",
+            "quiz": {
+                "question": "Which type of machine learning would be best for grouping similar customers together without any predefined categories?",
+                "options": {
+                    "a": "Supervised Learning",
+                    "b": "Unsupervised Learning",
+                    "c": "Reinforcement Learning"
+                },
+                "correct": "b",
+                "explanation": "Unsupervised learning is ideal for finding natural groupings in data without predefined categories."
+            }
+        }
+    ],
+    "key_takeaways": [
+        "Machine learning enables computers to learn from examples rather than following explicit rules",
+        "Different types of machine learning suit different types of problems",
+        "Understanding when to use each type is crucial for successful ML applications"
+    ],
+    "prev_module": null,
+    "next_module": "ml-fundamentals-2"
+}

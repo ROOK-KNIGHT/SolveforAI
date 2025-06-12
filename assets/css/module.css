@@ -1,0 +1,232 @@
+/* Module Styles */
+.module-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.module-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.module-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.module-description {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Concept Section */
+.concept-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.concept-section h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+}
+
+/* Concept Components */
+.concept-explanation {
+    margin-bottom: 2rem;
+}
+
+.concept-explanation h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.concept-explanation p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Metaphor Box */
+.metaphor-box {
+    background: #f0f7ff;
+    border-left: 4px solid #3498db;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.metaphor-box h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.metaphor-box p {
+    color: #444;
+    line-height: 1.6;
+}
+
+.metaphor-box ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.metaphor-box li {
+    margin-bottom: 0.5rem;
+    color: #444;
+}
+
+/* Technical Example */
+.technical-example {
+    margin-bottom: 2rem;
+}
+
+.technical-example h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.technical-example pre {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+}
+
+.technical-example code {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Quiz Section */
+.concept-quiz {
+    background: #fff8e1;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.concept-quiz h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.quiz-question p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+.quiz-question form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quiz-question label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.quiz-question label:hover {
+    background: #f5f5f5;
+}
+
+/* Module Summary */
+.module-summary {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 3rem 0;
+}
+
+.module-summary h2 {
+    color: #2c3e50;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.module-summary ul {
+    padding-left: 1.5rem;
+}
+
+.module-summary li {
+    margin-bottom: 0.75rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* Navigation */
+.module-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.module-navigation button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #f0f0f0;
+    z-index: 1000;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #3498db;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .module-content {
+        padding: 1rem;
+    }
+    
+    .module-header h1 {
+        font-size: 2rem;
+    }
+    
+    .concept-section {
+        padding: 1.5rem;
+    }
+    
+    .module-navigation {
+        flex-direction: column;
+    }
+    
+    .module-navigation button {
+        width: 100%;
+    }
+}
