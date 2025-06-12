@@ -18,18 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Path Details Buttons
-    const pathDetailsButtons = document.querySelectorAll('.path-details-btn, .start-path-btn');
+    const pathDetailsButtons = document.querySelectorAll('.path-details-btn');
     pathDetailsButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             scrollPosition = window.pageYOffset;
             const pathId = this.getAttribute('data-path');
-            if (this.classList.contains('path-details-btn')) {
-                showPathDetails(pathId);
-            } else {
-                startPath(pathId);
-            }
+            showPathDetails(pathId);
         });
     });
     
@@ -141,8 +137,6 @@ function showAssessmentModal() {
                 </div>
             </div>
             
-            <!-- Additional questions would be added here in a real implementation -->
-            
             <div class="assessment-result" id="assessment-result">
                 <h3>Your Recommended Path</h3>
                 <div class="recommendation-card">
@@ -162,14 +156,6 @@ function showAssessmentModal() {
                             <button class="btn btn-secondary" id="view-all-paths">View All Paths</button>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Ad slot integrated naturally as a "supplementary resource" -->
-                <div class="supplementary-resource sponsored">
-                    <span class="sponsored-tag">Sponsored</span>
-                    <h4>Recommended Resource</h4>
-                    <p>Get the "Machine Learning Fundamentals" eBook to complement your learning path</p>
-                    <a href="#" class="resource-link">Learn More <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
         </div>
@@ -215,9 +201,6 @@ function showAssessmentModal() {
             // For this demo, we'll just show the result
             question1.classList.remove('active');
             resultSection.classList.add('active');
-            
-            // This is where we would track an ad impression
-            logAdImpression('assessment-result-ad');
         });
     }
     
@@ -229,7 +212,7 @@ function showAssessmentModal() {
             window.closeModal(modal, overlay);
             
             // Start the recommended path
-            startPath('ml-fundamentals');
+            showPathContent('ml-fundamentals');
         });
     }
     
@@ -263,17 +246,8 @@ function showPathDetails(pathId) {
                 { title: 'Data Preprocessing', duration: '1 hour' },
                 { title: 'Supervised Learning: Regression', duration: '1.5 hours' },
                 { title: 'Supervised Learning: Classification', duration: '2 hours' },
-                { title: 'Model Evaluation and Validation', duration: '1 hour' },
-                { title: 'Feature Engineering', duration: '1.5 hours' },
-                { title: 'Unsupervised Learning', duration: '1.5 hours' },
-                { title: 'Ensemble Methods', duration: '1 hour' },
-                { title: 'Introduction to Neural Networks', duration: '2 hours' },
-                { title: 'ML Project: Predictive Analytics', duration: '3 hours' },
-                { title: 'Deploying ML Models', duration: '1 hour' },
-                { title: 'Career Paths in Machine Learning', duration: '30 min' }
-            ],
-            prerequisites: ['Basic Python programming', 'Fundamental statistics knowledge', 'Linear algebra basics'],
-            outcomes: ['Build and evaluate ML models', 'Select appropriate algorithms for different problems', 'Preprocess and transform data effectively', 'Deploy models for practical applications']
+                { title: 'Model Evaluation and Validation', duration: '1 hour' }
+            ]
         },
         'deep-learning': {
             title: 'Deep Learning Specialist',
@@ -283,20 +257,8 @@ function showPathDetails(pathId) {
                 { title: 'Backpropagation & Optimization', duration: '1.5 hours' },
                 { title: 'Convolutional Neural Networks', duration: '3 hours' },
                 { title: 'Image Recognition & Classification', duration: '2 hours' },
-                { title: 'Recurrent Neural Networks', duration: '2 hours' },
-                { title: 'Sequence Modeling', duration: '1.5 hours' },
-                { title: 'Attention Mechanisms', duration: '1 hour' },
-                { title: 'Transformer Architectures', duration: '2.5 hours' },
-                { title: 'Generative Adversarial Networks', duration: '2 hours' },
-                { title: 'Variational Autoencoders', duration: '1.5 hours' },
-                { title: 'Deep Reinforcement Learning', duration: '2 hours' },
-                { title: 'Model Optimization & Deployment', duration: '1.5 hours' },
-                { title: 'Project: Image Generation', duration: '3 hours' },
-                { title: 'Project: Natural Language Processing', duration: '3 hours' },
-                { title: 'Advanced Topics & Research Frontiers', duration: '1 hour' }
-            ],
-            prerequisites: ['Machine Learning Fundamentals', 'Intermediate Python programming', 'Experience with TensorFlow or PyTorch'],
-            outcomes: ['Design and implement complex neural networks', 'Apply CNNs for computer vision tasks', 'Build sequence models with RNNs and Transformers', 'Create generative models for content creation']
+                { title: 'Recurrent Neural Networks', duration: '2 hours' }
+            ]
         },
         'nlp-expert': {
             title: 'Natural Language Processing Expert',
@@ -306,23 +268,8 @@ function showPathDetails(pathId) {
                 { title: 'Text Preprocessing Techniques', duration: '1 hour' },
                 { title: 'Language Modeling', duration: '2 hours' },
                 { title: 'Word Embeddings', duration: '1.5 hours' },
-                { title: 'Recurrent Networks for NLP', duration: '2 hours' },
-                { title: 'Transformer Architecture', duration: '2.5 hours' },
-                { title: 'BERT & Contextual Embeddings', duration: '2 hours' },
-                { title: 'Transfer Learning in NLP', duration: '1.5 hours' },
-                { title: 'Named Entity Recognition', duration: '1 hour' },
-                { title: 'Sentiment Analysis', duration: '1.5 hours' },
-                { title: 'Text Generation', duration: '2 hours' },
-                { title: 'Question Answering Systems', duration: '2 hours' },
-                { title: 'Machine Translation', duration: '2 hours' },
-                { title: 'Chatbot Development', duration: '3 hours' },
-                { title: 'Model Deployment for NLP', duration: '1.5 hours' },
-                { title: 'Project: Multilingual Sentiment Analyzer', duration: '3 hours' },
-                { title: 'Project: Advanced Conversation Agent', duration: '3 hours' },
-                { title: 'NLP Ethics & Bias Mitigation', duration: '1 hour' }
-            ],
-            prerequisites: ['Deep Learning Specialist path or equivalent', 'Advanced Python programming', 'Experience with NLP libraries'],
-            outcomes: ['Build state-of-the-art NLP systems', 'Implement transformer-based language models', 'Create chatbots and conversational agents', 'Deploy production-ready NLP applications']
+                { title: 'Recurrent Networks for NLP', duration: '2 hours' }
+            ]
         }
     };
     
@@ -352,20 +299,6 @@ function showPathDetails(pathId) {
     });
     modulesHtml += '</ul>';
     
-    // Generate prerequisites HTML
-    let prerequisitesHtml = '<ul class="prerequisites-list">';
-    path.prerequisites.forEach(prerequisite => {
-        prerequisitesHtml += `<li>${prerequisite}</li>`;
-    });
-    prerequisitesHtml += '</ul>';
-    
-    // Generate outcomes HTML
-    let outcomesHtml = '<ul class="outcomes-list">';
-    path.outcomes.forEach(outcome => {
-        outcomesHtml += `<li>${outcome}</li>`;
-    });
-    outcomesHtml += '</ul>';
-    
     modal.innerHTML = `
         <div class="modal-header">
             <h2>${path.title}</h2>
@@ -379,31 +312,6 @@ function showPathDetails(pathId) {
                     <h3>What You'll Learn</h3>
                     <div class="module-count"><span>${path.modules.length}</span> Modules</div>
                     ${modulesHtml}
-                </div>
-                
-                <div class="path-details-section">
-                    <h3>Prerequisites</h3>
-                    ${prerequisitesHtml}
-                </div>
-                
-                <div class="path-details-section">
-                    <h3>Learning Outcomes</h3>
-                    ${outcomesHtml}
-                </div>
-                
-                <!-- Strategically placed ad as "Learning Resources" -->
-                <div class="path-details-section sponsored-section">
-                    <h3>Recommended Resources <span class="sponsored-tag">Sponsored</span></h3>
-                    <div class="resources-for-path">
-                        <div class="resource-item">
-                            <div class="resource-icon"><i class="fas fa-book"></i></div>
-                            <div class="resource-info">
-                                <h4>Premium ${path.title} Course Bundle</h4>
-                                <p>Get additional exercises, projects, and certification preparation.</p>
-                                <a href="#" class="resource-link">View Offer <i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -435,7 +343,7 @@ function showPathDetails(pathId) {
     if (startBtn) {
         startBtn.addEventListener('click', function() {
             window.closeModal(modal, overlay);
-            startPath(pathId);
+            showPathContent(pathId);
         });
     }
     
@@ -448,9 +356,6 @@ function showPathDetails(pathId) {
     modal.addEventListener('click', function(e) {
         e.stopPropagation();
     });
-    
-    // Track ad impression
-    logAdImpression('path-details-resource-ad');
 }
 
 /**
@@ -473,51 +378,79 @@ function showPathContent(pathId) {
         'nlp-expert': 'Natural Language Processing Expert'
     };
     
-    modal.innerHTML = `
-        <div class="modal-header">
-            <h2>${pathTitles[pathId] || 'Learning Path'}</h2>
-            <button class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="path-content-placeholder">
-                <h3>Welcome to Your Learning Journey!</h3>
-                <p>This is where your learning content will appear. We're currently building out this section.</p>
-                <div class="placeholder-modules">
-                    <div class="placeholder-module">
-                        <h4>Module 1: Introduction</h4>
-                        <p>Getting started with core concepts and terminology.</p>
-                    </div>
-                    <div class="placeholder-module">
-                        <h4>Module 2: Fundamentals</h4>
-                        <p>Building your foundation with hands-on exercises.</p>
-                    </div>
-                    <div class="placeholder-module">
-                        <h4>Module 3: Advanced Topics</h4>
-                        <p>Diving deeper into complex concepts and real-world applications.</p>
+    // Load the first module content
+    fetch('/content-engine/output/ml-fundamentals/module-1.html')
+        .then(response => response.text())
+        .then(content => {
+            modal.innerHTML = content;
+            
+            // Add modal to page using showModal helper
+            window.showModal(modal, overlay);
+            
+            // Handle modal interactions
+            const closeBtn = modal.querySelector('.modal-close');
+            closeBtn.addEventListener('click', function() {
+                window.closeModal(modal, overlay);
+            });
+            
+            // Clicking outside the modal closes it
+            overlay.addEventListener('click', function() {
+                window.closeModal(modal, overlay);
+            });
+            
+            // Prevent clicks inside modal from closing it
+            modal.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        })
+        .catch(error => {
+            console.error('Error loading module content:', error);
+            modal.innerHTML = `
+                <div class="modal-header">
+                    <h2>${pathTitles[pathId] || 'Learning Path'}</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="path-content-placeholder">
+                        <h3>Welcome to Your Learning Journey!</h3>
+                        <p>This is where your learning content will appear. We're currently building out this section.</p>
+                        <div class="placeholder-modules">
+                            <div class="placeholder-module">
+                                <h4>Module 1: Introduction</h4>
+                                <p>Getting started with core concepts and terminology.</p>
+                            </div>
+                            <div class="placeholder-module">
+                                <h4>Module 2: Fundamentals</h4>
+                                <p>Building your foundation with hands-on exercises.</p>
+                            </div>
+                            <div class="placeholder-module">
+                                <h4>Module 3: Advanced Topics</h4>
+                                <p>Diving deeper into complex concepts and real-world applications.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    `;
-    
-    // Add modal to page using showModal helper
-    window.showModal(modal, overlay);
-    
-    // Handle modal interactions
-    const closeBtn = modal.querySelector('.modal-close');
-    closeBtn.addEventListener('click', function() {
-        window.closeModal(modal, overlay);
-    });
-    
-    // Clicking outside the modal closes it
-    overlay.addEventListener('click', function() {
-        window.closeModal(modal, overlay);
-    });
-    
-    // Prevent clicks inside modal from closing it
-    modal.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
+            `;
+            
+            // Add modal to page using showModal helper
+            window.showModal(modal, overlay);
+            
+            // Handle modal interactions
+            const closeBtn = modal.querySelector('.modal-close');
+            closeBtn.addEventListener('click', function() {
+                window.closeModal(modal, overlay);
+            });
+            
+            // Clicking outside the modal closes it
+            overlay.addEventListener('click', function() {
+                window.closeModal(modal, overlay);
+            });
+            
+            // Prevent clicks inside modal from closing it
+            modal.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
 }
 
 /**
@@ -543,15 +476,4 @@ function showNotification(message) {
             document.body.removeChild(notification);
         }, 300);
     }, 3000);
-}
-
-/**
- * Log ad impression for analytics
- * @param {string} adId - Identifier for the ad placement
- */
-function logAdImpression(adId) {
-    // In a real implementation, this would send data to an analytics service
-    console.log(`Ad impression logged: ${adId} at ${new Date().toISOString()}`);
-    
-    // Additional ad-related analytics could be implemented here
 }
