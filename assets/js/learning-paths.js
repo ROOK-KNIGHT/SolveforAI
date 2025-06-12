@@ -34,11 +34,32 @@ document.addEventListener('DOMContentLoaded', function() {
     startPathButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             scrollPosition = window.pageYOffset;
             const pathId = this.getAttribute('data-path');
             showPathContent(pathId);
         });
     });
+
+    // Scroll to paths section if URL has #popular-paths
+    if (window.location.hash === '#popular-paths') {
+        const pathsSection = document.querySelector('#popular-paths');
+        if (pathsSection) {
+            pathsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Browse Learning Paths button
+    const browsePaths = document.querySelector('a[href="#popular-paths"]');
+    if (browsePaths) {
+        browsePaths.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pathsSection = document.querySelector('#popular-paths');
+            if (pathsSection) {
+                pathsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 
     // Function to show modal and prevent page scroll
     function showModal(modal, overlay) {
