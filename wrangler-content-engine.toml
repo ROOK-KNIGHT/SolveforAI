@@ -2,15 +2,11 @@ name = "content-engine-trigger"
 main = "content-engine-worker.js"
 compatibility_date = "2025-06-05"
 
-# This sets up the cron trigger to run daily at midnight UTC
-# You can adjust this to your preferred schedule
+# This sets up the cron trigger to run every 2 minutes
 # Format: "cron_expression"
-# Examples:
-# - "0 0 * * *" (daily at midnight)
-# - "0 0 * * 0" (weekly on Sunday at midnight)
-# - "0 0 1 * *" (monthly on the 1st at midnight)
+# Current schedule: Every 2 minutes
 [triggers]
-crons = ["0 0 * * *"]  # Daily at midnight UTC
+crons = ["*/2 * * * *"]  # Every 2 minutes
 
 # Set your environment variables
 [vars]

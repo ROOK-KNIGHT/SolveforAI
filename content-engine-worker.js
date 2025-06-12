@@ -60,8 +60,8 @@ export default {
 async function generateContent(env) {
   console.log("Calling content generation API");
   
-  // Option 1: If your content engine has a REST API endpoint
-  const response = await fetch("https://solveforai.com/api/generate-content", {
+  // Call the content engine API endpoint
+  const response = await fetch("https://solveforai.com/content-engine/generate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
