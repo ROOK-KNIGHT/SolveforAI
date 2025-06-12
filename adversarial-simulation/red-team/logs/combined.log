@@ -1,0 +1,10 @@
+{"level":"info","message":"C2 Server listening on port 3000","service":"c2-server","timestamp":"2025-06-07T07:51:07.479Z"}
+{"level":"info","message":"Connected to Redis","service":"c2-server","timestamp":"2025-06-07T07:51:07.490Z"}
+{"level":"info","message":"C2 Server listening on port 3000","service":"c2-server","timestamp":"2025-06-07T07:53:56.193Z"}
+{"level":"info","message":"Connected to Redis","service":"c2-server","timestamp":"2025-06-07T07:53:56.203Z"}
+{"level":"info","message":"C2 Server listening on port 3000","service":"c2-server","timestamp":"2025-06-07T07:59:16.584Z"}
+{"level":"info","message":"Connected to Redis","service":"c2-server","timestamp":"2025-06-07T07:59:16.588Z"}
+{"level":"info","message":"C2 Server listening on port 3000","service":"c2-server","timestamp":"2025-06-07T18:14:24.261Z"}
+{"level":"info","message":"Connected to Redis","service":"c2-server","timestamp":"2025-06-07T18:14:24.271Z"}
+{"level":"info","message":"C2 Server listening on port 3000","service":"c2-server","timestamp":"2025-06-07T18:30:19.411Z"}
+{"level":"info","message":"Connected to Redis","service":"c2-server","timestamp":"2025-06-07T18:30:19.428Z"}

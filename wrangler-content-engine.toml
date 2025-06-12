@@ -1,0 +1,24 @@
+name = "content-engine-trigger"
+main = "content-engine-worker.js"
+compatibility_date = "2025-06-05"
+
+# This sets up the cron trigger to run daily at midnight UTC
+# You can adjust this to your preferred schedule
+# Format: "cron_expression"
+# Examples:
+# - "0 0 * * *" (daily at midnight)
+# - "0 0 * * 0" (weekly on Sunday at midnight)
+# - "0 0 1 * *" (monthly on the 1st at midnight)
+[triggers]
+crons = ["0 0 * * *"]  # Daily at midnight UTC
+
+# Set your environment variables
+[vars]
+ENVIRONMENT = "production"
+
+# Secret environment variables (not exposed in the dashboard)
+# After deployment, set these using the Cloudflare dashboard or Wrangler CLI:
+# wrangler secret put API_KEY
+# These are required for the Worker to authenticate with your API
+# [secrets]
+# API_KEY

@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  # Redis for shared state between components
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  # Elasticsearch for log storage and analysis
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.4
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Kibana for visualization
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.4
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Red Team C2 Server
+  c2-server:
+    build:
+      context: ./red-team
+      dockerfile: Dockerfile.c2-server
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - NODE_ENV=production
+      - PORT=3000
+      - API_KEY=${C2_API_KEY:-your_secret_api_key_here}
+    volumes:
+      - ./red-team/logs:/app/logs
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # Blue Team Monitoring Server
+  monitoring-server:
+    build:
+      context: ./blue-team
+      dockerfile: Dockerfile.monitoring
+    ports:
+      - "3001:3001"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - NODE_ENV=production
+      - PORT=3001
+      - API_KEY=${MONITORING_API_KEY:-your_blue_team_api_key_here}
+    volumes:
+      - ./blue-team/logs:/app/logs
+    depends_on:
+      - redis
+      - elasticsearch
+    restart: unless-stopped
+
+  # Blue Team Analysis Dashboard
+  dashboard:
+    build:
+      context: ./blue-team
+      dockerfile: Dockerfile.dashboard
+    ports:
+      - "3002:3002"
+    environment:
+      - MONITORING_API_URL=http://monitoring-server:3001
+      - NODE_ENV=production
+      - PORT=3002
+    depends_on:
+      - monitoring-server
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  elasticsearch-data:

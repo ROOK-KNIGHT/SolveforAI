@@ -70,14 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
         
-        // Append to main content instead of body
-        const mainContent = document.querySelector('.site-content');
-        if (mainContent) {
-            mainContent.appendChild(overlay);
-            mainContent.appendChild(modal);
-        } else {
-            document.body.appendChild(overlay);
-            document.body.appendChild(modal);
+        // Append to modal root
+        const modalRoot = document.getElementById('modal-root');
+        if (modalRoot) {
+            modalRoot.appendChild(overlay);
+            modalRoot.appendChild(modal);
         }
     }
 
@@ -89,9 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.width = '';
         window.scrollTo(0, scrollPosition);
         
-        // Remove from parent element
-        modal.parentElement.removeChild(modal);
-        overlay.parentElement.removeChild(overlay);
+        // Remove from modal root
+        const modalRoot = document.getElementById('modal-root');
+        if (modalRoot) {
+            modalRoot.removeChild(modal);
+            modalRoot.removeChild(overlay);
+        }
     }
 
     window.showModal = showModal;

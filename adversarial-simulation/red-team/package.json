@@ -1,0 +1,29 @@
+{
+  "name": "adversarial-sim-red-team",
+  "version": "1.0.0",
+  "description": "Red Team botnet components for the 1v1 Adversarial Simulation Game",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:c2": "node src/c2-server/index.js",
+    "start:agent": "node src/bot-agent/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "redis": "^4.6.10",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "axios": "^1.6.0",
+    "winston": "^3.11.0",
+    "uuid": "^9.0.1",
+    "proxy-chain": "^2.3.0",
+    "node-schedule": "^2.1.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  }
+}

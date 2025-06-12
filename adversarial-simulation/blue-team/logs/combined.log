@@ -1,0 +1,74 @@
+{"level":"info","message":"Connected to Redis","service":"monitoring-system","timestamp":"2025-06-07T07:51:07.736Z"}
+{"level":"error","message":"Error initializing Elasticsearch indices: connect ECONNREFUSED 172.18.0.3:9200","meta":{"headers":{},"meta":{"aborted":false,"attempts":3,"connection":{"_openRequests":0,"deadCount":0,"headers":{"authorization":"[redacted]","user-agent":"elasticsearch-js/8.18.2 (linux 6.10.14-linuxkit-arm64; Node.js 18.20.8; Transport 8.9.7)","x-elastic-client-meta":"es=8.18.2,js=18.20.8,t=8.9.7,un=18.20.8"},"id":"http://elasticsearch:9200/","maxEventListeners":100,"pool":{"_events":{},"_eventsCount":1},"resurrectTimeout":0,"timeout":30000,"tls":null,"url":"http://elasticsearch:9200/","weight":1000},"context":null,"name":"elasticsearch-js","request":{"id":1,"options":{},"params":{"headers":{"accept":"application/vnd.elasticsearch+json; compatible-with=8,text/plain","authorization":"[redacted]","user-agent":"elasticsearch-js/8.18.2 (linux 6.10.14-linuxkit-arm64; Node.js 18.20.8; Transport 8.9.7)","x-elastic-client-meta":"es=8.18.2,js=18.20.8,t=8.9.7,un=18.20.8"},"method":"HEAD","path":"/request-logs","querystring":""}}},"statusCode":0,"warnings":null},"name":"ConnectionError","options":{"redaction":{"additionalKeys":[],"type":"replace"}},"service":"monitoring-system","stack":"ConnectionError: connect ECONNREFUSED 172.18.0.3:9200\n    at SniffingTransport._request (/app/node_modules/@elastic/transport/lib/Transport.js:595:31)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/node_modules/@elastic/transport/lib/Transport.js:627:32\n    at async SniffingTransport.request (/app/node_modules/@elastic/transport/lib/Transport.js:623:20)\n    at async Indices.exists (/app/node_modules/@elastic/elasticsearch/lib/api/api/indices.js:562:16)\n    at async initializeElasticsearch (/app/src/monitoring/index.js:178:22)\n    at async start (/app/src/monitoring/index.js:1158:5)","timestamp":"2025-06-07T07:51:15.949Z"}
+{"level":"info","message":"Monitoring server listening on port 3001","service":"monitoring-system","timestamp":"2025-06-07T07:51:15.953Z"}
+{"level":"info","message":"Connected to Redis","service":"monitoring-system","timestamp":"2025-06-07T07:53:56.328Z"}
+{"level":"info","message":"Creating Elasticsearch index: request-logs","service":"monitoring-system","timestamp":"2025-06-07T07:54:04.570Z"}
+{"level":"info","message":"Creating Elasticsearch index: behavior-logs","service":"monitoring-system","timestamp":"2025-06-07T07:54:04.722Z"}
+{"level":"info","message":"Creating Elasticsearch index: api-logs","service":"monitoring-system","timestamp":"2025-06-07T07:54:04.816Z"}
+{"level":"info","message":"Creating Elasticsearch index: detection-events","service":"monitoring-system","timestamp":"2025-06-07T07:54:04.881Z"}
+{"level":"info","message":"Elasticsearch indices initialized","service":"monitoring-system","timestamp":"2025-06-07T07:54:04.929Z"}
+{"level":"info","message":"Monitoring server listening on port 3001","service":"monitoring-system","timestamp":"2025-06-07T07:54:04.931Z"}
+{"level":"info","message":"Connected to Redis","service":"monitoring-system","timestamp":"2025-06-07T07:59:16.714Z"}
+{"level":"info","message":"Elasticsearch indices initialized","service":"monitoring-system","timestamp":"2025-06-07T07:59:24.994Z"}
+{"level":"info","message":"Monitoring server listening on port 3001","service":"monitoring-system","timestamp":"2025-06-07T07:59:24.996Z"}
+{"level":"info","message":"Analysis client connected: LqB68SUNGTzmizYcAAAB","service":"monitoring-system","timestamp":"2025-06-07T07:59:28.192Z"}
+{"level":"info","message":"Analysis client connected: 1OH-oYF7n172HtEJAAAD","service":"monitoring-system","timestamp":"2025-06-07T08:00:10.928Z"}
+{"level":"info","message":"Analysis client connected: lK_42QVIb0rfXqLZAAAF","service":"monitoring-system","timestamp":"2025-06-07T08:00:47.288Z"}
+{"level":"info","message":"Analysis client disconnected: lK_42QVIb0rfXqLZAAAF","service":"monitoring-system","timestamp":"2025-06-07T08:01:01.100Z"}
+{"level":"info","message":"Analysis client disconnected: 1OH-oYF7n172HtEJAAAD","service":"monitoring-system","timestamp":"2025-06-07T08:01:01.103Z"}
+{"level":"info","message":"Analysis client disconnected: LqB68SUNGTzmizYcAAAB","service":"monitoring-system","timestamp":"2025-06-07T08:01:01.104Z"}
+{"level":"info","message":"Analysis client connected: ZCtnmsX13RGZdFA_AAAJ","service":"monitoring-system","timestamp":"2025-06-07T08:01:02.619Z"}
+{"level":"info","message":"Analysis client connected: 6zl7reQK1WnwcQgIAAAK","service":"monitoring-system","timestamp":"2025-06-07T08:01:02.622Z"}
+{"level":"info","message":"Analysis client connected: 8EQ0oEGDWTDw0I2EAAAL","service":"monitoring-system","timestamp":"2025-06-07T08:01:02.624Z"}
+{"level":"info","message":"Analysis client disconnected: 6zl7reQK1WnwcQgIAAAK","service":"monitoring-system","timestamp":"2025-06-07T17:45:07.291Z"}
+{"level":"info","message":"Analysis client disconnected: 8EQ0oEGDWTDw0I2EAAAL","service":"monitoring-system","timestamp":"2025-06-07T17:45:07.294Z"}
+{"level":"info","message":"Analysis client disconnected: ZCtnmsX13RGZdFA_AAAJ","service":"monitoring-system","timestamp":"2025-06-07T17:45:07.294Z"}
+{"level":"info","message":"Analysis client connected: a_Kw7FdQIlG67x8uAAAP","service":"monitoring-system","timestamp":"2025-06-07T17:45:08.613Z"}
+{"level":"info","message":"Analysis client connected: tOol792ZNuzRmU0WAAAQ","service":"monitoring-system","timestamp":"2025-06-07T17:45:08.616Z"}
+{"level":"info","message":"Analysis client connected: AWKv0OFJIhuHcvtyAAAR","service":"monitoring-system","timestamp":"2025-06-07T17:45:08.618Z"}
+{"level":"info","message":"Connected to Redis","service":"monitoring-system","timestamp":"2025-06-07T18:14:24.543Z"}
+{"level":"info","message":"Elasticsearch indices initialized","service":"monitoring-system","timestamp":"2025-06-07T18:14:24.575Z"}
+{"level":"info","message":"Monitoring server listening on port 3001","service":"monitoring-system","timestamp":"2025-06-07T18:14:24.578Z"}
+{"level":"info","message":"Analysis client connected: ta2V3Dh5pwBksTb6AAAD","service":"monitoring-system","timestamp":"2025-06-07T18:14:25.126Z"}
+{"level":"info","message":"Analysis client connected: 4DkXUzy3TjBQcwGNAAAE","service":"monitoring-system","timestamp":"2025-06-07T18:14:25.130Z"}
+{"level":"info","message":"Analysis client connected: dNdsqCaD5oo8j49nAAAF","service":"monitoring-system","timestamp":"2025-06-07T18:14:25.132Z"}
+{"level":"info","message":"Analysis client connected: 0mo9r-7wrhmjlNznAAAH","service":"monitoring-system","timestamp":"2025-06-07T18:15:41.566Z"}
+{"level":"info","message":"Analysis client disconnected: 0mo9r-7wrhmjlNznAAAH","service":"monitoring-system","timestamp":"2025-06-07T18:15:50.750Z"}
+{"level":"info","message":"Analysis client disconnected: ta2V3Dh5pwBksTb6AAAD","service":"monitoring-system","timestamp":"2025-06-07T18:29:19.150Z"}
+{"level":"info","message":"Analysis client disconnected: dNdsqCaD5oo8j49nAAAF","service":"monitoring-system","timestamp":"2025-06-07T18:29:19.155Z"}
+{"level":"info","message":"Analysis client disconnected: 4DkXUzy3TjBQcwGNAAAE","service":"monitoring-system","timestamp":"2025-06-07T18:29:19.157Z"}
+{"level":"info","message":"Connected to Redis","service":"monitoring-system","timestamp":"2025-06-07T18:30:19.662Z"}
+{"level":"error","message":"Error initializing Elasticsearch indices: connect ECONNREFUSED 172.18.0.3:9200","meta":{"headers":{},"meta":{"aborted":false,"attempts":3,"connection":{"_openRequests":0,"deadCount":0,"headers":{"authorization":"[redacted]","user-agent":"elasticsearch-js/8.18.2 (linux 6.10.14-linuxkit-arm64; Node.js 18.20.8; Transport 8.9.7)","x-elastic-client-meta":"es=8.18.2,js=18.20.8,t=8.9.7,un=18.20.8"},"id":"http://elasticsearch:9200/","maxEventListeners":100,"pool":{"_events":{},"_eventsCount":1},"resurrectTimeout":0,"timeout":30000,"tls":null,"url":"http://elasticsearch:9200/","weight":1000},"context":null,"name":"elasticsearch-js","request":{"id":1,"options":{},"params":{"headers":{"accept":"application/vnd.elasticsearch+json; compatible-with=8,text/plain","authorization":"[redacted]","user-agent":"elasticsearch-js/8.18.2 (linux 6.10.14-linuxkit-arm64; Node.js 18.20.8; Transport 8.9.7)","x-elastic-client-meta":"es=8.18.2,js=18.20.8,t=8.9.7,un=18.20.8"},"method":"HEAD","path":"/request-logs","querystring":""}}},"statusCode":0,"warnings":null},"name":"ConnectionError","options":{"redaction":{"additionalKeys":[],"type":"replace"}},"service":"monitoring-system","stack":"ConnectionError: connect ECONNREFUSED 172.18.0.3:9200\n    at SniffingTransport._request (/app/node_modules/@elastic/transport/lib/Transport.js:595:31)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/node_modules/@elastic/transport/lib/Transport.js:627:32\n    at async SniffingTransport.request (/app/node_modules/@elastic/transport/lib/Transport.js:623:20)\n    at async Indices.exists (/app/node_modules/@elastic/elasticsearch/lib/api/api/indices.js:562:16)\n    at async initializeElasticsearch (/app/src/monitoring/index.js:178:22)\n    at async start (/app/src/monitoring/index.js:1158:5)","timestamp":"2025-06-07T18:30:28.545Z"}
+{"level":"info","message":"Monitoring server listening on port 3001","service":"monitoring-system","timestamp":"2025-06-07T18:30:28.553Z"}
+{"level":"info","message":"Analysis client connected: PUHMcTGIltg7NTjAAAAB","service":"monitoring-system","timestamp":"2025-06-07T18:30:29.891Z"}
+{"level":"info","message":"Analysis client connected: DKSfKwRxddFKQcrhAAAD","service":"monitoring-system","timestamp":"2025-06-07T18:30:30.700Z"}
+{"level":"info","message":"Analysis client connected: VpjqdbdtN9wlWrz7AAAF","service":"monitoring-system","timestamp":"2025-06-07T18:30:33.452Z"}
+{"level":"info","message":"Analysis client connected: 7ZB2MkL7CiZw3kVeAAAH","service":"monitoring-system","timestamp":"2025-06-07T18:32:24.794Z"}
+{"level":"info","message":"Analysis client connected: d2AtMgba8mT3BzztAAAJ","service":"monitoring-system","timestamp":"2025-06-07T18:36:14.616Z"}
+{"level":"info","message":"Analysis client disconnected: d2AtMgba8mT3BzztAAAJ","service":"monitoring-system","timestamp":"2025-06-07T18:36:26.228Z"}
+{"level":"info","message":"Analysis client disconnected: 7ZB2MkL7CiZw3kVeAAAH","service":"monitoring-system","timestamp":"2025-06-07T18:42:31.401Z"}
+{"level":"info","message":"Analysis client connected: YCeYyP_eYgLsXtCzAAAL","service":"monitoring-system","timestamp":"2025-06-07T18:42:31.465Z"}
+{"level":"info","message":"Analysis client disconnected: DKSfKwRxddFKQcrhAAAD","service":"monitoring-system","timestamp":"2025-06-07T18:43:03.351Z"}
+{"level":"info","message":"Analysis client disconnected: PUHMcTGIltg7NTjAAAAB","service":"monitoring-system","timestamp":"2025-06-07T18:43:05.315Z"}
+{"level":"info","message":"Analysis client disconnected: YCeYyP_eYgLsXtCzAAAL","service":"monitoring-system","timestamp":"2025-06-07T18:43:07.525Z"}
+{"level":"info","message":"Analysis client disconnected: VpjqdbdtN9wlWrz7AAAF","service":"monitoring-system","timestamp":"2025-06-07T19:01:55.529Z"}
+{"level":"info","message":"Analysis client connected: uVaddBvgOHQnYBgmAAAN","service":"monitoring-system","timestamp":"2025-06-07T19:01:57.119Z"}
+{"level":"info","message":"Analysis client disconnected: uVaddBvgOHQnYBgmAAAN","service":"monitoring-system","timestamp":"2025-06-07T22:18:51.572Z"}
+{"level":"info","message":"Analysis client connected: JGRC5xY619RFzeTKAAAP","service":"monitoring-system","timestamp":"2025-06-07T22:18:53.057Z"}
+{"level":"info","message":"Analysis client disconnected: JGRC5xY619RFzeTKAAAP","service":"monitoring-system","timestamp":"2025-06-09T00:07:22.502Z"}
+{"level":"info","message":"Analysis client connected: -1ykN_2cIvpK5C9_AAAR","service":"monitoring-system","timestamp":"2025-06-09T00:07:23.032Z"}
+{"level":"info","message":"Analysis client disconnected: -1ykN_2cIvpK5C9_AAAR","service":"monitoring-system","timestamp":"2025-06-09T15:04:45.348Z"}
+{"level":"info","message":"Analysis client connected: qJxL5qPsrZ_6fJIpAAAT","service":"monitoring-system","timestamp":"2025-06-09T15:04:45.973Z"}
+{"level":"info","message":"Analysis client disconnected: qJxL5qPsrZ_6fJIpAAAT","service":"monitoring-system","timestamp":"2025-06-09T19:31:54.419Z"}
+{"level":"info","message":"Analysis client connected: 93aKJP4rf90uc2uUAAAV","service":"monitoring-system","timestamp":"2025-06-09T19:31:54.601Z"}
+{"level":"info","message":"Analysis client disconnected: 93aKJP4rf90uc2uUAAAV","service":"monitoring-system","timestamp":"2025-06-10T00:53:25.060Z"}
+{"level":"info","message":"Analysis client connected: puHa_-032pdus9CqAAAX","service":"monitoring-system","timestamp":"2025-06-10T00:53:25.307Z"}
+{"level":"info","message":"Analysis client disconnected: puHa_-032pdus9CqAAAX","service":"monitoring-system","timestamp":"2025-06-10T04:36:51.619Z"}
+{"level":"info","message":"Analysis client connected: bQbivw-lqbxgdA8pAAAZ","service":"monitoring-system","timestamp":"2025-06-10T04:36:52.593Z"}
+{"level":"info","message":"Analysis client disconnected: bQbivw-lqbxgdA8pAAAZ","service":"monitoring-system","timestamp":"2025-06-10T04:47:42.131Z"}
+{"level":"info","message":"Analysis client connected: 5_qjs9a62Qbd8YmMAAAb","service":"monitoring-system","timestamp":"2025-06-10T04:47:43.633Z"}
+{"level":"info","message":"Analysis client disconnected: 5_qjs9a62Qbd8YmMAAAb","service":"monitoring-system","timestamp":"2025-06-10T18:16:02.196Z"}
+{"level":"info","message":"Analysis client connected: zGB_zAcvtx1saVbkAAAd","service":"monitoring-system","timestamp":"2025-06-10T18:16:04.351Z"}
+{"level":"info","message":"Analysis client disconnected: zGB_zAcvtx1saVbkAAAd","service":"monitoring-system","timestamp":"2025-06-10T19:50:59.367Z"}
+{"level":"info","message":"Analysis client connected: rOtKa7zrmmzn0FHSAAAf","service":"monitoring-system","timestamp":"2025-06-10T19:51:00.642Z"}
+{"level":"info","message":"Analysis client disconnected: rOtKa7zrmmzn0FHSAAAf","service":"monitoring-system","timestamp":"2025-06-11T06:20:04.822Z"}

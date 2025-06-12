@@ -1,0 +1,33 @@
+{
+"name": "adversarial-sim-blue-team",
+  "version": "1.0.0",
+  "description": "Blue Team detection and analysis components for the 1v1 Adversarial Simulation Game",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:monitor": "node src/monitoring/index.js",
+    "start:analysis": "node src/analysis/index.js",
+    "start:dashboard": "node src/dashboard/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "elasticsearch": "^16.7.3",
+    "winston": "^3.11.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "redis": "^4.6.10",
+    "axios": "^1.6.0",
+    "uuid": "^9.0.1",
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.6.3",
+    "@elastic/elasticsearch": "^8.10.0",
+    "ml-kmeans": "^6.0.0",
+    "ml-random-forest": "^2.1.0",
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  }
+}

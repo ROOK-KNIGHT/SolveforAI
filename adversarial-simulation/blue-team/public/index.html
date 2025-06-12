@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Detection Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-shield-lock"></i> Bot Detection Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-bs-target="overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-target="traffic">Traffic Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-target="behavior">Behavior Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-target="detections">Detections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-target="geomap">Geographic Map</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <select class="form-select me-2" id="timeRangeSelector">
+                        <option value="15m">Last 15 Minutes</option>
+                        <option value="1h" selected>Last Hour</option>
+                        <option value="6h">Last 6 Hours</option>
+                        <option value="1d">Last 24 Hours</option>
+                        <option value="7d">Last 7 Days</option>
+                    </select>
+                    <button class="btn btn-outline-light" id="refreshButton">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Overview Section -->
+        <div class="dashboard-section active" id="overview">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-globe"></i> Total Requests</h5>
+                            <h2 class="display-4" id="totalRequests">-</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-person"></i> Human Requests</h5>
+                            <h2 class="display-4" id="humanRequests">-</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-danger text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-robot"></i> Bot Requests</h5>
+                            <h2 class="display-4" id="botRequests">-</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-dark mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-shield-exclamation"></i> Detection Rate</h5>
+                            <h2 class="display-4" id="detectionRate">-</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-graph-up"></i> Traffic Over Time
+                        </div>
+                        <div class="card-body">
+                            <canvas id="trafficChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-pie-chart"></i> Bot vs. Human Traffic
+                        </div>
+                        <div class="card-body">
+                            <canvas id="trafficPieChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-exclamation-triangle"></i> Recent Detections
+                        </div>
+                        <div class="card-body table-responsive" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table table-striped table-hover" id="recentDetectionsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>IP</th>
+                                        <th>Detection Type</th>
+                                        <th>Confidence</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table rows will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-bar-chart"></i> Detection Types
+                        </div>
+                        <div class="card-body">
+                            <canvas id="detectionTypesChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traffic Analysis Section -->
+        <div class="dashboard-section" id="traffic">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-globe"></i> HTTP Request Analysis
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <canvas id="requestMethodsChart" height="250"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="responseStatusChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-clock-history"></i> Response Time Analysis
+                </div>
+                <div class="card-body">
+                    <canvas id="responseTimeChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-search"></i> Top Requested URLs
+                </div>
+                <div class="card-body table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-striped" id="topUrlsTable">
+                        <thead>
+                            <tr>
+                                <th>URL</th>
+                                <th>Count</th>
+                                <th>Bot %</th>
+                                <th>Avg Response Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Behavior Analysis Section -->
+        <div class="dashboard-section" id="behavior">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-mouse"></i> Mouse Movement Patterns
+                        </div>
+                        <div class="card-body">
+                            <canvas id="mouseMovementChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-arrow-down-up"></i> Scroll Behavior
+                        </div>
+                        <div class="card-body">
+                            <canvas id="scrollBehaviorChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-fingerprint"></i> Browser Fingerprint Clusters
+                </div>
+                <div class="card-body">
+                    <canvas id="fingerprintClustersChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-activity"></i> Session Duration Analysis
+                </div>
+                <div class="card-body">
+                    <canvas id="sessionDurationChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detections Section -->
+        <div class="dashboard-section" id="detections">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-shield-exclamation"></i> Detection Events</span>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="filterAll">All</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="filterHighConf">High Confidence</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="filterBlocked">Blocked</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive" style="max-height: 500px; overflow-y: auto;">
+                    <table class="table table-striped table-hover" id="detectionsTable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>IP</th>
+                                <th>Session ID</th>
+                                <th>Detection Type</th>
+                                <th>Confidence</th>
+                                <th>Action Taken</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Geographic Map Section -->
+        <div class="dashboard-section" id="geomap">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-geo-alt"></i> Geographic Distribution of Traffic
+                </div>
+                <div class="card-body">
+                    <div id="worldMap" style="height: 500px;"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-flag"></i> Top Countries
+                        </div>
+                        <div class="card-body">
+                            <canvas id="topCountriesChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="bi bi-bar-chart"></i> Bot Traffic by Country
+                        </div>
+                        <div class="card-body">
+                            <canvas id="botByCountryChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detection Details Modal -->
+    <div class="modal fade" id="detectionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detection Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h6>Detection Information</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>IP:</strong> <span id="modalIp"></span></p>
+                                <p><strong>Session ID:</strong> <span id="modalSessionId"></span></p>
+                                <p><strong>Detection Type:</strong> <span id="modalDetectionType"></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Timestamp:</strong> <span id="modalTimestamp"></span></p>
+                                <p><strong>Confidence:</strong> <span id="modalConfidence"></span></p>
+                                <p><strong>Action Taken:</strong> <span id="modalAction"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Evidence</h6>
+                        <pre id="modalEvidence" class="bg-light p-3 rounded"></pre>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

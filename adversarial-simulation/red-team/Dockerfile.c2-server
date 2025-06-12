@@ -1,0 +1,20 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package.json ./
+RUN npm install --production
+
+# Copy source files
+COPY src ./src
+COPY config ./config
+
+# Create logs directory
+RUN mkdir -p logs
+
+# Command to run the application
+CMD ["node", "src/c2-server/index.js"]
+
+# Expose port
+EXPOSE 3000

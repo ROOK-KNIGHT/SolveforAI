@@ -42,6 +42,7 @@
     </header>
     
     <main class="site-content">
+        <div id="modal-container"></div>
         <section class="page-header learning-paths-hero">
             <div class="container">
                 <div class="hero-content">
@@ -67,6 +68,16 @@
             </div>
         </section>
         
+        <div class="skill-assessment-container">
+            <div class="container">
+                <div class="skill-assessment">
+                    <h3>Find Your Path <span class="beta-tag">BETA</span></h3>
+                    <p>Take a quick assessment to discover which learning path matches your current skills and goals.</p>
+                    <button id="start-assessment" class="btn btn-primary">Start Skill Assessment</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Ad Banner -->
         <div class="container">
             <div class="ad-container header-ad">
@@ -81,12 +92,6 @@
                     <h2>Personalized Learning Journeys</h2>
                     <p>Follow structured learning paths designed to take you from beginner to expert in various AI disciplines.</p>
                     <p>Each path consists of carefully sequenced tutorials, hands-on projects, and knowledge checks to ensure you're making steady progress.</p>
-                    
-                    <div class="skill-assessment">
-                        <h3>Find Your Path <span class="beta-tag">BETA</span></h3>
-                        <p>Take a quick assessment to discover which learning path matches your current skills and goals.</p>
-                        <button id="start-assessment" class="btn btn-primary">Start Skill Assessment</button>
-                    </div>
                 </div>
             </div>
         </section>
@@ -356,6 +361,9 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Modal Container -->
+    <div id="modal-root"></div>
     
     <!-- Custom JavaScript -->
     <script src="assets/js/main.js"></script>
