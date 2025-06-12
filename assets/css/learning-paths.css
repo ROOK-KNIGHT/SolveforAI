@@ -5,29 +5,29 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9998;
-    display: grid;
-    place-items: center;
-    padding: 20px;
     overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: white;
     border-radius: 12px;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
     z-index: 9999;
-    max-width: 90%;
-    width: 800px;
-    max-height: calc(100vh - 40px);
+    width: min(800px, 90vw);
+    max-height: 90vh;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    transform: translateY(0);
 }
 
 .modal-header {
