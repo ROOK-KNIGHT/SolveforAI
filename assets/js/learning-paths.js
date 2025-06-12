@@ -69,8 +69,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.top = `-${scrollPosition}px`;
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
-        document.body.appendChild(overlay);
-        document.body.appendChild(modal);
+        
+        // Append to main content instead of body
+        const mainContent = document.querySelector('.site-content');
+        if (mainContent) {
+            mainContent.appendChild(overlay);
+            mainContent.appendChild(modal);
+        } else {
+            document.body.appendChild(overlay);
+            document.body.appendChild(modal);
+        }
     }
 
     // Function to close modal and restore scroll position
@@ -80,8 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.top = '';
         document.body.style.width = '';
         window.scrollTo(0, scrollPosition);
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        
+        // Remove from parent element
+        modal.parentElement.removeChild(modal);
+        overlay.parentElement.removeChild(overlay);
     }
 
     window.showModal = showModal;
