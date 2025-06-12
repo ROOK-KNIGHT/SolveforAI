@@ -5,28 +5,40 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Store initial scroll position
+    let scrollPosition = 0;
     
     // Start Assessment Button
     const startAssessmentBtn = document.getElementById('start-assessment');
     if (startAssessmentBtn) {
         startAssessmentBtn.addEventListener('click', function() {
+            scrollPosition = window.pageYOffset;
             showAssessmentModal();
         });
     }
     
     // Path Details Buttons
-    const pathDetailsButtons = document.querySelectorAll('.path-details-btn');
+    const pathDetailsButtons = document.querySelectorAll('.path-details-btn, .start-path-btn');
     pathDetailsButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            scrollPosition = window.pageYOffset;
             const pathId = this.getAttribute('data-path');
-            showPathDetails(pathId);
+            if (this.classList.contains('path-details-btn')) {
+                showPathDetails(pathId);
+            } else {
+                startPath(pathId);
+            }
         });
     });
     
     // Start Path Buttons
     const startPathButtons = document.querySelectorAll('.start-path-btn');
     startPathButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollPosition = window.pageYOffset;
             const pathId = this.getAttribute('data-path');
             startPath(pathId);
         });
@@ -38,15 +50,42 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (createAccountBtn) {
         createAccountBtn.addEventListener('click', function() {
+            scrollPosition = window.pageYOffset;
             showAccountModal('signup');
         });
     }
     
     if (signInBtn) {
         signInBtn.addEventListener('click', function() {
+            scrollPosition = window.pageYOffset;
             showAccountModal('signin');
         });
     }
+
+    // Function to show modal and prevent page scroll
+    function showModal(modal, overlay) {
+        scrollPosition = window.pageYOffset;
+        document.body.classList.add('modal-open');
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.appendChild(overlay);
+        document.body.appendChild(modal);
+    }
+
+    // Function to close modal and restore scroll position
+    function closeModal(modal, overlay) {
+        document.body.classList.remove('modal-open');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
+        document.body.removeChild(overlay);
+        document.body.removeChild(modal);
+    }
+
+    window.showModal = showModal;
+    window.closeModal = closeModal;
 });
 
 /**
@@ -144,21 +183,18 @@ function showAssessmentModal() {
         </div>
     `;
     
-    // Add modal to page
-    document.body.appendChild(overlay);
-    document.body.appendChild(modal);
+    // Add modal to page using showModal helper
+    window.showModal(modal, overlay);
     
     // Handle modal interactions
     const closeBtn = modal.querySelector('.modal-close');
     closeBtn.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
     });
     
     // Clicking outside the modal closes it
     overlay.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
     });
     
     // Prevent clicks inside modal from closing it
@@ -198,8 +234,7 @@ function showAssessmentModal() {
     if (acceptBtn) {
         acceptBtn.addEventListener('click', function() {
             // Close the modal
-            document.body.removeChild(overlay);
-            document.body.removeChild(modal);
+            window.closeModal(modal, overlay);
             
             // Start the recommended path
             startPath('ml-fundamentals');
@@ -210,8 +245,7 @@ function showAssessmentModal() {
     const viewAllBtn = document.getElementById('view-all-paths');
     if (viewAllBtn) {
         viewAllBtn.addEventListener('click', function() {
-            document.body.removeChild(overlay);
-            document.body.removeChild(modal);
+            window.closeModal(modal, overlay);
             
             // Scroll to paths section
             const pathsSection = document.querySelector('.learning-paths-list');
@@ -388,9 +422,8 @@ function showPathDetails(pathId) {
         </div>
     `;
     
-    // Add modal to page
-    document.body.appendChild(overlay);
-    document.body.appendChild(modal);
+    // Add modal to page using showModal helper
+    window.showModal(modal, overlay);
     
     // Handle modal interactions
     const closeBtn = modal.querySelector('.modal-close');
@@ -398,29 +431,25 @@ function showPathDetails(pathId) {
     const startBtn = modal.querySelector('.start-path-btn');
     
     closeBtn.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
     });
     
     if (closeBtnSecondary) {
         closeBtnSecondary.addEventListener('click', function() {
-            document.body.removeChild(overlay);
-            document.body.removeChild(modal);
+            window.closeModal(modal, overlay);
         });
     }
     
     if (startBtn) {
         startBtn.addEventListener('click', function() {
-            document.body.removeChild(overlay);
-            document.body.removeChild(modal);
+            window.closeModal(modal, overlay);
             startPath(pathId);
         });
     }
     
     // Clicking outside the modal closes it
     overlay.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
     });
     
     // Prevent clicks inside modal from closing it
@@ -523,23 +552,20 @@ function showAccountModal(type = 'signup', options = {}) {
         </div>
     `;
     
-    // Add modal to page
-    document.body.appendChild(overlay);
-    document.body.appendChild(modal);
+    // Add modal to page using showModal helper
+    window.showModal(modal, overlay);
     
     // Handle modal interactions
     const closeBtn = modal.querySelector('.modal-close');
     closeBtn.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
     });
     
     // Account submit button
     const submitBtn = modal.querySelector('.account-submit-btn');
     submitBtn.addEventListener('click', function() {
         // Simulate successful account creation/login
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
         
         // If we had a path to redirect to
         if (options.redirectPath) {
@@ -556,16 +582,14 @@ function showAccountModal(type = 'signup', options = {}) {
         switchLink.addEventListener('click', function(e) {
             e.preventDefault();
             const newType = this.getAttribute('data-type');
-            document.body.removeChild(overlay);
-            document.body.removeChild(modal);
+            window.closeModal(modal, overlay);
             showAccountModal(newType, options);
         });
     }
     
     // Clicking outside the modal closes it
     overlay.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
+        window.closeModal(modal, overlay);
     });
     
     // Prevent clicks inside modal from closing it
