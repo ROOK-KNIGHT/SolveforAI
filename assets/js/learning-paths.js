@@ -40,27 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             scrollPosition = window.pageYOffset;
             const pathId = this.getAttribute('data-path');
-            startPath(pathId);
+            showPathContent(pathId);
         });
     });
-    
-    // Account Buttons
-    const createAccountBtn = document.getElementById('create-account');
-    const signInBtn = document.getElementById('sign-in');
-    
-    if (createAccountBtn) {
-        createAccountBtn.addEventListener('click', function() {
-            scrollPosition = window.pageYOffset;
-            showAccountModal('signup');
-        });
-    }
-    
-    if (signInBtn) {
-        signInBtn.addEventListener('click', function() {
-            scrollPosition = window.pageYOffset;
-            showAccountModal('signin');
-        });
-    }
 
     // Function to show modal and prevent page scroll
     function showModal(modal, overlay) {
@@ -472,92 +454,48 @@ function showPathDetails(pathId) {
 }
 
 /**
- * Start a learning path
+ * Show learning path content
  * @param {string} pathId - The path identifier
  */
-function startPath(pathId) {
-    // In a real implementation, this would create a user session or redirect to the first module
-    // For this demo, we'll show an account prompt if no user is logged in
-    
-    // Check if user is logged in (demo: always false)
-    const isLoggedIn = false;
-    
-    if (!isLoggedIn) {
-        showAccountModal('signup', { redirectPath: pathId });
-        return;
-    }
-    
-    // If logged in, would redirect to first module
-    console.log(`Starting path: ${pathId}`);
-}
-
-/**
- * Show account modal for sign up or sign in
- * @param {string} type - 'signup' or 'signin'
- * @param {object} options - Additional options
- */
-function showAccountModal(type = 'signup', options = {}) {
+function showPathContent(pathId) {
     // Create modal overlay
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     
     // Create modal content
     const modal = document.createElement('div');
-    modal.className = 'modal account-modal';
+    modal.className = 'modal path-content-modal';
     
-    const title = type === 'signup' ? 'Create Your Account' : 'Sign In';
-    const buttonText = type === 'signup' ? 'Create Account' : 'Sign In';
-    const alternateText = type === 'signup' ? 'Already have an account?' : 'Need an account?';
-    const alternateAction = type === 'signup' ? 'signin' : 'signup';
-    const alternateLink = type === 'signup' ? 'Sign In' : 'Sign Up';
+    // Get path title based on ID
+    const pathTitles = {
+        'ml-fundamentals': 'Machine Learning Fundamentals',
+        'deep-learning': 'Deep Learning Specialist',
+        'nlp-expert': 'Natural Language Processing Expert'
+    };
     
     modal.innerHTML = `
         <div class="modal-header">
-            <h2>${title}</h2>
+            <h2>${pathTitles[pathId] || 'Learning Path'}</h2>
             <button class="modal-close">&times;</button>
         </div>
         <div class="modal-body">
-            <div class="account-form">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Your email address">
+            <div class="path-content-placeholder">
+                <h3>Welcome to Your Learning Journey!</h3>
+                <p>This is where your learning content will appear. We're currently building out this section.</p>
+                <div class="placeholder-modules">
+                    <div class="placeholder-module">
+                        <h4>Module 1: Introduction</h4>
+                        <p>Getting started with core concepts and terminology.</p>
+                    </div>
+                    <div class="placeholder-module">
+                        <h4>Module 2: Fundamentals</h4>
+                        <p>Building your foundation with hands-on exercises.</p>
+                    </div>
+                    <div class="placeholder-module">
+                        <h4>Module 3: Advanced Topics</h4>
+                        <p>Diving deeper into complex concepts and real-world applications.</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Your password">
-                </div>
-                ${type === 'signup' ? `
-                <div class="form-group">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" placeholder="Confirm your password">
-                </div>
-                ` : ''}
-                <div class="form-actions">
-                    <button class="btn btn-primary account-submit-btn">${buttonText}</button>
-                </div>
-                <div class="account-alternate">
-                    <p>${alternateText} <a href="#" class="account-switch-link" data-type="${alternateAction}">${alternateLink}</a></p>
-                </div>
-            </div>
-            
-            <!-- Social sign-in options -->
-            <div class="social-sign-in">
-                <p>Or continue with</p>
-                <div class="social-buttons">
-                    <button class="social-btn google-btn"><i class="fab fa-google"></i> Google</button>
-                    <button class="social-btn github-btn"><i class="fab fa-github"></i> GitHub</button>
-                </div>
-            </div>
-            
-            <!-- Ad placement as 'premium account benefits' -->
-            <div class="account-benefits sponsored">
-                <h3>Premium Account Benefits <span class="sponsored-tag">Sponsored</span></h3>
-                <ul class="benefits-list">
-                    <li><i class="fas fa-check"></i> Access to exclusive AI workshops</li>
-                    <li><i class="fas fa-check"></i> Project code reviews by industry experts</li>
-                    <li><i class="fas fa-check"></i> Premium certificate of completion</li>
-                </ul>
-                <a href="#" class="learn-more-link">Learn More <i class="fas fa-external-link-alt"></i></a>
             </div>
         </div>
     `;
@@ -571,32 +509,6 @@ function showAccountModal(type = 'signup', options = {}) {
         window.closeModal(modal, overlay);
     });
     
-    // Account submit button
-    const submitBtn = modal.querySelector('.account-submit-btn');
-    submitBtn.addEventListener('click', function() {
-        // Simulate successful account creation/login
-        window.closeModal(modal, overlay);
-        
-        // If we had a path to redirect to
-        if (options.redirectPath) {
-            simulatePathStart(options.redirectPath);
-        }
-        
-        // Show success message
-        showNotification(`Successfully ${type === 'signup' ? 'created account' : 'signed in'}!`);
-    });
-    
-    // Switch between signup/signin
-    const switchLink = modal.querySelector('.account-switch-link');
-    if (switchLink) {
-        switchLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const newType = this.getAttribute('data-type');
-            window.closeModal(modal, overlay);
-            showAccountModal(newType, options);
-        });
-    }
-    
     // Clicking outside the modal closes it
     overlay.addEventListener('click', function() {
         window.closeModal(modal, overlay);
@@ -606,45 +518,6 @@ function showAccountModal(type = 'signup', options = {}) {
     modal.addEventListener('click', function(e) {
         e.stopPropagation();
     });
-    
-    // Track ad impression
-    logAdImpression('account-benefits-ad');
-}
-
-/**
- * Simulate starting a learning path
- * @param {string} pathId - The path identifier
- */
-function simulatePathStart(pathId) {
-    // Find the path card
-    const pathCard = document.querySelector(`.path-card .path-details-btn[data-path="${pathId}"]`).closest('.path-card');
-    
-    if (pathCard) {
-        // Update progress
-        const progressBar = pathCard.querySelector('.progress');
-        const progressText = pathCard.querySelector('.progress-text');
-        
-        if (progressBar && progressText) {
-            // Animate progress to 5%
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 5) {
-                    clearInterval(interval);
-                } else {
-                    width++;
-                    progressBar.style.width = width + '%';
-                }
-            }, 20);
-            
-            progressText.textContent = 'Just started';
-        }
-        
-        // Update button text
-        const startBtn = pathCard.querySelector('.start-path-btn');
-        if (startBtn) {
-            startBtn.textContent = 'Continue Path';
-        }
-    }
 }
 
 /**

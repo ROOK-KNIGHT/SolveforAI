@@ -572,6 +572,50 @@ body.modal-open {
     text-decoration: underline;
 }
 
+/* Path Content Modal */
+.path-content-placeholder {
+    text-align: center;
+    padding: 2rem;
+}
+
+.path-content-placeholder h3 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.path-content-placeholder p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.placeholder-modules {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.placeholder-module {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: left;
+    border-left: 4px solid #3498db;
+}
+
+.placeholder-module h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.placeholder-module p {
+    color: #666;
+    margin: 0;
+    font-size: 1rem;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .paths-grid {
