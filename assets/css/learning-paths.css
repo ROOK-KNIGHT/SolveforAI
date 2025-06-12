@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     height: 0;
-    z-index: 9997;
+    z-index: 10003;
 }
 
 .modal-overlay {
@@ -19,7 +19,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
+    z-index: 10004;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +31,7 @@
     background: white;
     border-radius: 12px;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
+    z-index: 10005;
     width: min(800px, 90vw);
     max-height: 90vh;
     margin: auto;
@@ -47,7 +47,7 @@
     top: 0;
     background: white;
     border-radius: 12px 12px 0 0;
-    z-index: 10000;
+    z-index: 10006;
 }
 
 .modal-body {
