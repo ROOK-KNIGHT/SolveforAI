@@ -1,36 +1,141 @@
 /* Learning Paths Specific Styles */
 
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    max-width: 90%;
+    width: 800px;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eaeaea;
+    position: sticky;
+    top: 0;
+    background: white;
+    border-radius: 12px 12px 0 0;
+    z-index: 10000;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0.5rem;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+body.modal-open {
+    overflow: hidden;
+    padding-right: 15px; /* Prevent content shift when scrollbar disappears */
+}
+
+/* Skill Assessment Container */
+.skill-assessment-container {
+    background: linear-gradient(135deg, #2980b9, #8e44ad);
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+    margin-top: -220px;
+    position: relative;
+    z-index: 1;
+}
+
+.skill-assessment {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-assessment h3 {
+    color: #2c3e50;
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.skill-assessment p {
+    color: #34495e;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.skill-assessment .btn-primary {
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+}
+
 /* Hero Section */
 .learning-paths-hero {
     background: linear-gradient(135deg, #3498db, #9b59b6);
     color: white;
-    padding: 4rem 0;
-    margin-bottom: 0;
+    padding: 0.75rem 0 0.5rem;
+    margin-bottom: -2px;
 }
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 2rem;
+    grid-template-columns: auto 250px;
+    gap: 0.5rem;
     align-items: center;
 }
 
 .hero-text h1 {
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
     line-height: 1.2;
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
     opacity: 0.9;
 }
 
 .hero-description {
     font-size: 1.1rem;
-    margin-bottom: 2rem;
-    max-width: 600px;
+    margin-bottom: 1rem;
+    max-width: 500px;
 }
 
 .learning-path-illustration {
@@ -39,13 +144,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 80px;
+    margin-top: -1rem;
 }
 
 .learning-path-illustration i {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     animation: floatSign 3s ease-in-out infinite alternate;
 }
 
@@ -218,7 +324,17 @@
 .path-actions {
     margin-top: auto;
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.path-actions button {
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 1rem;
 }
 
 .path-footer {
@@ -233,11 +349,13 @@
 
 /* Path Details */
 .path-details-btn, .start-path-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .path-details-btn {
