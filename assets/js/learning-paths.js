@@ -379,7 +379,7 @@ function showPathContent(pathId) {
     };
     
     // Load the first module content
-    fetch('/content-engine/output/ml-fundamentals/module-1.html')
+    fetch('../content-engine/output/ml-fundamentals/module-1.html')
         .then(response => response.text())
         .then(content => {
             modal.innerHTML = content;
