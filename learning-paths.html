@@ -42,7 +42,6 @@
     </header>
     
     <main class="site-content">
-        <div id="modal-container"></div>
         <section class="page-header learning-paths-hero">
             <div class="container">
                 <div class="hero-content">
@@ -50,7 +49,10 @@
                         <h1>AI & Machine Learning Learning Paths</h1>
                         <p class="hero-subtitle">Structured learning journeys to guide your AI education</p>
                         <p class="hero-description">Follow carefully designed pathways from beginner to expert with our comprehensive learning tracks.</p>
-                        <a href="#popular-paths" class="btn btn-primary">Browse Learning Paths</a>
+                        <div class="hero-buttons">
+                            <button id="start-assessment" class="btn btn-primary">Start Skill Assessment</button>
+                            <a href="#popular-paths" class="btn btn-secondary">Browse Learning Paths</a>
+                        </div>
                     </div>
                     <div class="hero-visual">
                         <div class="learning-path-illustration">
@@ -68,16 +70,6 @@
             </div>
         </section>
         
-        <div class="skill-assessment-container">
-            <div class="container">
-                <div class="skill-assessment">
-                    <h3>Find Your Path <span class="beta-tag">BETA</span></h3>
-                    <p>Take a quick assessment to discover which learning path matches your current skills and goals.</p>
-                    <button id="start-assessment" class="btn btn-primary">Start Skill Assessment</button>
-                </div>
-            </div>
-        </div>
-
         <!-- Ad Banner -->
         <div class="container">
             <div class="ad-container header-ad">
