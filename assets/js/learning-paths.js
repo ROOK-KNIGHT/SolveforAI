@@ -291,6 +291,50 @@ function showPathDetails(pathId) {
                 { title: 'Word Embeddings', duration: '1.5 hours' },
                 { title: 'Recurrent Networks for NLP', duration: '2 hours' }
             ]
+        },
+        'computer-vision': {
+            title: 'Computer Vision Specialist',
+            description: 'Master computer vision techniques for image processing, object detection, and visual understanding.',
+            modules: [
+                { title: 'Computer Vision Fundamentals', duration: '2 hours' },
+                { title: 'Image Processing & Feature Extraction', duration: '2 hours' },
+                { title: 'Object Detection & Recognition', duration: '2.5 hours' },
+                { title: 'Semantic Segmentation', duration: '2 hours' },
+                { title: 'Advanced CV Applications', duration: '2.5 hours' }
+            ]
+        },
+        'mlops': {
+            title: 'MLOps & Deployment',
+            description: 'Learn to deploy, monitor, and maintain machine learning models in production environments.',
+            modules: [
+                { title: 'Introduction to MLOps', duration: '1.5 hours' },
+                { title: 'Model Deployment Strategies', duration: '2 hours' },
+                { title: 'Monitoring & Maintenance', duration: '2 hours' },
+                { title: 'CI/CD for ML', duration: '2.5 hours' },
+                { title: 'Scaling ML Systems', duration: '2 hours' }
+            ]
+        },
+        'ai-ethics': {
+            title: 'AI Ethics & Responsible AI',
+            description: 'Understand the ethical implications of AI and learn to develop responsible AI systems.',
+            modules: [
+                { title: 'Introduction to AI Ethics', duration: '1.5 hours' },
+                { title: 'Fairness & Bias', duration: '2 hours' },
+                { title: 'Transparency & Explainability', duration: '2 hours' },
+                { title: 'Privacy & Security', duration: '2 hours' },
+                { title: 'Responsible AI Development', duration: '2.5 hours' }
+            ]
+        },
+        'reinforcement-learning': {
+            title: 'Reinforcement Learning',
+            description: 'Master the principles and applications of reinforcement learning for autonomous decision-making.',
+            modules: [
+                { title: 'Introduction to Reinforcement Learning', duration: '2 hours' },
+                { title: 'Value-Based Methods', duration: '2.5 hours' },
+                { title: 'Policy Gradient Methods', duration: '2.5 hours' },
+                { title: 'Deep Reinforcement Learning', duration: '3 hours' },
+                { title: 'Advanced RL Applications', duration: '2 hours' }
+            ]
         }
     };
     
@@ -388,7 +432,11 @@ function showPathContent(pathId) {
     const pathDirectories = {
         'ml-fundamentals': 'ml-fundamentals',
         'deep-learning': 'deep-learning-specialist',
-        'nlp-expert': 'nlp-expert'
+        'nlp-expert': 'nlp-expert',
+        'computer-vision': 'computer-vision',
+        'mlops': 'mlops',
+        'ai-ethics': 'ai-ethics',
+        'reinforcement-learning': 'reinforcement-learning'
     };
 
     // Get the correct directory for this path
@@ -399,7 +447,7 @@ function showPathContent(pathId) {
     }
 
     // Fetch the module content
-    fetch(`/content-engine/output/${moduleDir}/module-1.html`)
+    fetch(`content-engine/output/${moduleDir}/module-1.html`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Module content not found');
