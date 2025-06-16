@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to AI Ethics | AI Ethics & Responsible AI</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/module.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>Introduction to AI Ethics</h1>
+            <p class="module-description">Learn the fundamental principles of AI ethics, including fairness, accountability, transparency, and the societal impact of artificial intelligence systems.</p>
+        </section>
+
+        <!-- Understanding AI Ethics Section -->
+        <section class="concept-section">
+            <h2>Understanding AI Ethics</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>AI ethics involves the moral principles and guidelines that govern the development and deployment of artificial intelligence systems. It addresses questions of fairness, bias, transparency, and accountability in AI systems.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The AI Judge</h3>
+                <p>Think of AI ethics like the principles that guide a judge in making decisions. Just as a judge must be fair, unbiased, transparent in their reasoning, and accountable for their decisions, AI systems must embody these same principles. And just as we carefully consider the impact of judicial decisions on society, we must consider the broader implications of AI systems.</p>
+                <ul>
+                    <li>Fairness is like ensuring equal treatment under the law</li>
+                    <li>Transparency is like providing clear reasoning for decisions</li>
+                    <li>Accountability is like having an appeals process</li>
+                    <li>Societal impact is like considering precedent and broader implications</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import pandas as pd
+from aif360.datasets import BinaryLabelDataset
+from aif360.metrics import BinaryLabelDatasetMetric
+
+def assess_fairness(data, protected_attribute, label_column):
+    # Convert to AIF360 dataset format
+    dataset = BinaryLabelDataset(
+        df=data,
+        label_names=[label_column],
+        protected_attribute_names=[protected_attribute]
+    )
+    
+    # Calculate fairness metrics
+    metrics = BinaryLabelDatasetMetric(dataset)
+    
+    fairness_report = {
+        'disparate_impact': metrics.disparate_impact(),
+        'statistical_parity_difference': metrics.statistical_parity_difference(),
+        'equal_opportunity_difference': metrics.equal_opportunity_difference()
+    }
+    
+    # Generate recommendations
+    recommendations = []
+    if fairness_report['disparate_impact'] < 0.8:
+        recommendations.append(
+            'Consider applying disparate impact remediation'
+        )
+    if abs(fairness_report['statistical_parity_difference']) > 0.1:
+        recommendations.append(
+            'Investigate potential demographic biases'
+        )
+    
+    return {
+        'metrics': fairness_report,
+        'recommendations': recommendations
+    }</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Why is fairness important in AI systems?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q1" value="a">
+                            To make systems run faster
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            To ensure equal and unbiased treatment across different groups
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            To reduce computational costs
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            To simplify the algorithms
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transparency and Explainability Section -->
+        <section class="concept-section">
+            <h2>Transparency and Explainability</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Transparency and explainability refer to the ability to understand and interpret how AI systems make decisions. This is crucial for building trust, enabling oversight, and ensuring accountability.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Black Box Recipe</h3>
+                <p>Think of AI explainability like sharing a recipe versus serving food from a black box. When a chef shares their recipe, you can understand the ingredients, process, and reasoning behind each choice. Similarly, explainable AI systems should reveal their decision-making process rather than just providing unexplained outputs.</p>
+                <ul>
+                    <li>Model parameters are like recipe ingredients</li>
+                    <li>Decision processes are like cooking steps</li>
+                    <li>Feature importance is like key flavor components</li>
+                    <li>Model documentation is like recipe notes and tips</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import shap
+import lime
+import lime.lime_tabular
+
+class ModelExplainer:
+    def __init__(self, model, feature_names):
+        self.model = model
+        self.feature_names = feature_names
+        self.explainer = None
+    
+    def explain_prediction(self, instance, method='shap'):
+        if method == 'shap':
+            # SHAP (SHapley Additive exPlanations)
+            explainer = shap.TreeExplainer(self.model)
+            shap_values = explainer.shap_values(instance)
+            
+            explanation = {
+                'feature_importance': dict(zip(
+                    self.feature_names,
+                    abs(shap_values).mean(0)
+                )),
+                'prediction_contribution': dict(zip(
+                    self.feature_names,
+                    shap_values[0]
+                ))
+            }
+        
+        elif method == 'lime':
+            # LIME (Local Interpretable Model-agnostic Explanations)
+            if not self.explainer:
+                self.explainer = lime.lime_tabular.LimeTabularExplainer(
+                    training_data=self.X_train,
+                    feature_names=self.feature_names,
+                    class_names=self.class_names,
+                    mode='classification'
+                )
+            
+            exp = self.explainer.explain_instance(
+                instance,
+                self.model.predict_proba
+            )
+            
+            explanation = {
+                'feature_importance': dict(exp.as_list()),
+                'prediction_probability': exp.predict_proba
+            }
+        
+        return {
+            'method': method,
+            'explanation': explanation,
+            'interpretation': self._generate_interpretation(explanation)
+        }
+    
+    def _generate_interpretation(self, explanation):
+        # Generate human-readable interpretation
+        interpretation = [
+            f"The most important features for this prediction were:"
+        ]
+        
+        for feature, importance in sorted(
+            explanation['feature_importance'].items(),
+            key=lambda x: abs(x[1]),
+            reverse=True
+        )[:3]:
+            interpretation.append(
+                f"- {feature}: {'positive' if importance > 0 else 'negative'} "
+                f"impact of magnitude {abs(importance):.2f}"
+            )
+        
+        return '\n'.join(interpretation)</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the main purpose of model explainability?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q2" value="a">
+                            To make models run faster
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="b">
+                            To understand and interpret how AI systems make decisions
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            To reduce model size
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="d">
+                            To improve accuracy
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Societal Impact Section -->
+        <section class="concept-section">
+            <h2>Societal Impact and Responsibility</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>AI systems can have significant impacts on society, from influencing individual decisions to shaping social systems. Understanding and managing these impacts is a crucial ethical responsibility.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Ripple Effect</h3>
+                <p>Think of AI's societal impact like dropping a stone in a pond. The immediate splash (direct effects) creates ripples that spread outward, affecting more distant areas (indirect effects). Just as we must consider both immediate and far-reaching effects of the ripples, we must consider both direct and indirect impacts of AI systems.</p>
+                <ul>
+                    <li>Direct impacts are like the initial splash</li>
+                    <li>Indirect effects are like distant ripples</li>
+                    <li>Unintended consequences are like waves reflecting off shores</li>
+                    <li>Mitigation strategies are like controlling wave patterns</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">from typing import List, Dict
+from datetime import datetime
+
+class AIImpactAssessment:
+    def __init__(self):
+        self.impact_areas = [
+            'privacy',
+            'fairness',
+            'accessibility',
+            'environmental',
+            'economic',
+            'social'
+        ]
+    
+    def assess_impact(self, system_description: Dict) -> Dict:
+        assessment = {
+            'timestamp': datetime.now().isoformat(),
+            'system_name': system_description['name'],
+            'purpose': system_description['purpose'],
+            'impacts': {},
+            'risks': [],
+            'recommendations': []
+        }
+        
+        # Assess each impact area
+        for area in self.impact_areas:
+            impact_score = self._evaluate_impact(
+                area,
+                system_description
+            )
+            
+            assessment['impacts'][area] = {
+                'score': impact_score,
+                'level': self._get_impact_level(impact_score),
+                'details': self._get_impact_details(area, impact_score)
+            }
+            
+            # Identify risks and recommendations
+            if impact_score > 0.7:
+                assessment['risks'].append(
+                    self._generate_risk_description(area, impact_score)
+                )
+                assessment['recommendations'].append(
+                    self._generate_recommendation(area, impact_score)
+                )
+        
+        # Calculate overall impact score
+        assessment['overall_impact'] = sum(
+            impact['score'] for impact in assessment['impacts'].values()
+        ) / len(self.impact_areas)
+        
+        return assessment
+    
+    def generate_report(self, assessment: Dict) -> str:
+        report = [
+            f"Impact Assessment Report for {assessment['system_name']}",
+            f"Generated on: {assessment['timestamp']}",
+            f"Overall Impact Score: {assessment['overall_impact']:.2f}\n"
+        ]
+        
+        # Add detailed findings
+        report.append("Key Findings:")
+        for area, impact in assessment['impacts'].items():
+            report.append(
+                f"- {area.title()}: {impact['level']} "
+                f"(Score: {impact['score']:.2f})"
+            )
+        
+        # Add risks and recommendations
+        if assessment['risks']:
+            report.append("\nIdentified Risks:")
+            for risk in assessment['risks']:
+                report.append(f"- {risk}")
+        
+        if assessment['recommendations']:
+            report.append("\nRecommendations:")
+            for rec in assessment['recommendations']:
+                report.append(f"- {rec}")
+        
+        return '\n'.join(report)</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Why is it important to assess the societal impact of AI systems?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q3" value="a">
+                            To make marketing easier
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="b">
+                            To understand and manage both direct and indirect effects on society
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="c">
+                            To increase system performance
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            To reduce development costs
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>AI ethics is crucial for ensuring fair, transparent, and accountable AI systems</li>
+                <li>Explainability helps build trust and enables effective oversight of AI systems</li>
+                <li>Understanding societal impact is essential for responsible AI development</li>
+                <li>Ethical considerations should be integrated throughout the AI development lifecycle</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="ethics-002">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "ethics-001",
+        path: "ai-ethics",
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/assets/js/module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+    "module_id": "ethics-001",
+    "module_title": "Introduction to AI Ethics",
+    "module_description": "Learn the fundamental principles of AI ethics, including fairness, accountability, transparency, and the societal impact of artificial intelligence systems.",
+    "learning_path": "ai-ethics",
+    "progress_percentage": 0,
+    "concepts": [
+        {
+            "title": "Understanding AI Ethics",
+            "explanation": "AI ethics involves the moral principles and guidelines that govern the development and deployment of artificial intelligence systems. It addresses questions of fairness, bias, transparency, and accountability in AI systems.",
+            "metaphor": {
+                "title": "The AI Judge",
+                "description": "Think of AI ethics like the principles that guide a judge in making decisions. Just as a judge must be fair, unbiased, transparent in their reasoning, and accountable for their decisions, AI systems must embody these same principles. And just as we carefully consider the impact of judicial decisions on society, we must consider the broader implications of AI systems.",
+                "points": [
+                    "Fairness is like ensuring equal treatment under the law",
+                    "Transparency is like providing clear reasoning for decisions",
+                    "Accountability is like having an appeals process",
+                    "Societal impact is like considering precedent and broader implications"
+                ]
+            },
+            "technical_example": "import pandas as pd\nfrom aif360.datasets import BinaryLabelDataset\nfrom aif360.metrics import BinaryLabelDatasetMetric\n\ndef assess_fairness(data, protected_attribute, label_column):\n    # Convert to AIF360 dataset format\n    dataset = BinaryLabelDataset(\n        df=data,\n        label_names=[label_column],\n        protected_attribute_names=[protected_attribute]\n    )\n    \n    # Calculate fairness metrics\n    metrics = BinaryLabelDatasetMetric(dataset)\n    \n    fairness_report = {\n        'disparate_impact': metrics.disparate_impact(),\n        'statistical_parity_difference': metrics.statistical_parity_difference(),\n        'equal_opportunity_difference': metrics.equal_opportunity_difference()\n    }\n    \n    # Generate recommendations\n    recommendations = []\n    if fairness_report['disparate_impact'] < 0.8:\n        recommendations.append(\n            'Consider applying disparate impact remediation'\n        )\n    if abs(fairness_report['statistical_parity_difference']) > 0.1:\n        recommendations.append(\n            'Investigate potential demographic biases'\n        )\n    \n    return {\n        'metrics': fairness_report,\n        'recommendations': recommendations\n    }",
+            "quiz": {
+                "question": "Why is fairness important in AI systems?",
+                "options": {
+                    "a": "To make systems run faster",
+                    "b": "To ensure equal and unbiased treatment across different groups",
+                    "c": "To reduce computational costs",
+                    "d": "To simplify the algorithms"
+                },
+                "correct": "b",
+                "explanation": "Fairness in AI systems is crucial to ensure that they treat all individuals and groups equitably, avoiding discrimination and bias that could perpetuate or amplify existing societal inequalities."
+            }
+        },
+        {
+            "title": "Transparency and Explainability",
+            "explanation": "Transparency and explainability refer to the ability to understand and interpret how AI systems make decisions. This is crucial for building trust, enabling oversight, and ensuring accountability.",
+            "metaphor": {
+                "title": "The Black Box Recipe",
+                "description": "Think of AI explainability like sharing a recipe versus serving food from a black box. When a chef shares their recipe, you can understand the ingredients, process, and reasoning behind each choice. Similarly, explainable AI systems should reveal their decision-making process rather than just providing unexplained outputs.",
+                "points": [
+                    "Model parameters are like recipe ingredients",
+                    "Decision processes are like cooking steps",
+                    "Feature importance is like key flavor components",
+                    "Model documentation is like recipe notes and tips"
+                ]
+            },
+            "technical_example": "import shap\nimport lime\nimport lime.lime_tabular\n\nclass ModelExplainer:\n    def __init__(self, model, feature_names):\n        self.model = model\n        self.feature_names = feature_names\n        self.explainer = None\n    \n    def explain_prediction(self, instance, method='shap'):\n        if method == 'shap':\n            # SHAP (SHapley Additive exPlanations)\n            explainer = shap.TreeExplainer(self.model)\n            shap_values = explainer.shap_values(instance)\n            \n            explanation = {\n                'feature_importance': dict(zip(\n                    self.feature_names,\n                    abs(shap_values).mean(0)\n                )),\n                'prediction_contribution': dict(zip(\n                    self.feature_names,\n                    shap_values[0]\n                ))\n            }\n        \n        elif method == 'lime':\n            # LIME (Local Interpretable Model-agnostic Explanations)\n            if not self.explainer:\n                self.explainer = lime.lime_tabular.LimeTabularExplainer(\n                    training_data=self.X_train,\n                    feature_names=self.feature_names,\n                    class_names=self.class_names,\n                    mode='classification'\n                )\n            \n            exp = self.explainer.explain_instance(\n                instance,\n                self.model.predict_proba\n            )\n            \n            explanation = {\n                'feature_importance': dict(exp.as_list()),\n                'prediction_probability': exp.predict_proba\n            }\n        \n        return {\n            'method': method,\n            'explanation': explanation,\n            'interpretation': self._generate_interpretation(explanation)\n        }\n    \n    def _generate_interpretation(self, explanation):\n        # Generate human-readable interpretation\n        interpretation = [\n            f\"The most important features for this prediction were:\"\n        ]\n        \n        for feature, importance in sorted(\n            explanation['feature_importance'].items(),\n            key=lambda x: abs(x[1]),\n            reverse=True\n        )[:3]:\n            interpretation.append(\n                f\"- {feature}: {'positive' if importance > 0 else 'negative'} \"\n                f\"impact of magnitude {abs(importance):.2f}\"\n            )\n        \n        return '\\n'.join(interpretation)",
+            "quiz": {
+                "question": "What is the main purpose of model explainability?",
+                "options": {
+                    "a": "To make models run faster",
+                    "b": "To understand and interpret how AI systems make decisions",
+                    "c": "To reduce model size",
+                    "d": "To improve accuracy"
+                },
+                "correct": "b",
+                "explanation": "Model explainability aims to make AI decision-making processes transparent and interpretable, enabling understanding, oversight, and accountability of AI systems."
+            }
+        },
+        {
+            "title": "Societal Impact and Responsibility",
+            "explanation": "AI systems can have significant impacts on society, from influencing individual decisions to shaping social systems. Understanding and managing these impacts is a crucial ethical responsibility.",
+            "metaphor": {
+                "title": "The Ripple Effect",
+                "description": "Think of AI's societal impact like dropping a stone in a pond. The immediate splash (direct effects) creates ripples that spread outward, affecting more distant areas (indirect effects). Just as we must consider both immediate and far-reaching effects of the ripples, we must consider both direct and indirect impacts of AI systems.",
+                "points": [
+                    "Direct impacts are like the initial splash",
+                    "Indirect effects are like distant ripples",
+                    "Unintended consequences are like waves reflecting off shores",
+                    "Mitigation strategies are like controlling wave patterns"
+                ]
+            },
+            "technical_example": "from typing import List, Dict\nfrom datetime import datetime\n\nclass AIImpactAssessment:\n    def __init__(self):\n        self.impact_areas = [\n            'privacy',\n            'fairness',\n            'accessibility',\n            'environmental',\n            'economic',\n            'social'\n        ]\n    \n    def assess_impact(self, system_description: Dict) -> Dict:\n        assessment = {\n            'timestamp': datetime.now().isoformat(),\n            'system_name': system_description['name'],\n            'purpose': system_description['purpose'],\n            'impacts': {},\n            'risks': [],\n            'recommendations': []\n        }\n        \n        # Assess each impact area\n        for area in self.impact_areas:\n            impact_score = self._evaluate_impact(\n                area,\n                system_description\n            )\n            \n            assessment['impacts'][area] = {\n                'score': impact_score,\n                'level': self._get_impact_level(impact_score),\n                'details': self._get_impact_details(area, impact_score)\n            }\n            \n            # Identify risks and recommendations\n            if impact_score > 0.7:\n                assessment['risks'].append(\n                    self._generate_risk_description(area, impact_score)\n                )\n                assessment['recommendations'].append(\n                    self._generate_recommendation(area, impact_score)\n                )\n        \n        # Calculate overall impact score\n        assessment['overall_impact'] = sum(\n            impact['score'] for impact in assessment['impacts'].values()\n        ) / len(self.impact_areas)\n        \n        return assessment\n    \n    def generate_report(self, assessment: Dict) -> str:\n        report = [\n            f\"Impact Assessment Report for {assessment['system_name']}\",\n            f\"Generated on: {assessment['timestamp']}\",\n            f\"Overall Impact Score: {assessment['overall_impact']:.2f}\\n\"\n        ]\n        \n        # Add detailed findings\n        report.append(\"Key Findings:\")\n        for area, impact in assessment['impacts'].items():\n            report.append(\n                f\"- {area.title()}: {impact['level']} \"\n                f\"(Score: {impact['score']:.2f})\"\n            )\n        \n        # Add risks and recommendations\n        if assessment['risks']:\n            report.append(\"\\nIdentified Risks:\")\n            for risk in assessment['risks']:\n                report.append(f\"- {risk}\")\n        \n        if assessment['recommendations']:\n            report.append(\"\\nRecommendations:\")\n            for rec in assessment['recommendations']:\n                report.append(f\"- {rec}\")\n        \n        return '\\n'.join(report)",
+            "quiz": {
+                "question": "Why is it important to assess the societal impact of AI systems?",
+                "options": {
+                    "a": "To make marketing easier",
+                    "b": "To understand and manage both direct and indirect effects on society",
+                    "c": "To increase system performance",
+                    "d": "To reduce development costs"
+                },
+                "correct": "b",
+                "explanation": "Assessing societal impact is crucial because AI systems can have far-reaching effects on individuals and communities, both directly and indirectly. Understanding these impacts helps ensure responsible development and deployment."
+            }
+        }
+    ],
+    "key_takeaways": [
+        "AI ethics is crucial for ensuring fair, transparent, and accountable AI systems",
+        "Explainability helps build trust and enables effective oversight of AI systems",
+        "Understanding societal impact is essential for responsible AI development",
+        "Ethical considerations should be integrated throughout the AI development lifecycle"
+    ],
+    "prev_module": null,
+    "next_module": "ethics-002"
+}
