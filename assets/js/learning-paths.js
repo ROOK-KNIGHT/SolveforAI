@@ -384,125 +384,85 @@ function showPathDetails(pathId) {
  * @param {string} pathId - The path identifier
  */
 function showPathContent(pathId) {
-    // Create modal overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    
-    // Create modal content
-    const modal = document.createElement('div');
-    modal.className = 'modal path-content-modal';
-    
-    // Get path title based on ID
-    const pathTitles = {
-        'ml-fundamentals': 'Machine Learning Fundamentals',
-        'deep-learning': 'Deep Learning Specialist',
-        'nlp-expert': 'Natural Language Processing Expert'
+    // Map path IDs to their module directories
+    const pathDirectories = {
+        'ml-fundamentals': 'ml-fundamentals',
+        'deep-learning': 'deep-learning-specialist',
+        'nlp-expert': 'nlp-expert'
     };
-    
-    // Show module content directly
-    modal.innerHTML = `
-        <div class="modal-header">
-            <h2>Introduction to Machine Learning</h2>
-            <button class="modal-close">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="concept-section">
-                <h2>What is Machine Learning?</h2>
-                
-                <div class="concept-explanation">
-                    <h3>The Core Idea</h3>
-                    <p>Machine learning is a way for computers to learn from examples rather than following explicit instructions. Instead of writing rules for every situation, we show the computer many examples and let it discover patterns.</p>
-                </div>
 
-                <div class="metaphor-box">
-                    <h3>The Recipe Book Metaphor</h3>
-                    <p>Think of traditional programming as following a recipe book: you have specific instructions to follow step by step. Machine learning, on the other hand, is like having a chef taste thousands of dishes and learn to recognize what makes a good meal without explicit recipes.</p>
-                    <ul>
-                        <li>Traditional Programming = Following a recipe exactly</li>
-                        <li>Machine Learning = Learning patterns from many examples</li>
-                        <li>Like a chef learning to cook by tasting rather than reading recipes</li>
-                    </ul>
-                </div>
+    // Get the correct directory for this path
+    const moduleDir = pathDirectories[pathId];
+    if (!moduleDir) {
+        showNotification('Error: Path not found');
+        return;
+    }
 
-                <div class="technical-example">
-                    <h3>Technical Implementation</h3>
-                    <pre><code>
-# Traditional Programming
-def is_spam(email):
-    if "buy now" in email.lower():
-        return True
-    if "discount" in email.lower():
-        return True
-    return False
-
-# Machine Learning Approach
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-
-# Train on examples
-vectorizer = CountVectorizer()
-classifier = MultinomialNB()
-classifier.fit(vectorizer.fit_transform(training_emails), 
-              training_labels)
-                    </code></pre>
-                </div>
-
-                <div class="concept-quiz">
-                    <h3>Quick Check</h3>
-                    <div class="quiz-question">
-                        <p>Which statement best describes machine learning?</p>
-                        <form>
-                            <label>
-                                <input type="radio" name="q1" value="a">
-                                A system that follows explicit rules
-                            </label>
-                            <label>
-                                <input type="radio" name="q1" value="b">
-                                A program that learns patterns from examples
-                            </label>
-                            <label>
-                                <input type="radio" name="q1" value="c">
-                                A database of pre-written solutions
-                            </label>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <section class="module-summary">
-                <h2>Key Takeaways</h2>
-                <ul>
-                    <li>Machine learning enables computers to learn from examples rather than following explicit rules</li>
-                    <li>Different types of machine learning suit different types of problems</li>
-                    <li>Understanding when to use each type is crucial for successful ML applications</li>
-                </ul>
-            </section>
-
-            <section class="module-navigation">
-                <button class="btn btn-primary next-module">Continue to Next Module</button>
-                <button class="btn btn-secondary save-progress">Save Progress</button>
-            </section>
-        </div>
-    `;
+    // Fetch the module content
+    fetch(`/content-engine/output/${moduleDir}/module-1.html`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Module content not found');
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Create modal overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
             
-    // Add modal to page using showModal helper
-    window.showModal(modal, overlay);
-    
-    // Handle modal interactions
-    const closeBtn = modal.querySelector('.modal-close');
-    closeBtn.addEventListener('click', function() {
-        window.closeModal(modal, overlay);
-    });
-    
-    // Clicking outside the modal closes it
-    overlay.addEventListener('click', function() {
-        window.closeModal(modal, overlay);
-    });
-    
-    // Prevent clicks inside modal from closing it
-    modal.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
+            // Create modal content
+            const modal = document.createElement('div');
+            modal.className = 'modal path-content-modal';
+            
+            // Parse the HTML content
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Extract the main content
+            const mainContent = doc.querySelector('main').innerHTML;
+            
+            // Add the content to our modal
+            modal.innerHTML = `
+                <div class="modal-header">
+                    <h2>${doc.querySelector('h1').textContent}</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    ${mainContent}
+                </div>
+            `;
+            
+            // Add modal to page using showModal helper
+            window.showModal(modal, overlay);
+            
+            // Handle modal interactions
+            const closeBtn = modal.querySelector('.modal-close');
+            closeBtn.addEventListener('click', function() {
+                window.closeModal(modal, overlay);
+            });
+            
+            // Clicking outside the modal closes it
+            overlay.addEventListener('click', function() {
+                window.closeModal(modal, overlay);
+            });
+            
+            // Prevent clicks inside modal from closing it
+            modal.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Initialize code highlighting
+            if (window.hljs) {
+                modal.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error loading module:', error);
+            showNotification('Error loading module content');
+        });
 }
 
 /**
