@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Machine Learning | Learning Path</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/module.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>Introduction to Machine Learning</h1>
+            <p class="module-description">Understand the core concepts of machine learning through intuitive explanations and practical examples.</p>
+        </section>
+
+        <!-- Concept Template (Repeat for each concept, max 5) -->
+        <section class="concept-section">
+            <h2>What is Machine Learning?</h2>
+            
+            <!-- Core Explanation -->
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Machine learning is a way for computers to learn from examples rather than following explicit instructions. Instead of writing rules for every situation, we show the computer many examples and let it discover patterns.</p>
+            </div>
+
+            <!-- Metaphor -->
+            <div class="metaphor-box">
+                <h3>The Recipe Book Metaphor</h3>
+                <p>Think of traditional programming as following a recipe book: you have specific instructions to follow step by step. Machine learning, on the other hand, is like having a chef taste thousands of dishes and learn to recognize what makes a good meal without explicit recipes.</p>
+                <ul>
+                    <li>Traditional Programming &#x3D; Following a recipe exactly</li>
+                    <li>Machine Learning &#x3D; Learning patterns from many examples</li>
+                    <li>Like a chef learning to cook by tasting rather than reading recipes</li>
+                </ul>
+            </div>
+
+            <!-- Technical Example -->
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code># Traditional Programming
+def is_spam(email):
+    if &quot;buy now&quot; in email.lower():
+        return True
+    if &quot;discount&quot; in email.lower():
+        return True
+    return False
+
+# Machine Learning Approach
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Train on examples
+vectorizer &#x3D; CountVectorizer()
+classifier &#x3D; MultinomialNB()
+classifier.fit(vectorizer.fit_transform(training_emails), 
+              training_labels)</code></pre>
+            </div>
+
+            <!-- Quick Quiz -->
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Which statement best describes machine learning?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q0" value="a">
+                            A system that follows explicit rules
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            A program that learns patterns from examples
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            A database of pre-written solutions
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            A collection of if-else statements
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="concept-section">
+            <h2>Types of Machine Learning</h2>
+            
+            <!-- Core Explanation -->
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>There are three main types of machine learning: supervised learning (learning with labeled examples), unsupervised learning (finding patterns without labels), and reinforcement learning (learning through trial and error).</p>
+            </div>
+
+            <!-- Metaphor -->
+            <div class="metaphor-box">
+                <h3>The Learning Styles Metaphor</h3>
+                <p>Different types of machine learning are like different ways of teaching a student.</p>
+                <ul>
+                    <li>Supervised Learning &#x3D; Learning with a teacher who provides correct answers</li>
+                    <li>Unsupervised Learning &#x3D; Self-study by finding patterns in information</li>
+                    <li>Reinforcement Learning &#x3D; Learning through practice and feedback, like playing a game</li>
+                </ul>
+            </div>
+
+            <!-- Technical Example -->
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code># Supervised Learning Example
+from sklearn.linear_model import LinearRegression
+model &#x3D; LinearRegression()
+model.fit(X_train, y_train)  # Learning with labeled data
+
+# Unsupervised Learning Example
+from sklearn.cluster import KMeans
+clustering &#x3D; KMeans(n_clusters&#x3D;3)
+clustering.fit(X)  # Finding patterns without labels
+
+# Reinforcement Learning Example
+def q_learning(state, action, reward, next_state):
+    old_value &#x3D; Q[state][action]
+    next_max &#x3D; np.max(Q[next_state])
+    Q[state][action] &#x3D; old_value + alpha * (reward + gamma * next_max - old_value)</code></pre>
+            </div>
+
+            <!-- Quick Quiz -->
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Which type of machine learning would be best for grouping similar customers together without any predefined categories?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q0" value="a">
+                            Supervised Learning
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            Unsupervised Learning
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            Reinforcement Learning
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Machine learning enables computers to learn from examples rather than following explicit rules</li>
+                <li>Different types of machine learning suit different types of problems</li>
+                <li>Understanding when to use each type is crucial for successful ML applications</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="ml-fundamentals-2">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "ml-fundamentals-1",
+        path: "ml-fundamentals",
+        concepts: [{&quot;title&quot;:&quot;What is Machine Learning?&quot;,&quot;explanation&quot;:&quot;Machine learning is a way for computers to learn from examples rather than following explicit instructions. Instead of writing rules for every situation, we show the computer many examples and let it discover patterns.&quot;,&quot;metaphor&quot;:{&quot;title&quot;:&quot;The Recipe Book Metaphor&quot;,&quot;description&quot;:&quot;Think of traditional programming as following a recipe book: you have specific instructions to follow step by step. Machine learning, on the other hand, is like having a chef taste thousands of dishes and learn to recognize what makes a good meal without explicit recipes.&quot;,&quot;points&quot;:[&quot;Traditional Programming &#x3D; Following a recipe exactly&quot;,&quot;Machine Learning &#x3D; Learning patterns from many examples&quot;,&quot;Like a chef learning to cook by tasting rather than reading recipes&quot;]},&quot;technical_example&quot;:&quot;# Traditional Programming\ndef is_spam(email):\n    if \&quot;buy now\&quot; in email.lower():\n        return True\n    if \&quot;discount\&quot; in email.lower():\n        return True\n    return False\n\n# Machine Learning Approach\nfrom sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.naive_bayes import MultinomialNB\n\n# Train on examples\nvectorizer &#x3D; CountVectorizer()\nclassifier &#x3D; MultinomialNB()\nclassifier.fit(vectorizer.fit_transform(training_emails), \n              training_labels)&quot;,&quot;quiz&quot;:{&quot;question&quot;:&quot;Which statement best describes machine learning?&quot;,&quot;options&quot;:{&quot;a&quot;:&quot;A system that follows explicit rules&quot;,&quot;b&quot;:&quot;A program that learns patterns from examples&quot;,&quot;c&quot;:&quot;A database of pre-written solutions&quot;,&quot;d&quot;:&quot;A collection of if-else statements&quot;},&quot;correct&quot;:&quot;b&quot;,&quot;explanation&quot;:&quot;Machine learning systems learn patterns from data, rather than following explicit rules or pre-written solutions.&quot;}},{&quot;title&quot;:&quot;Types of Machine Learning&quot;,&quot;explanation&quot;:&quot;There are three main types of machine learning: supervised learning (learning with labeled examples), unsupervised learning (finding patterns without labels), and reinforcement learning (learning through trial and error).&quot;,&quot;metaphor&quot;:{&quot;title&quot;:&quot;The Learning Styles Metaphor&quot;,&quot;description&quot;:&quot;Different types of machine learning are like different ways of teaching a student.&quot;,&quot;points&quot;:[&quot;Supervised Learning &#x3D; Learning with a teacher who provides correct answers&quot;,&quot;Unsupervised Learning &#x3D; Self-study by finding patterns in information&quot;,&quot;Reinforcement Learning &#x3D; Learning through practice and feedback, like playing a game&quot;]},&quot;technical_example&quot;:&quot;# Supervised Learning Example\nfrom sklearn.linear_model import LinearRegression\nmodel &#x3D; LinearRegression()\nmodel.fit(X_train, y_train)  # Learning with labeled data\n\n# Unsupervised Learning Example\nfrom sklearn.cluster import KMeans\nclustering &#x3D; KMeans(n_clusters&#x3D;3)\nclustering.fit(X)  # Finding patterns without labels\n\n# Reinforcement Learning Example\ndef q_learning(state, action, reward, next_state):\n    old_value &#x3D; Q[state][action]\n    next_max &#x3D; np.max(Q[next_state])\n    Q[state][action] &#x3D; old_value + alpha * (reward + gamma * next_max - old_value)&quot;,&quot;quiz&quot;:{&quot;question&quot;:&quot;Which type of machine learning would be best for grouping similar customers together without any predefined categories?&quot;,&quot;options&quot;:{&quot;a&quot;:&quot;Supervised Learning&quot;,&quot;b&quot;:&quot;Unsupervised Learning&quot;,&quot;c&quot;:&quot;Reinforcement Learning&quot;},&quot;correct&quot;:&quot;b&quot;,&quot;explanation&quot;:&quot;Unsupervised learning is ideal for finding natural groupings in data without predefined categories.&quot;}}],
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/assets/js/module.js"></script>
+</body>
+</html>

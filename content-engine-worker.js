@@ -61,7 +61,7 @@ async function generateContent(env) {
   console.log("Calling content generation API");
   
   // Call the content engine API endpoint
-  const response = await fetch("https://solveforai.com/content-engine/generate", {
+  const response = await fetch("http://localhost:3000/generate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +71,11 @@ async function generateContent(env) {
       generateNow: true,
       topic: getRandomTopic(), // Optional: Generate a random topic or let the API choose
       options: {
-        provider: Math.random() > 0.5 ? "openAI" : "anthropic" // Randomly alternate AI providers
+        provider: Math.random() > 0.5 ? "openAI" : "anthropic", // Randomly alternate AI providers
+        apiKeys: {
+          openai: env.OPENAI_API_KEY,
+          anthropic: env.ANTHROPIC_API_KEY
+        }
       }
     })
   });

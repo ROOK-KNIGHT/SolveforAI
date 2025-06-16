@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Neural Architectures | Deep Learning Specialist</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/module.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>Advanced Neural Architectures</h1>
+            <p class="module-description">Explore cutting-edge neural network architectures that power modern deep learning applications. Learn about residual networks, attention mechanisms, and transformer architectures that have revolutionized the field.</p>
+        </section>
+
+        <!-- ResNet Section -->
+        <section class="concept-section">
+            <h2>Residual Networks (ResNet)</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Residual Networks solve the vanishing gradient problem in very deep neural networks by introducing skip connections that allow information to bypass layers. This enables the training of networks hundreds of layers deep, which was previously impossible with traditional architectures.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Express Elevator Metaphor</h3>
+                <p>Think of a ResNet like a skyscraper with both regular elevators (layers) and express elevators (skip connections). Regular elevators stop at every floor, similar to how information flows through each layer. Express elevators skip several floors, allowing people (information) to reach higher levels quickly without getting stuck in traffic. This is similar to how skip connections allow information to bypass multiple layers, making it easier for the network to learn.</p>
+                <ul>
+                    <li>Regular elevators represent the standard layer-by-layer processing</li>
+                    <li>Express elevators represent skip connections that bypass layers</li>
+                    <li>Higher floors represent deeper layers in the network</li>
+                    <li>Traffic congestion represents the vanishing gradient problem</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(ResidualBlock, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, 
+                               stride=stride, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3,
+                               stride=1, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+        
+        # Skip connection
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_channels != out_channels:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size=1,
+                         stride=stride, bias=False),
+                nn.BatchNorm2d(out_channels)
+            )
+    
+    def forward(self, x):
+        out = F.relu(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        out += self.shortcut(x)  # Add skip connection
+        out = F.relu(out)
+        return out</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the primary advantage of using skip connections in ResNets?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q1" value="a">
+                            They reduce the number of parameters in the network
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            They allow information to flow directly through deep networks, mitigating the vanishing gradient problem
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            They make the network train faster by skipping unnecessary computations
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            They improve the network's memory efficiency
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attention Mechanisms Section -->
+        <section class="concept-section">
+            <h2>Attention Mechanisms</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Attention mechanisms allow neural networks to focus on relevant parts of the input when producing outputs. Instead of processing all input elements equally, attention helps the network learn which parts are most important for the current task.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Spotlight Operator</h3>
+                <p>Imagine a theater stage with multiple actors. The spotlight operator (attention mechanism) decides which actors to illuminate based on their importance to the current scene. Just as the audience naturally focuses on the illuminated actors, the neural network learns to focus on the most relevant parts of the input data.</p>
+                <ul>
+                    <li>The spotlight represents the attention weights</li>
+                    <li>Actors represent different parts of the input</li>
+                    <li>The operator's decisions represent learned attention patterns</li>
+                    <li>The audience's focus represents the network's processing priority</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">class AttentionLayer(nn.Module):
+    def __init__(self, hidden_size):
+        super(AttentionLayer, self).__init__()
+        self.attention = nn.Linear(hidden_size * 2, hidden_size)
+        self.v = nn.Parameter(torch.rand(hidden_size))
+        stdv = 1. / math.sqrt(self.v.size(0))
+        self.v.data.uniform_(-stdv, stdv)
+    
+    def forward(self, hidden, encoder_outputs):
+        batch_size = encoder_outputs.size(0)
+        seq_len = encoder_outputs.size(1)
+        
+        # Repeat hidden state seq_len times
+        h = hidden.repeat(1, seq_len, 1)
+        
+        # Calculate attention scores
+        attn_energies = self.score(h, encoder_outputs)
+        
+        # Normalize attention scores to weights
+        return F.softmax(attn_energies, dim=1)
+    
+    def score(self, hidden, encoder_outputs):
+        energy = torch.tanh(self.attention(torch.cat([hidden, encoder_outputs], 2)))
+        energy = energy.transpose(1, 2)
+        v = self.v.repeat(encoder_outputs.size(0), 1).unsqueeze(1)
+        energy = torch.bmm(v, energy)
+        return energy.squeeze(1)</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>How does an attention mechanism improve neural network performance?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q2" value="a">
+                            By reducing the number of parameters in the network
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="b">
+                            By allowing the network to focus on relevant parts of the input
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            By increasing the network's processing speed
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="d">
+                            By compressing the input data
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transformer Architecture Section -->
+        <section class="concept-section">
+            <h2>Transformer Architecture</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Transformers are a revolutionary architecture that relies entirely on attention mechanisms to process sequential data. Unlike traditional RNNs, transformers process all elements of a sequence in parallel, making them highly efficient and effective for tasks like language processing.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Multi-Track Recording Studio</h3>
+                <p>Think of a transformer as a modern recording studio where multiple sound engineers (attention heads) work simultaneously on different aspects of a song. Each engineer can focus on specific instruments or frequencies, and their combined work creates the final mix. Similarly, transformer heads process different aspects of the input in parallel, then combine their insights for the final output.</p>
+                <ul>
+                    <li>Sound engineers represent different attention heads</li>
+                    <li>Instruments represent different aspects of the input</li>
+                    <li>Mixing board represents the feed-forward network</li>
+                    <li>Final mix represents the combined attention outputs</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">class TransformerBlock(nn.Module):
+    def __init__(self, embed_dim, num_heads, ff_dim, dropout=0.1):
+        super(TransformerBlock, self).__init__()
+        self.attention = nn.MultiheadAttention(embed_dim, num_heads)
+        self.norm1 = nn.LayerNorm(embed_dim)
+        self.norm2 = nn.LayerNorm(embed_dim)
+        self.ff = nn.Sequential(
+            nn.Linear(embed_dim, ff_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(ff_dim, embed_dim)
+        )
+        self.dropout = nn.Dropout(dropout)
+    
+    def forward(self, x):
+        # Multi-head attention
+        attended, _ = self.attention(x, x, x)
+        x = self.norm1(x + self.dropout(attended))
+        
+        # Feed forward
+        fed_forward = self.ff(x)
+        return self.norm2(x + self.dropout(fed_forward))</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is a key advantage of transformer architectures over traditional RNNs?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q3" value="a">
+                            They use less memory
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="b">
+                            They process sequential data in parallel rather than sequentially
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="c">
+                            They are easier to train
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            They require less training data
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Residual connections enable the training of very deep neural networks by providing direct paths for gradient flow</li>
+                <li>Attention mechanisms allow networks to focus on relevant parts of the input, improving performance on complex tasks</li>
+                <li>Transformers revolutionized sequence processing by enabling parallel computation and effective modeling of long-range dependencies</li>
+                <li>Modern architectures often combine multiple innovations to achieve state-of-the-art performance</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="dls-002">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "dls-001",
+        path: "deep-learning-specialist",
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/assets/js/module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
