@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Fundamentals | NLP Expert</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/module.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>NLP Fundamentals</h1>
+            <p class="module-description">Learn the foundational concepts of Natural Language Processing, including text preprocessing, tokenization, and basic text analysis techniques.</p>
+        </section>
+
+        <!-- Introduction to NLP Section -->
+        <section class="concept-section">
+            <h2>Introduction to NLP</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Natural Language Processing (NLP) is a branch of artificial intelligence that helps computers understand, interpret, and manipulate human language. It bridges the gap between human communication and computer understanding.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Language Detective</h3>
+                <p>Think of NLP like a detective analyzing a conversation. Just as a detective looks for clues in speech patterns, word choice, and context to understand meaning, NLP systems analyze text by breaking it down into meaningful components and examining their relationships.</p>
+                <ul>
+                    <li>Words are like individual clues that contribute to meaning</li>
+                    <li>Context is like the crime scene - it gives clues their significance</li>
+                    <li>Grammar rules are like investigative procedures</li>
+                    <li>Understanding intent is like solving the case</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+
+def basic_text_analysis(text):
+    # Tokenize the text into words
+    tokens = word_tokenize(text.lower())
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    meaningful_words = [w for w in tokens if w not in stop_words]
+    
+    # Get word frequencies
+    freq_dist = nltk.FreqDist(meaningful_words)
+    
+    return {
+        'token_count': len(tokens),
+        'unique_words': len(set(meaningful_words)),
+        'most_common': freq_dist.most_common(5)
+    }
+
+# Example usage
+text = "Natural language processing helps computers understand human language."
+analysis = basic_text_analysis(text)
+print(analysis)</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the primary goal of Natural Language Processing?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q1" value="a">
+                            To create new human languages
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            To help computers understand and process human language
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            To replace human communication entirely
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            To translate between programming languages
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Text Preprocessing Section -->
+        <section class="concept-section">
+            <h2>Text Preprocessing</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Text preprocessing is the crucial first step in NLP that transforms raw text into a clean, standardized format that machines can process effectively. This includes tasks like tokenization, removing stop words, and normalizing text.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Text Kitchen</h3>
+                <p>Think of text preprocessing like preparing ingredients in a kitchen. Just as a chef needs to wash, peel, and chop ingredients before cooking, NLP systems need to clean and prepare text data before analysis. Different recipes (NLP tasks) require different types of preparation.</p>
+                <ul>
+                    <li>Raw text is like unprocessed ingredients</li>
+                    <li>Tokenization is like chopping ingredients into pieces</li>
+                    <li>Removing stop words is like removing unwanted parts</li>
+                    <li>Text normalization is like standardizing ingredient sizes</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import re
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+
+def preprocess_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    
+    # Remove special characters and numbers
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
+    
+    # Tokenize
+    tokens = word_tokenize(text)
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    tokens = [t for t in tokens if t not in stop_words]
+    
+    # Lemmatize
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(t) for t in tokens]
+    
+    return tokens
+
+# Example usage
+text = "The quick brown foxes are jumping over the lazy dogs!"
+clean_tokens = preprocess_text(text)
+print(clean_tokens)</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Why is text preprocessing important in NLP?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q2" value="a">
+                            To make the text more readable for humans
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="b">
+                            To standardize and clean text for consistent machine processing
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            To reduce the size of text files
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="d">
+                            To translate text into different languages
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenization and Vocabulary Section -->
+        <section class="concept-section">
+            <h2>Tokenization and Vocabulary</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Tokenization is the process of breaking text into smaller units (tokens) such as words or subwords. Building a vocabulary from these tokens is essential for converting text into a format that machine learning models can process.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Language Building Blocks</h3>
+                <p>Think of tokenization like breaking down a LEGO structure into its individual blocks. Just as LEGO blocks are the basic units for building larger structures, tokens are the fundamental units for understanding text. The vocabulary is like your collection of unique LEGO pieces that you can use to build any structure.</p>
+                <ul>
+                    <li>Words are like individual LEGO blocks</li>
+                    <li>Sentences are like assembled structures</li>
+                    <li>Vocabulary is like your LEGO collection catalog</li>
+                    <li>Word relationships are like block connection patterns</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">from collections import Counter
+from nltk.tokenize import word_tokenize, sent_tokenize
+
+class VocabularyBuilder:
+    def __init__(self, min_freq=2):
+        self.word2idx = {}
+        self.idx2word = {}
+        self.word_freq = Counter()
+        self.min_freq = min_freq
+    
+    def build_vocab(self, texts):
+        # Count word frequencies
+        for text in texts:
+            tokens = word_tokenize(text.lower())
+            self.word_freq.update(tokens)
+        
+        # Create vocabulary (only include words above minimum frequency)
+        vocab = [word for word, freq in self.word_freq.items() 
+                if freq >= self.min_freq]
+        
+        # Create mappings
+        for idx, word in enumerate(vocab):
+            self.word2idx[word] = idx
+            self.idx2word[idx] = word
+    
+    def encode(self, text):
+        tokens = word_tokenize(text.lower())
+        return [self.word2idx.get(token, -1) for token in tokens]
+
+# Example usage
+texts = [
+    "Natural language processing is fascinating.",
+    "Processing text requires careful analysis."
+]
+
+vocab_builder = VocabularyBuilder(min_freq=1)
+vocab_builder.build_vocab(texts)
+encoded = vocab_builder.encode(texts[0])
+print(f"Vocabulary size: {len(vocab_builder.word2idx)}")
+print(f"Encoded text: {encoded}")</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the main purpose of tokenization in NLP?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q3" value="a">
+                            To compress text data
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="b">
+                            To break text into smaller, meaningful units for processing
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="c">
+                            To translate text between languages
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            To encrypt sensitive information
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>NLP enables computers to understand and process human language</li>
+                <li>Text preprocessing is crucial for standardizing and cleaning text data</li>
+                <li>Tokenization breaks text into meaningful units for analysis</li>
+                <li>Building a vocabulary helps convert text into a machine-processable format</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="nlp-002">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "nlp-001",
+        path: "nlp-expert",
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/assets/js/module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+    "module_id": "nlp-001",
+    "module_title": "NLP Fundamentals",
+    "module_description": "Learn the foundational concepts of Natural Language Processing, including text preprocessing, tokenization, and basic text analysis techniques.",
+    "learning_path": "nlp-expert",
+    "progress_percentage": 0,
+    "concepts": [
+        {
+            "title": "Introduction to NLP",
+            "explanation": "Natural Language Processing (NLP) is a branch of artificial intelligence that helps computers understand, interpret, and manipulate human language. It bridges the gap between human communication and computer understanding.",
+            "metaphor": {
+                "title": "The Language Detective",
+                "description": "Think of NLP like a detective analyzing a conversation. Just as a detective looks for clues in speech patterns, word choice, and context to understand meaning, NLP systems analyze text by breaking it down into meaningful components and examining their relationships.",
+                "points": [
+                    "Words are like individual clues that contribute to meaning",
+                    "Context is like the crime scene - it gives clues their significance",
+                    "Grammar rules are like investigative procedures",
+                    "Understanding intent is like solving the case"
+                ]
+            },
+            "technical_example": "import nltk\nfrom nltk.tokenize import word_tokenize\nfrom nltk.corpus import stopwords\n\ndef basic_text_analysis(text):\n    # Tokenize the text into words\n    tokens = word_tokenize(text.lower())\n    \n    # Remove stopwords\n    stop_words = set(stopwords.words('english'))\n    meaningful_words = [w for w in tokens if w not in stop_words]\n    \n    # Get word frequencies\n    freq_dist = nltk.FreqDist(meaningful_words)\n    \n    return {\n        'token_count': len(tokens),\n        'unique_words': len(set(meaningful_words)),\n        'most_common': freq_dist.most_common(5)\n    }\n\n# Example usage\ntext = \"Natural language processing helps computers understand human language.\"\nanalysis = basic_text_analysis(text)\nprint(analysis)",
+            "quiz": {
+                "question": "What is the primary goal of Natural Language Processing?",
+                "options": {
+                    "a": "To create new human languages",
+                    "b": "To help computers understand and process human language",
+                    "c": "To replace human communication entirely",
+                    "d": "To translate between programming languages"
+                },
+                "correct": "b",
+                "explanation": "NLP aims to bridge the gap between human communication and computer understanding by enabling computers to understand, interpret, and generate human language in a meaningful way."
+            }
+        },
+        {
+            "title": "Text Preprocessing",
+            "explanation": "Text preprocessing is the crucial first step in NLP that transforms raw text into a clean, standardized format that machines can process effectively. This includes tasks like tokenization, removing stop words, and normalizing text.",
+            "metaphor": {
+                "title": "The Text Kitchen",
+                "description": "Think of text preprocessing like preparing ingredients in a kitchen. Just as a chef needs to wash, peel, and chop ingredients before cooking, NLP systems need to clean and prepare text data before analysis. Different recipes (NLP tasks) require different types of preparation.",
+                "points": [
+                    "Raw text is like unprocessed ingredients",
+                    "Tokenization is like chopping ingredients into pieces",
+                    "Removing stop words is like removing unwanted parts",
+                    "Text normalization is like standardizing ingredient sizes"
+                ]
+            },
+            "technical_example": "import re\nfrom nltk.tokenize import word_tokenize\nfrom nltk.corpus import stopwords\nfrom nltk.stem import WordNetLemmatizer\n\ndef preprocess_text(text):\n    # Convert to lowercase\n    text = text.lower()\n    \n    # Remove special characters and numbers\n    text = re.sub(r'[^a-zA-Z\\s]', '', text)\n    \n    # Tokenize\n    tokens = word_tokenize(text)\n    \n    # Remove stopwords\n    stop_words = set(stopwords.words('english'))\n    tokens = [t for t in tokens if t not in stop_words]\n    \n    # Lemmatize\n    lemmatizer = WordNetLemmatizer()\n    tokens = [lemmatizer.lemmatize(t) for t in tokens]\n    \n    return tokens\n\n# Example usage\ntext = \"The quick brown foxes are jumping over the lazy dogs!\"\nclean_tokens = preprocess_text(text)\nprint(clean_tokens)",
+            "quiz": {
+                "question": "Why is text preprocessing important in NLP?",
+                "options": {
+                    "a": "To make the text more readable for humans",
+                    "b": "To standardize and clean text for consistent machine processing",
+                    "c": "To reduce the size of text files",
+                    "d": "To translate text into different languages"
+                },
+                "correct": "b",
+                "explanation": "Text preprocessing is crucial because it standardizes and cleans text data, making it suitable for consistent machine processing. This helps improve the accuracy and efficiency of NLP tasks."
+            }
+        },
+        {
+            "title": "Tokenization and Vocabulary",
+            "explanation": "Tokenization is the process of breaking text into smaller units (tokens) such as words or subwords. Building a vocabulary from these tokens is essential for converting text into a format that machine learning models can process.",
+            "metaphor": {
+                "title": "The Language Building Blocks",
+                "description": "Think of tokenization like breaking down a LEGO structure into its individual blocks. Just as LEGO blocks are the basic units for building larger structures, tokens are the fundamental units for understanding text. The vocabulary is like your collection of unique LEGO pieces that you can use to build any structure.",
+                "points": [
+                    "Words are like individual LEGO blocks",
+                    "Sentences are like assembled structures",
+                    "Vocabulary is like your LEGO collection catalog",
+                    "Word relationships are like block connection patterns"
+                ]
+            },
+            "technical_example": "from collections import Counter\nfrom nltk.tokenize import word_tokenize, sent_tokenize\n\nclass VocabularyBuilder:\n    def __init__(self, min_freq=2):\n        self.word2idx = {}\n        self.idx2word = {}\n        self.word_freq = Counter()\n        self.min_freq = min_freq\n    \n    def build_vocab(self, texts):\n        # Count word frequencies\n        for text in texts:\n            tokens = word_tokenize(text.lower())\n            self.word_freq.update(tokens)\n        \n        # Create vocabulary (only include words above minimum frequency)\n        vocab = [word for word, freq in self.word_freq.items() \n                if freq >= self.min_freq]\n        \n        # Create mappings\n        for idx, word in enumerate(vocab):\n            self.word2idx[word] = idx\n            self.idx2word[idx] = word\n    \n    def encode(self, text):\n        tokens = word_tokenize(text.lower())\n        return [self.word2idx.get(token, -1) for token in tokens]\n\n# Example usage\ntexts = [\n    \"Natural language processing is fascinating.\",\n    \"Processing text requires careful analysis.\"\n]\n\nvocab_builder = VocabularyBuilder(min_freq=1)\nvocab_builder.build_vocab(texts)\nencoded = vocab_builder.encode(texts[0])\nprint(f\"Vocabulary size: {len(vocab_builder.word2idx)}\")\nprint(f\"Encoded text: {encoded}\")",
+            "quiz": {
+                "question": "What is the main purpose of tokenization in NLP?",
+                "options": {
+                    "a": "To compress text data",
+                    "b": "To break text into smaller, meaningful units for processing",
+                    "c": "To translate text between languages",
+                    "d": "To encrypt sensitive information"
+                },
+                "correct": "b",
+                "explanation": "Tokenization breaks text into smaller units (tokens) that can be processed by NLP systems. This is a fundamental step that enables machines to analyze and understand text at a granular level."
+            }
+        }
+    ],
+    "key_takeaways": [
+        "NLP enables computers to understand and process human language",
+        "Text preprocessing is crucial for standardizing and cleaning text data",
+        "Tokenization breaks text into meaningful units for analysis",
+        "Building a vocabulary helps convert text into a machine-processable format"
+    ],
+    "prev_module": null,
+    "next_module": "nlp-002"
+}
