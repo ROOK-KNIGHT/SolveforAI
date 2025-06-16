@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Reinforcement Learning | Reinforcement Learning</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/module.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>Introduction to Reinforcement Learning</h1>
+            <p class="module-description">Learn the fundamental concepts of reinforcement learning, including agents, environments, rewards, and the exploration-exploitation trade-off.</p>
+        </section>
+
+        <!-- Understanding RL Section -->
+        <section class="concept-section">
+            <h2>Understanding Reinforcement Learning</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment. The agent receives rewards or penalties based on its actions, and learns to maximize cumulative rewards over time.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Learning Child</h3>
+                <p>Think of reinforcement learning like a child learning to ride a bicycle. The child (agent) interacts with the bicycle and environment (state), making various actions (steering, pedaling). They receive feedback (rewards) in the form of staying upright (positive) or falling (negative). Through trial and error, they learn the best actions for different situations.</p>
+                <ul>
+                    <li>The child is like the RL agent making decisions</li>
+                    <li>The bicycle and surroundings represent the environment state</li>
+                    <li>Actions like pedaling and steering are the agent's choices</li>
+                    <li>Staying upright or falling are like rewards and penalties</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import gym
+import numpy as np
+
+class SimpleQLearningAgent:
+    def __init__(self, n_states, n_actions, learning_rate=0.1, discount=0.95):
+        self.q_table = np.zeros((n_states, n_actions))
+        self.lr = learning_rate
+        self.gamma = discount
+    
+    def choose_action(self, state, epsilon=0.1):
+        # Epsilon-greedy action selection
+        if np.random.random() < epsilon:
+            return np.random.randint(self.q_table.shape[1])
+        return np.argmax(self.q_table[state])
+    
+    def learn(self, state, action, reward, next_state):
+        # Q-learning update rule
+        old_value = self.q_table[state, action]
+        next_max = np.max(self.q_table[next_state])
+        
+        # Update Q-value using Bellman equation
+        new_value = (1 - self.lr) * old_value + self.lr * (
+            reward + self.gamma * next_max
+        )
+        self.q_table[state, action] = new_value
+
+# Example usage
+env = gym.make('FrozenLake-v1')
+agent = SimpleQLearningAgent(
+    n_states=env.observation_space.n,
+    n_actions=env.action_space.n
+)
+
+# Training loop
+for episode in range(1000):
+    state = env.reset()
+    done = False
+    
+    while not done:
+        action = agent.choose_action(state)
+        next_state, reward, done, _ = env.step(action)
+        agent.learn(state, action, reward, next_state)
+        state = next_state</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the main goal of a reinforcement learning agent?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q1" value="a">
+                            To classify data accurately
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            To maximize cumulative rewards over time
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            To minimize memory usage
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            To process data quickly
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- States and Actions Section -->
+        <section class="concept-section">
+            <h2>States and Actions</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>In reinforcement learning, states represent the current situation of the environment, while actions are the possible choices an agent can make. Understanding this state-action relationship is fundamental to RL.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Chess Player</h3>
+                <p>Think of states and actions like playing chess. The arrangement of pieces on the board represents the state, while the possible moves represent actions. Just as a chess player learns which moves are best in different board positions, an RL agent learns which actions are best in different states.</p>
+                <ul>
+                    <li>Board positions are like environment states</li>
+                    <li>Possible moves are like available actions</li>
+                    <li>Move selection is like the agent's policy</li>
+                    <li>Winning probability is like expected reward</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import numpy as np
+from typing import List, Tuple
+
+class GridWorldEnvironment:
+    def __init__(self, size: int = 4):
+        self.size = size
+        self.state = 0  # Start at top-left corner
+        self.goal = size * size - 1  # Bottom-right corner
+    
+    def get_state_space(self) -> int:
+        return self.size * self.size
+    
+    def get_action_space(self) -> List[str]:
+        return ['up', 'right', 'down', 'left']
+    
+    def get_valid_actions(self, state: int) -> List[str]:
+        actions = []
+        row, col = state // self.size, state % self.size
+        
+        # Check each direction
+        if row > 0:
+            actions.append('up')
+        if col < self.size - 1:
+            actions.append('right')
+        if row < self.size - 1:
+            actions.append('down')
+        if col > 0:
+            actions.append('left')
+        
+        return actions
+    
+    def step(self, action: str) -> Tuple[int, float, bool]:
+        row, col = self.state // self.size, self.state % self.size
+        
+        # Apply action
+        if action == 'up' and row > 0:
+            row -= 1
+        elif action == 'right' and col < self.size - 1:
+            col += 1
+        elif action == 'down' and row < self.size - 1:
+            row += 1
+        elif action == 'left' and col > 0:
+            col -= 1
+        
+        # Update state
+        self.state = row * self.size + col
+        
+        # Check if goal reached
+        done = self.state == self.goal
+        reward = 1.0 if done else 0.0
+        
+        return self.state, reward, done
+    
+    def reset(self) -> int:
+        self.state = 0
+        return self.state
+
+# Example usage
+env = GridWorldEnvironment(4)
+state = env.reset()
+
+print(f"Initial state: {state}")
+print(f"Valid actions: {env.get_valid_actions(state)}")
+
+# Take a step
+action = 'right'
+next_state, reward, done = env.step(action)
+print(f"After moving {action}:")
+print(f"New state: {next_state}")
+print(f"Reward: {reward}")
+print(f"Done: {done}")</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the relationship between states and actions in RL?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q2" value="a">
+                            States determine which actions are possible
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="b">
+                            Actions determine the state space
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            States and actions are always independent
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="d">
+                            Actions have no effect on states
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exploration vs. Exploitation Section -->
+        <section class="concept-section">
+            <h2>Exploration vs. Exploitation</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>The exploration-exploitation trade-off is a fundamental challenge in reinforcement learning. Agents must balance exploring new actions to discover better strategies with exploiting known good actions to maximize rewards.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Restaurant Dilemma</h3>
+                <p>Think of the exploration-exploitation trade-off like choosing where to eat. You can either explore new restaurants (potentially finding better ones but risking disappointment) or exploit your favorite restaurant (guaranteed satisfaction but possibly missing better options). This is similar to how RL agents must balance trying new actions versus sticking with proven ones.</p>
+                <ul>
+                    <li>Trying new restaurants is like exploration</li>
+                    <li>Returning to favorites is like exploitation</li>
+                    <li>Reviews are like reward signals</li>
+                    <li>Restaurant choice strategy is like the agent's policy</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import numpy as np
+from typing import List
+
+class MultiArmedBandit:
+    def __init__(self, n_arms: int):
+        # True reward probabilities (unknown to agent)
+        self.true_rewards = np.random.normal(0, 1, n_arms)
+        self.n_arms = n_arms
+        
+        # Initialize estimates and counts
+        self.value_estimates = np.zeros(n_arms)
+        self.action_counts = np.zeros(n_arms)
+    
+    def get_reward(self, action: int) -> float:
+        # Simulate reward with some noise
+        return np.random.normal(self.true_rewards[action], 0.1)
+    
+    def epsilon_greedy(self, epsilon: float) -> int:
+        # Exploration
+        if np.random.random() < epsilon:
+            return np.random.randint(self.n_arms)
+        
+        # Exploitation
+        return np.argmax(self.value_estimates)
+    
+    def ucb(self, c: float) -> int:
+        # Upper Confidence Bound action selection
+        total_counts = np.sum(self.action_counts) + 1
+        ucb_values = self.value_estimates + c * np.sqrt(
+            np.log(total_counts) / (self.action_counts + 1e-5)
+        )
+        return np.argmax(ucb_values)
+    
+    def thompson_sampling(self) -> int:
+        # Thompson Sampling action selection
+        samples = np.random.normal(
+            self.value_estimates,
+            1.0 / np.sqrt(self.action_counts + 1)
+        )
+        return np.argmax(samples)
+    
+    def update(self, action: int, reward: float):
+        # Update estimates using incremental average
+        self.action_counts[action] += 1
+        n = self.action_counts[action]
+        self.value_estimates[action] += (
+            reward - self.value_estimates[action]
+        ) / n
+
+# Example usage
+bandit = MultiArmedBandit(10)
+rewards = []
+
+# Try different strategies
+strategies = {
+    'epsilon_greedy': lambda: bandit.epsilon_greedy(0.1),
+    'ucb': lambda: bandit.ucb(2.0),
+    'thompson': lambda: bandit.thompson_sampling()
+}
+
+for strategy_name, strategy in strategies.items():
+    print(f"\nTesting {strategy_name}:")
+    total_reward = 0
+    
+    for t in range(1000):
+        action = strategy()
+        reward = bandit.get_reward(action)
+        bandit.update(action, reward)
+        total_reward += reward
+    
+    print(f"Average reward: {total_reward/1000:.3f}")
+    print(f"Best arm found: {np.argmax(bandit.value_estimates)}")</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Why is the exploration-exploitation trade-off important in RL?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q3" value="a">
+                            It helps reduce memory usage
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="b">
+                            It balances finding new strategies with using proven ones
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="c">
+                            It makes the code run faster
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            It simplifies the learning process
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Reinforcement learning involves agents learning through interaction with environments</li>
+                <li>States and actions form the foundation of decision-making in RL</li>
+                <li>The exploration-exploitation trade-off is crucial for effective learning</li>
+                <li>Different strategies can be used to balance exploration and exploitation</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="rl-002">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "rl-001",
+        path: "reinforcement-learning",
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/assets/js/module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

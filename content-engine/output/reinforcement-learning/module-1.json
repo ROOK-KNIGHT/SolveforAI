@@ -1,0 +1,95 @@
+{
+    "module_id": "rl-001",
+    "module_title": "Introduction to Reinforcement Learning",
+    "module_description": "Learn the fundamental concepts of reinforcement learning, including agents, environments, rewards, and the exploration-exploitation trade-off.",
+    "learning_path": "reinforcement-learning",
+    "progress_percentage": 0,
+    "concepts": [
+        {
+            "title": "Understanding Reinforcement Learning",
+            "explanation": "Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment. The agent receives rewards or penalties based on its actions, and learns to maximize cumulative rewards over time.",
+            "metaphor": {
+                "title": "The Learning Child",
+                "description": "Think of reinforcement learning like a child learning to ride a bicycle. The child (agent) interacts with the bicycle and environment (state), making various actions (steering, pedaling). They receive feedback (rewards) in the form of staying upright (positive) or falling (negative). Through trial and error, they learn the best actions for different situations.",
+                "points": [
+                    "The child is like the RL agent making decisions",
+                    "The bicycle and surroundings represent the environment state",
+                    "Actions like pedaling and steering are the agent's choices",
+                    "Staying upright or falling are like rewards and penalties"
+                ]
+            },
+            "technical_example": "import gym\nimport numpy as np\n\nclass SimpleQLearningAgent:\n    def __init__(self, n_states, n_actions, learning_rate=0.1, discount=0.95):\n        self.q_table = np.zeros((n_states, n_actions))\n        self.lr = learning_rate\n        self.gamma = discount\n    \n    def choose_action(self, state, epsilon=0.1):\n        # Epsilon-greedy action selection\n        if np.random.random() < epsilon:\n            return np.random.randint(self.q_table.shape[1])\n        return np.argmax(self.q_table[state])\n    \n    def learn(self, state, action, reward, next_state):\n        # Q-learning update rule\n        old_value = self.q_table[state, action]\n        next_max = np.max(self.q_table[next_state])\n        \n        # Update Q-value using Bellman equation\n        new_value = (1 - self.lr) * old_value + self.lr * (\n            reward + self.gamma * next_max\n        )\n        self.q_table[state, action] = new_value\n\n# Example usage\nenv = gym.make('FrozenLake-v1')\nagent = SimpleQLearningAgent(\n    n_states=env.observation_space.n,\n    n_actions=env.action_space.n\n)\n\n# Training loop\nfor episode in range(1000):\n    state = env.reset()\n    done = False\n    \n    while not done:\n        action = agent.choose_action(state)\n        next_state, reward, done, _ = env.step(action)\n        agent.learn(state, action, reward, next_state)\n        state = next_state",
+            "quiz": {
+                "question": "What is the main goal of a reinforcement learning agent?",
+                "options": {
+                    "a": "To classify data accurately",
+                    "b": "To maximize cumulative rewards over time",
+                    "c": "To minimize memory usage",
+                    "d": "To process data quickly"
+                },
+                "correct": "b",
+                "explanation": "The primary goal of a reinforcement learning agent is to learn a policy that maximizes the cumulative rewards it receives over time through interaction with its environment."
+            }
+        },
+        {
+            "title": "States and Actions",
+            "explanation": "In reinforcement learning, states represent the current situation of the environment, while actions are the possible choices an agent can make. Understanding this state-action relationship is fundamental to RL.",
+            "metaphor": {
+                "title": "The Chess Player",
+                "description": "Think of states and actions like playing chess. The arrangement of pieces on the board represents the state, while the possible moves represent actions. Just as a chess player learns which moves are best in different board positions, an RL agent learns which actions are best in different states.",
+                "points": [
+                    "Board positions are like environment states",
+                    "Possible moves are like available actions",
+                    "Move selection is like the agent's policy",
+                    "Winning probability is like expected reward"
+                ]
+            },
+            "technical_example": "import numpy as np\nfrom typing import List, Tuple\n\nclass GridWorldEnvironment:\n    def __init__(self, size: int = 4):\n        self.size = size\n        self.state = 0  # Start at top-left corner\n        self.goal = size * size - 1  # Bottom-right corner\n    \n    def get_state_space(self) -> int:\n        return self.size * self.size\n    \n    def get_action_space(self) -> List[str]:\n        return ['up', 'right', 'down', 'left']\n    \n    def get_valid_actions(self, state: int) -> List[str]:\n        actions = []\n        row, col = state // self.size, state % self.size\n        \n        # Check each direction\n        if row > 0:\n            actions.append('up')\n        if col < self.size - 1:\n            actions.append('right')\n        if row < self.size - 1:\n            actions.append('down')\n        if col > 0:\n            actions.append('left')\n        \n        return actions\n    \n    def step(self, action: str) -> Tuple[int, float, bool]:\n        row, col = self.state // self.size, self.state % self.size\n        \n        # Apply action\n        if action == 'up' and row > 0:\n            row -= 1\n        elif action == 'right' and col < self.size - 1:\n            col += 1\n        elif action == 'down' and row < self.size - 1:\n            row += 1\n        elif action == 'left' and col > 0:\n            col -= 1\n        \n        # Update state\n        self.state = row * self.size + col\n        \n        # Check if goal reached\n        done = self.state == self.goal\n        reward = 1.0 if done else 0.0\n        \n        return self.state, reward, done\n    \n    def reset(self) -> int:\n        self.state = 0\n        return self.state\n\n# Example usage\nenv = GridWorldEnvironment(4)\nstate = env.reset()\n\nprint(f\"Initial state: {state}\")\nprint(f\"Valid actions: {env.get_valid_actions(state)}\")\n\n# Take a step\naction = 'right'\nnext_state, reward, done = env.step(action)\nprint(f\"After moving {action}:\")\nprint(f\"New state: {next_state}\")\nprint(f\"Reward: {reward}\")\nprint(f\"Done: {done}\")",
+            "quiz": {
+                "question": "What is the relationship between states and actions in RL?",
+                "options": {
+                    "a": "States determine which actions are possible",
+                    "b": "Actions determine the state space",
+                    "c": "States and actions are always independent",
+                    "d": "Actions have no effect on states"
+                },
+                "correct": "a",
+                "explanation": "States represent the current situation and determine which actions are possible. The agent learns to select appropriate actions based on the current state to maximize rewards."
+            }
+        },
+        {
+            "title": "Exploration vs. Exploitation",
+            "explanation": "The exploration-exploitation trade-off is a fundamental challenge in reinforcement learning. Agents must balance exploring new actions to discover better strategies with exploiting known good actions to maximize rewards.",
+            "metaphor": {
+                "title": "The Restaurant Dilemma",
+                "description": "Think of the exploration-exploitation trade-off like choosing where to eat. You can either explore new restaurants (potentially finding better ones but risking disappointment) or exploit your favorite restaurant (guaranteed satisfaction but possibly missing better options). This is similar to how RL agents must balance trying new actions versus sticking with proven ones.",
+                "points": [
+                    "Trying new restaurants is like exploration",
+                    "Returning to favorites is like exploitation",
+                    "Reviews are like reward signals",
+                    "Restaurant choice strategy is like the agent's policy"
+                ]
+            },
+            "technical_example": "import numpy as np\nfrom typing import List\n\nclass MultiArmedBandit:\n    def __init__(self, n_arms: int):\n        # True reward probabilities (unknown to agent)\n        self.true_rewards = np.random.normal(0, 1, n_arms)\n        self.n_arms = n_arms\n        \n        # Initialize estimates and counts\n        self.value_estimates = np.zeros(n_arms)\n        self.action_counts = np.zeros(n_arms)\n    \n    def get_reward(self, action: int) -> float:\n        # Simulate reward with some noise\n        return np.random.normal(self.true_rewards[action], 0.1)\n    \n    def epsilon_greedy(self, epsilon: float) -> int:\n        # Exploration\n        if np.random.random() < epsilon:\n            return np.random.randint(self.n_arms)\n        \n        # Exploitation\n        return np.argmax(self.value_estimates)\n    \n    def ucb(self, c: float) -> int:\n        # Upper Confidence Bound action selection\n        total_counts = np.sum(self.action_counts) + 1\n        ucb_values = self.value_estimates + c * np.sqrt(\n            np.log(total_counts) / (self.action_counts + 1e-5)\n        )\n        return np.argmax(ucb_values)\n    \n    def thompson_sampling(self) -> int:\n        # Thompson Sampling action selection\n        samples = np.random.normal(\n            self.value_estimates,\n            1.0 / np.sqrt(self.action_counts + 1)\n        )\n        return np.argmax(samples)\n    \n    def update(self, action: int, reward: float):\n        # Update estimates using incremental average\n        self.action_counts[action] += 1\n        n = self.action_counts[action]\n        self.value_estimates[action] += (\n            reward - self.value_estimates[action]\n        ) / n\n\n# Example usage\nbandit = MultiArmedBandit(10)\nrewards = []\n\n# Try different strategies\nstrategies = {\n    'epsilon_greedy': lambda: bandit.epsilon_greedy(0.1),\n    'ucb': lambda: bandit.ucb(2.0),\n    'thompson': lambda: bandit.thompson_sampling()\n}\n\nfor strategy_name, strategy in strategies.items():\n    print(f\"\\nTesting {strategy_name}:\")\n    total_reward = 0\n    \n    for t in range(1000):\n        action = strategy()\n        reward = bandit.get_reward(action)\n        bandit.update(action, reward)\n        total_reward += reward\n    \n    print(f\"Average reward: {total_reward/1000:.3f}\")\n    print(f\"Best arm found: {np.argmax(bandit.value_estimates)}\")",
+            "quiz": {
+                "question": "Why is the exploration-exploitation trade-off important in RL?",
+                "options": {
+                    "a": "It helps reduce memory usage",
+                    "b": "It balances finding new strategies with using proven ones",
+                    "c": "It makes the code run faster",
+                    "d": "It simplifies the learning process"
+                },
+                "correct": "b",
+                "explanation": "The exploration-exploitation trade-off is crucial because agents need to balance discovering potentially better strategies (exploration) with using known effective strategies (exploitation) to maximize long-term rewards."
+            }
+        }
+    ],
+    "key_takeaways": [
+        "Reinforcement learning involves agents learning through interaction with environments",
+        "States and actions form the foundation of decision-making in RL",
+        "The exploration-exploitation trade-off is crucial for effective learning",
+        "Different strategies can be used to balance exploration and exploitation"
+    ],
+    "prev_module": null,
+    "next_module": "rl-002"
+}
