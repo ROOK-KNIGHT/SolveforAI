@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision Fundamentals | Computer Vision Specialist</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/module.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>Computer Vision Fundamentals</h1>
+            <p class="module-description">Learn the foundational concepts of computer vision, including image representation, basic image processing techniques, and how computers interpret visual information.</p>
+        </section>
+
+        <!-- Digital Image Basics Section -->
+        <section class="concept-section">
+            <h2>Digital Image Basics</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Digital images are represented as matrices of numbers, where each element (pixel) contains color or intensity information. Understanding this fundamental representation is crucial for working with computer vision algorithms.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Mosaic Artist</h3>
+                <p>Think of a digital image like a mosaic artwork. Just as a mosaic is made up of small colored tiles arranged in a grid, a digital image is composed of pixels arranged in rows and columns. The artist (computer) can analyze the color and arrangement of each tile (pixel) to understand the overall picture.</p>
+                <ul>
+                    <li>Pixels are like individual mosaic tiles</li>
+                    <li>Image resolution is like the size of the mosaic grid</li>
+                    <li>Color channels are like different types of colored tiles</li>
+                    <li>Image processing is like rearranging or modifying tiles</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import numpy as np
+import cv2
+
+def explore_image(image_path):
+    # Read image
+    img = cv2.imread(image_path)
+    
+    # Convert BGR to RGB (OpenCV uses BGR by default)
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    
+    # Get image properties
+    height, width = img.shape[:2]
+    channels = img.shape[2] if len(img.shape) > 2 else 1
+    
+    # Get pixel information
+    center_pixel = img[height//2, width//2]
+    
+    return {
+        'dimensions': (height, width),
+        'channels': channels,
+        'center_pixel_values': center_pixel,
+        'total_pixels': height * width
+    }
+
+# Example usage
+image_info = explore_image('sample.jpg')
+print(f"Image size: {image_info['dimensions']}")
+print(f"Number of channels: {image_info['channels']}")
+print(f"Center pixel RGB values: {image_info['center_pixel_values']}")</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is a pixel in a digital image?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q1" value="a">
+                            A type of digital camera
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            The smallest unit of a digital image containing color/intensity information
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            A file format for images
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            A type of image compression
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Color Spaces and Channels Section -->
+        <section class="concept-section">
+            <h2>Color Spaces and Channels</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Color spaces are different ways of representing color in digital images. Common color spaces include RGB (Red, Green, Blue), HSV (Hue, Saturation, Value), and grayscale. Each has specific uses in computer vision applications.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Paint Mixer</h3>
+                <p>Think of color spaces like different systems for mixing paint. RGB is like having three primary color paints (red, green, blue) and mixing them in different amounts. HSV is like describing a color by its pure color (hue), how vivid it is (saturation), and how light or dark it is (value).</p>
+                <ul>
+                    <li>RGB channels are like primary color paints</li>
+                    <li>HSV is like a painter's way of describing colors</li>
+                    <li>Grayscale is like using only black and white paint</li>
+                    <li>Color conversion is like following different mixing recipes</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import cv2
+import numpy as np
+
+def explore_color_spaces(image_path):
+    # Read image
+    img = cv2.imread(image_path)
+    
+    # Convert to different color spaces
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Split channels
+    r, g, b = cv2.split(rgb)
+    h, s, v = cv2.split(hsv)
+    
+    def get_channel_stats(channel):
+        return {
+            'min': np.min(channel),
+            'max': np.max(channel),
+            'mean': np.mean(channel)
+        }
+    
+    return {
+        'rgb_stats': {
+            'red': get_channel_stats(r),
+            'green': get_channel_stats(g),
+            'blue': get_channel_stats(b)
+        },
+        'hsv_stats': {
+            'hue': get_channel_stats(h),
+            'saturation': get_channel_stats(s),
+            'value': get_channel_stats(v)
+        },
+        'grayscale_stats': get_channel_stats(gray)
+    }
+
+# Example usage
+color_info = explore_color_spaces('sample.jpg')
+print("RGB Channel Statistics:")
+print(color_info['rgb_stats'])</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Why might you convert an image from RGB to HSV color space?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q2" value="a">
+                            To make the image smaller
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="b">
+                            To make color-based object detection more robust to lighting changes
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            To improve image quality
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="d">
+                            To compress the image
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Basic Image Processing Section -->
+        <section class="concept-section">
+            <h2>Basic Image Processing</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Basic image processing operations modify pixel values to enhance images or extract useful information. Common operations include filtering, thresholding, and edge detection.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Photo Editor</h3>
+                <p>Think of image processing like a photo editor adjusting a photograph. Just as an editor might adjust brightness, contrast, or apply filters to enhance certain features, computer vision algorithms apply mathematical operations to modify or analyze images.</p>
+                <ul>
+                    <li>Filtering is like using photo editing tools</li>
+                    <li>Thresholding is like converting to black and white</li>
+                    <li>Edge detection is like tracing the outlines</li>
+                    <li>Noise reduction is like smoothing rough areas</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">import cv2
+import numpy as np
+
+def basic_processing(image_path):
+    # Read image
+    img = cv2.imread(image_path)
+    
+    # Convert to grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Apply Gaussian blur
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    
+    # Apply binary thresholding
+    _, thresh = cv2.threshold(blurred, 127, 255, cv2.THRESH_BINARY)
+    
+    # Detect edges using Canny
+    edges = cv2.Canny(blurred, 100, 200)
+    
+    # Apply basic morphological operations
+    kernel = np.ones((5,5), np.uint8)
+    dilated = cv2.dilate(thresh, kernel, iterations=1)
+    eroded = cv2.erode(thresh, kernel, iterations=1)
+    
+    return {
+        'original': img,
+        'grayscale': gray,
+        'blurred': blurred,
+        'threshold': thresh,
+        'edges': edges,
+        'dilated': dilated,
+        'eroded': eroded
+    }
+
+# Example usage
+processed_images = basic_processing('sample.jpg')
+# Display or save the processed images as needed</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the purpose of applying a Gaussian blur to an image?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q3" value="a">
+                            To make the image sharper
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="b">
+                            To reduce noise and smooth the image
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="c">
+                            To detect edges
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            To increase image contrast
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Digital images are represented as matrices of pixels containing color or intensity information</li>
+                <li>Different color spaces provide different ways of representing and analyzing color information</li>
+                <li>Basic image processing operations can enhance images or extract useful features</li>
+                <li>Understanding these fundamentals is crucial for more advanced computer vision tasks</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="cv-002">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "cv-001",
+        path: "computer-vision",
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to MLOps | MLOps & Deployment</title>
+    
+    <!-- Font imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/module.css">
+
+    <!-- Code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-indicator">
+        <div class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <main class="module-content">
+        <!-- Module Header -->
+        <section class="module-header">
+            <h1>Introduction to MLOps</h1>
+            <p class="module-description">Learn the fundamentals of MLOps, including the machine learning lifecycle, deployment strategies, and best practices for operationalizing ML models.</p>
+        </section>
+
+        <!-- Understanding MLOps Section -->
+        <section class="concept-section">
+            <h2>Understanding MLOps</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>MLOps (Machine Learning Operations) combines machine learning, DevOps, and data engineering to streamline the process of taking machine learning models to production and maintaining them over time.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The AI Factory</h3>
+                <p>Think of MLOps like running a modern factory that produces AI models. Just as a factory needs assembly lines, quality control, and maintenance schedules, MLOps provides the infrastructure and processes to consistently produce, deploy, and maintain high-quality ML models.</p>
+                <ul>
+                    <li>Model development is like product design and prototyping</li>
+                    <li>Testing and validation are like quality control checkpoints</li>
+                    <li>Deployment pipelines are like assembly lines</li>
+                    <li>Monitoring systems are like factory sensors and alarms</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="yaml"># Example MLOps pipeline configuration
+pipeline:
+  name: ml-model-pipeline
+  stages:
+    - name: data-validation
+      script: validate_data.py
+      params:
+        data_path: data/training
+        schema_path: schemas/data_schema.json
+    
+    - name: model-training
+      script: train_model.py
+      params:
+        model_type: xgboost
+        hyperparams:
+          max_depth: 6
+          learning_rate: 0.1
+    
+    - name: model-evaluation
+      script: evaluate_model.py
+      params:
+        metrics: [accuracy, f1_score, precision, recall]
+        threshold: 0.85
+    
+    - name: model-deployment
+      script: deploy_model.py
+      params:
+        deployment_type: kubernetes
+        replicas: 3
+        resources:
+          cpu: '1'
+          memory: '2Gi'</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the primary goal of MLOps?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q1" value="a">
+                            To create new machine learning algorithms
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            To streamline the deployment and maintenance of ML models in production
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            To collect more training data
+                        </label>
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            To make models train faster
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ML Model Lifecycle Section -->
+        <section class="concept-section">
+            <h2>ML Model Lifecycle</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>The machine learning lifecycle encompasses all stages from data collection to model retirement, including development, testing, deployment, monitoring, and updates. Understanding this lifecycle is crucial for effective MLOps.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Product Lifecycle</h3>
+                <p>Think of an ML model like a product going through its lifecycle. Just as products go through design, manufacturing, launch, maintenance, and eventual retirement, ML models follow a similar path from development to deployment to monitoring and updates.</p>
+                <ul>
+                    <li>Data collection is like gathering raw materials</li>
+                    <li>Model development is like product design and testing</li>
+                    <li>Deployment is like product launch</li>
+                    <li>Monitoring and updates are like product maintenance</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">from mlflow import log_metric, log_param, log_model
+from sklearn.model_selection import train_test_split
+from datetime import datetime
+
+class ModelLifecycleManager:
+    def __init__(self, model_name, version):
+        self.model_name = model_name
+        self.version = version
+        self.lifecycle_stage = 'development'
+    
+    def track_experiment(self, params, metrics):
+        # Log parameters and metrics
+        for param_name, value in params.items():
+            log_param(param_name, value)
+        
+        for metric_name, value in metrics.items():
+            log_metric(metric_name, value)
+    
+    def prepare_deployment(self, model, requirements):
+        # Save model and requirements
+        log_model(
+            model,
+            'model',
+            registered_model_name=self.model_name
+        )
+        
+        # Update metadata
+        metadata = {
+            'name': self.model_name,
+            'version': self.version,
+            'deployed_at': datetime.now().isoformat(),
+            'requirements': requirements
+        }
+        
+        return metadata
+    
+    def monitor_health(self, metrics_threshold):
+        # Check model health
+        current_metrics = self.get_current_metrics()
+        alerts = []
+        
+        for metric, threshold in metrics_threshold.items():
+            if current_metrics[metric] < threshold:
+                alerts.append(f'{metric} below threshold')
+        
+        return {
+            'status': 'healthy' if not alerts else 'degraded',
+            'alerts': alerts
+        }</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>Which stage of the ML lifecycle involves monitoring model performance in production?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q2" value="a">
+                            Development stage
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="b">
+                            Training stage
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="c">
+                            Deployment stage
+                        </label>
+                        <label>
+                            <input type="radio" name="q2" value="d">
+                            Maintenance stage
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deployment Strategies Section -->
+        <section class="concept-section">
+            <h2>Deployment Strategies</h2>
+            
+            <div class="concept-explanation">
+                <h3>The Core Idea</h3>
+                <p>Different strategies for deploying ML models to production, including canary deployments, blue-green deployments, and shadow deployments. Each strategy has its own benefits and use cases.</p>
+            </div>
+
+            <div class="metaphor-box">
+                <h3>The Restaurant Menu Update</h3>
+                <p>Think of deploying ML models like a restaurant updating its menu. Just as a restaurant might test new dishes with a few customers (canary), maintain two menus and switch between them (blue-green), or prepare new dishes alongside existing ones (shadow), ML deployments use similar strategies to minimize risk.</p>
+                <ul>
+                    <li>Canary deployment is like offering new dishes to select customers</li>
+                    <li>Blue-green is like having two complete menus ready to switch</li>
+                    <li>Shadow deployment is like preparing new dishes without serving them</li>
+                    <li>Rollback is like reverting to the previous menu</li>
+                </ul>
+            </div>
+
+            <div class="technical-example">
+                <h3>Technical Implementation</h3>
+                <pre><code class="python">from kubernetes import client, config
+from datetime import datetime
+
+class ModelDeployment:
+    def __init__(self, model_name, version):
+        self.model_name = model_name
+        self.version = version
+        config.load_kube_config()
+        self.api = client.AppsV1Api()
+    
+    def canary_deployment(self, percentage=10):
+        # Deploy new version to small percentage of traffic
+        new_deployment = self._create_deployment_object(
+            name=f'{self.model_name}-{self.version}',
+            replicas=1
+        )
+        
+        # Update service to split traffic
+        service = self._update_service_weights(
+            new_version_weight=percentage,
+            old_version_weight=100-percentage
+        )
+        
+        return {
+            'deployment': new_deployment,
+            'service': service,
+            'traffic_split': f'{percentage}% new, {100-percentage}% old'
+        }
+    
+    def blue_green_deployment(self):
+        # Deploy new version alongside old version
+        new_deployment = self._create_deployment_object(
+            name=f'{self.model_name}-{self.version}-green',
+            replicas=3
+        )
+        
+        # Wait for new deployment to be ready
+        self._wait_for_deployment(new_deployment.metadata.name)
+        
+        # Switch traffic to new version
+        service = self._update_service_selector(
+            new_version=self.version
+        )
+        
+        return {
+            'deployment': new_deployment,
+            'service': service,
+            'status': 'switched to green'
+        }
+    
+    def shadow_deployment(self):
+        # Deploy new version without receiving production traffic
+        shadow_deployment = self._create_deployment_object(
+            name=f'{self.model_name}-{self.version}-shadow',
+            replicas=1
+        )
+        
+        # Configure traffic mirroring
+        self._setup_traffic_mirror(
+            source=f'{self.model_name}-prod',
+            target=shadow_deployment.metadata.name
+        )
+        
+        return {
+            'deployment': shadow_deployment,
+            'status': 'receiving mirrored traffic'
+        }</code></pre>
+            </div>
+
+            <div class="concept-quiz">
+                <h3>Quick Check</h3>
+                <div class="quiz-question">
+                    <p>What is the main advantage of a canary deployment?</p>
+                    <form>
+                        <label>
+                            <input type="radio" name="q3" value="a">
+                            It's faster than other deployment methods
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="b">
+                            It reduces server costs
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="c">
+                            It allows testing with a small subset of users before full deployment
+                        </label>
+                        <label>
+                            <input type="radio" name="q3" value="d">
+                            It improves model accuracy
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Summary -->
+        <section class="module-summary">
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>MLOps combines ML, DevOps, and data engineering to streamline model deployment and maintenance</li>
+                <li>The ML lifecycle requires careful management from development through deployment to retirement</li>
+                <li>Different deployment strategies offer various trade-offs between risk and complexity</li>
+                <li>Monitoring and maintenance are crucial for long-term model success</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <section class="module-navigation">
+            <button class="btn btn-primary next-module" data-module="mlops-002">Continue to Next Module</button>
+            <button class="btn btn-secondary save-progress">Save Progress</button>
+        </section>
+    </main>
+
+    <!-- Module Data -->
+    <script>
+    const moduleData = {
+        id: "mlops-001",
+        path: "mlops",
+        progress: 0
+    };
+    </script>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/module.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
