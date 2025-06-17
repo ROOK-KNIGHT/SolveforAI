@@ -1,0 +1,18 @@
+{
+  "id": "test-module",
+  "title": "Test Module for Git Integration",
+  "description": "A test module to validate git operations",
+  "content": {
+    "sections": [
+      {
+        "title": "Introduction",
+        "content": "This is a test section"
+      }
+    ]
+  },
+  "metadata": {
+    "created": "2025-06-17T21:55:21.430Z",
+    "type": "test",
+    "category": "testing"
+  }
+}
