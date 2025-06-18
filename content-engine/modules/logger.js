@@ -83,13 +83,20 @@ async function log(level, message) {
                           level === 'DEBUG' ? 'debug' : 'log';
     console[consoleMethod](`[${level}] ${message}`);
     
+    // Initialize logger if not already done
+    if (!logFilePath) {
+      await init();
+    }
+    
     try {
-      // Write to main log file
-      await fs.appendFile(logFilePath, logEntry);
-      
-      // Also write errors to error log
-      if (level === 'ERROR') {
-        await fs.appendFile(errorLogFilePath, logEntry);
+      // Write to main log file (only if paths are available)
+      if (logFilePath) {
+        await fs.appendFile(logFilePath, logEntry);
+        
+        // Also write errors to error log
+        if (level === 'ERROR' && errorLogFilePath) {
+          await fs.appendFile(errorLogFilePath, logEntry);
+        }
       }
     } catch (error) {
       console.error(`Failed to write to log file: ${error.message}`);

@@ -1,0 +1,95 @@
+{
+    "module_id": "mlops-001",
+    "module_title": "Introduction to MLOps",
+    "module_description": "Learn the fundamentals of MLOps, including the machine learning lifecycle, deployment strategies, and best practices for operationalizing ML models.",
+    "learning_path": "mlops",
+    "progress_percentage": 0,
+    "concepts": [
+        {
+            "title": "Understanding MLOps",
+            "explanation": "MLOps (Machine Learning Operations) combines machine learning, DevOps, and data engineering to streamline the process of taking machine learning models to production and maintaining them over time.",
+            "metaphor": {
+                "title": "The AI Factory",
+                "description": "Think of MLOps like running a modern factory that produces AI models. Just as a factory needs assembly lines, quality control, and maintenance schedules, MLOps provides the infrastructure and processes to consistently produce, deploy, and maintain high-quality ML models.",
+                "points": [
+                    "Model development is like product design and prototyping",
+                    "Testing and validation are like quality control checkpoints",
+                    "Deployment pipelines are like assembly lines",
+                    "Monitoring systems are like factory sensors and alarms"
+                ]
+            },
+            "technical_example": "# Example MLOps pipeline configuration\npipeline:\n  name: ml-model-pipeline\n  stages:\n    - name: data-validation\n      script: validate_data.py\n      params:\n        data_path: data/training\n        schema_path: schemas/data_schema.json\n    \n    - name: model-training\n      script: train_model.py\n      params:\n        model_type: xgboost\n        hyperparams:\n          max_depth: 6\n          learning_rate: 0.1\n    \n    - name: model-evaluation\n      script: evaluate_model.py\n      params:\n        metrics: [accuracy, f1_score, precision, recall]\n        threshold: 0.85\n    \n    - name: model-deployment\n      script: deploy_model.py\n      params:\n        deployment_type: kubernetes\n        replicas: 3\n        resources:\n          cpu: '1'\n          memory: '2Gi'",
+            "quiz": {
+                "question": "What is the primary goal of MLOps?",
+                "options": {
+                    "a": "To create new machine learning algorithms",
+                    "b": "To streamline the deployment and maintenance of ML models in production",
+                    "c": "To collect more training data",
+                    "d": "To make models train faster"
+                },
+                "correct": "b",
+                "explanation": "MLOps aims to streamline and automate the process of deploying and maintaining machine learning models in production, ensuring reliability, scalability, and maintainability."
+            }
+        },
+        {
+            "title": "ML Model Lifecycle",
+            "explanation": "The machine learning lifecycle encompasses all stages from data collection to model retirement, including development, testing, deployment, monitoring, and updates. Understanding this lifecycle is crucial for effective MLOps.",
+            "metaphor": {
+                "title": "The Product Lifecycle",
+                "description": "Think of an ML model like a product going through its lifecycle. Just as products go through design, manufacturing, launch, maintenance, and eventual retirement, ML models follow a similar path from development to deployment to monitoring and updates.",
+                "points": [
+                    "Data collection is like gathering raw materials",
+                    "Model development is like product design and testing",
+                    "Deployment is like product launch",
+                    "Monitoring and updates are like product maintenance"
+                ]
+            },
+            "technical_example": "from mlflow import log_metric, log_param, log_model\nfrom sklearn.model_selection import train_test_split\nfrom datetime import datetime\n\nclass ModelLifecycleManager:\n    def __init__(self, model_name, version):\n        self.model_name = model_name\n        self.version = version\n        self.lifecycle_stage = 'development'\n    \n    def track_experiment(self, params, metrics):\n        # Log parameters and metrics\n        for param_name, value in params.items():\n            log_param(param_name, value)\n        \n        for metric_name, value in metrics.items():\n            log_metric(metric_name, value)\n    \n    def prepare_deployment(self, model, requirements):\n        # Save model and requirements\n        log_model(\n            model,\n            'model',\n            registered_model_name=self.model_name\n        )\n        \n        # Update metadata\n        metadata = {\n            'name': self.model_name,\n            'version': self.version,\n            'deployed_at': datetime.now().isoformat(),\n            'requirements': requirements\n        }\n        \n        return metadata\n    \n    def monitor_health(self, metrics_threshold):\n        # Check model health\n        current_metrics = self.get_current_metrics()\n        alerts = []\n        \n        for metric, threshold in metrics_threshold.items():\n            if current_metrics[metric] < threshold:\n                alerts.append(f'{metric} below threshold')\n        \n        return {\n            'status': 'healthy' if not alerts else 'degraded',\n            'alerts': alerts\n        }",
+            "quiz": {
+                "question": "Which stage of the ML lifecycle involves monitoring model performance in production?",
+                "options": {
+                    "a": "Development stage",
+                    "b": "Training stage",
+                    "c": "Deployment stage",
+                    "d": "Maintenance stage"
+                },
+                "correct": "d",
+                "explanation": "The maintenance stage involves monitoring model performance in production, detecting degradation, and determining when updates or retraining are needed."
+            }
+        },
+        {
+            "title": "Deployment Strategies",
+            "explanation": "Different strategies for deploying ML models to production, including canary deployments, blue-green deployments, and shadow deployments. Each strategy has its own benefits and use cases.",
+            "metaphor": {
+                "title": "The Restaurant Menu Update",
+                "description": "Think of deploying ML models like a restaurant updating its menu. Just as a restaurant might test new dishes with a few customers (canary), maintain two menus and switch between them (blue-green), or prepare new dishes alongside existing ones (shadow), ML deployments use similar strategies to minimize risk.",
+                "points": [
+                    "Canary deployment is like offering new dishes to select customers",
+                    "Blue-green is like having two complete menus ready to switch",
+                    "Shadow deployment is like preparing new dishes without serving them",
+                    "Rollback is like reverting to the previous menu"
+                ]
+            },
+            "technical_example": "from kubernetes import client, config\nfrom datetime import datetime\n\nclass ModelDeployment:\n    def __init__(self, model_name, version):\n        self.model_name = model_name\n        self.version = version\n        config.load_kube_config()\n        self.api = client.AppsV1Api()\n    \n    def canary_deployment(self, percentage=10):\n        # Deploy new version to small percentage of traffic\n        new_deployment = self._create_deployment_object(\n            name=f'{self.model_name}-{self.version}',\n            replicas=1\n        )\n        \n        # Update service to split traffic\n        service = self._update_service_weights(\n            new_version_weight=percentage,\n            old_version_weight=100-percentage\n        )\n        \n        return {\n            'deployment': new_deployment,\n            'service': service,\n            'traffic_split': f'{percentage}% new, {100-percentage}% old'\n        }\n    \n    def blue_green_deployment(self):\n        # Deploy new version alongside old version\n        new_deployment = self._create_deployment_object(\n            name=f'{self.model_name}-{self.version}-green',\n            replicas=3\n        )\n        \n        # Wait for new deployment to be ready\n        self._wait_for_deployment(new_deployment.metadata.name)\n        \n        # Switch traffic to new version\n        service = self._update_service_selector(\n            new_version=self.version\n        )\n        \n        return {\n            'deployment': new_deployment,\n            'service': service,\n            'status': 'switched to green'\n        }\n    \n    def shadow_deployment(self):\n        # Deploy new version without receiving production traffic\n        shadow_deployment = self._create_deployment_object(\n            name=f'{self.model_name}-{self.version}-shadow',\n            replicas=1\n        )\n        \n        # Configure traffic mirroring\n        self._setup_traffic_mirror(\n            source=f'{self.model_name}-prod',\n            target=shadow_deployment.metadata.name\n        )\n        \n        return {\n            'deployment': shadow_deployment,\n            'status': 'receiving mirrored traffic'\n        }",
+            "quiz": {
+                "question": "What is the main advantage of a canary deployment?",
+                "options": {
+                    "a": "It's faster than other deployment methods",
+                    "b": "It reduces server costs",
+                    "c": "It allows testing with a small subset of users before full deployment",
+                    "d": "It improves model accuracy"
+                },
+                "correct": "c",
+                "explanation": "Canary deployments allow you to test a new model version with a small percentage of users, minimizing risk and allowing you to detect issues before affecting all users."
+            }
+        }
+    ],
+    "key_takeaways": [
+        "MLOps combines ML, DevOps, and data engineering to streamline model deployment and maintenance",
+        "The ML lifecycle requires careful management from development through deployment to retirement",
+        "Different deployment strategies offer various trade-offs between risk and complexity",
+        "Monitoring and maintenance are crucial for long-term model success"
+    ],
+    "prev_module": null,
+    "next_module": "mlops-002"
+}

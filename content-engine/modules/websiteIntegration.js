@@ -8,6 +8,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const config = require('../config/config');
 const logger = require('./logger');
+const gitManager = require('./gitManager');
 
 /**
  * Upload content to the website
@@ -38,6 +39,9 @@ async function uploadContent(localPath, metadata) {
     
     // Update sitemap if needed
     await updateSitemap(metadata);
+    
+    // Deploy content via git
+    await deployContentWithGit(metadata, [destPath]);
     
     // Determine the public URL
     const publicUrl = `${config.website.domain}/tutorials/${filename}`;
@@ -454,10 +458,47 @@ async function updateHomepage(metadata) {
   }
 }
 
+/**
+ * Deploy content using git integration
+ * @param {object} metadata - Content metadata
+ * @param {Array} files - Array of file paths to deploy
+ * @returns {boolean} Success indicator
+ */
+async function deployContentWithGit(metadata, files = []) {
+  try {
+    logger.info(`Deploying content with git: ${metadata.title}`);
+    
+    // Use git manager to deploy content
+    const gitResult = await gitManager.deployContent(
+      metadata.category || 'tutorial',
+      metadata.title,
+      files,
+      {
+        prefix: config.git.commitPrefix || 'content',
+        action: 'add'
+      }
+    );
+    
+    if (gitResult.success) {
+      logger.info(`Successfully deployed content via git: ${metadata.title}`);
+      return true;
+    } else {
+      logger.warn(`Git deployment partially failed: ${gitResult.error}`);
+      // Don't throw error as content is still uploaded, just git failed
+      return false;
+    }
+  } catch (error) {
+    logger.error(`Git deployment failed: ${error.message}`);
+    // Don't throw error as content is still uploaded, just git failed
+    return false;
+  }
+}
+
 module.exports = {
   uploadContent,
   updateTutorialIndex,
   updateSitemap,
   copyImagesToWebsite,
-  updateHomepage
+  updateHomepage,
+  deployContentWithGit
 };

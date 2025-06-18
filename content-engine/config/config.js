@@ -67,5 +67,15 @@ module.exports = {
       width: 1200,
       height: 630
     }
+  },
+  
+  // Git integration settings
+  git: {
+    autoPush: true, // Enable automatic git push after content creation
+    remote: 'origin', // Default remote name
+    branch: 'main', // Default branch name
+    commitPrefix: 'content', // Prefix for commit messages
+    maxRetries: 3, // Maximum retries for git operations
+    retryDelay: 1000 // Delay between retries in milliseconds
   }
 };

@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  apiKey: process.env.OPENAI_API_KEY || 'your-openai-api-key',
+  apiKey: process.env.OPENAI_API_KEY || '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',
   organization: process.env.OPENAI_ORGANIZATION || '',
   
   // Default models to use for different purposes

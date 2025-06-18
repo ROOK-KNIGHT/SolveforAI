@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  apiKey: process.env.ANTHROPIC_API_KEY || 'your-anthropic-api-key',
+  apiKey: process.env.ANTHROPIC_API_KEY || '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',
   
   // Default models to use for different purposes
   models: {

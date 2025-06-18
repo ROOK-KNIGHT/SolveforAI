@@ -1,0 +1,95 @@
+{
+    "module_id": "cv-001",
+    "module_title": "Computer Vision Fundamentals",
+    "module_description": "Learn the foundational concepts of computer vision, including image representation, basic image processing techniques, and how computers interpret visual information.",
+    "learning_path": "computer-vision",
+    "progress_percentage": 0,
+    "concepts": [
+        {
+            "title": "Digital Image Basics",
+            "explanation": "Digital images are represented as matrices of numbers, where each element (pixel) contains color or intensity information. Understanding this fundamental representation is crucial for working with computer vision algorithms.",
+            "metaphor": {
+                "title": "The Mosaic Artist",
+                "description": "Think of a digital image like a mosaic artwork. Just as a mosaic is made up of small colored tiles arranged in a grid, a digital image is composed of pixels arranged in rows and columns. The artist (computer) can analyze the color and arrangement of each tile (pixel) to understand the overall picture.",
+                "points": [
+                    "Pixels are like individual mosaic tiles",
+                    "Image resolution is like the size of the mosaic grid",
+                    "Color channels are like different types of colored tiles",
+                    "Image processing is like rearranging or modifying tiles"
+                ]
+            },
+            "technical_example": "import numpy as np\nimport cv2\n\ndef explore_image(image_path):\n    # Read image\n    img = cv2.imread(image_path)\n    \n    # Convert BGR to RGB (OpenCV uses BGR by default)\n    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)\n    \n    # Get image properties\n    height, width = img.shape[:2]\n    channels = img.shape[2] if len(img.shape) > 2 else 1\n    \n    # Get pixel information\n    center_pixel = img[height//2, width//2]\n    \n    return {\n        'dimensions': (height, width),\n        'channels': channels,\n        'center_pixel_values': center_pixel,\n        'total_pixels': height * width\n    }\n\n# Example usage\nimage_info = explore_image('sample.jpg')\nprint(f\"Image size: {image_info['dimensions']}\")\nprint(f\"Number of channels: {image_info['channels']}\")\nprint(f\"Center pixel RGB values: {image_info['center_pixel_values']}\")",
+            "quiz": {
+                "question": "What is a pixel in a digital image?",
+                "options": {
+                    "a": "A type of digital camera",
+                    "b": "The smallest unit of a digital image containing color/intensity information",
+                    "c": "A file format for images",
+                    "d": "A type of image compression"
+                },
+                "correct": "b",
+                "explanation": "A pixel is the smallest unit of a digital image, containing numerical values that represent color or intensity information. Images are made up of a grid of these pixels."
+            }
+        },
+        {
+            "title": "Color Spaces and Channels",
+            "explanation": "Color spaces are different ways of representing color in digital images. Common color spaces include RGB (Red, Green, Blue), HSV (Hue, Saturation, Value), and grayscale. Each has specific uses in computer vision applications.",
+            "metaphor": {
+                "title": "The Paint Mixer",
+                "description": "Think of color spaces like different systems for mixing paint. RGB is like having three primary color paints (red, green, blue) and mixing them in different amounts. HSV is like describing a color by its pure color (hue), how vivid it is (saturation), and how light or dark it is (value).",
+                "points": [
+                    "RGB channels are like primary color paints",
+                    "HSV is like a painter's way of describing colors",
+                    "Grayscale is like using only black and white paint",
+                    "Color conversion is like following different mixing recipes"
+                ]
+            },
+            "technical_example": "import cv2\nimport numpy as np\n\ndef explore_color_spaces(image_path):\n    # Read image\n    img = cv2.imread(image_path)\n    \n    # Convert to different color spaces\n    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)\n    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)\n    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)\n    \n    # Split channels\n    r, g, b = cv2.split(rgb)\n    h, s, v = cv2.split(hsv)\n    \n    def get_channel_stats(channel):\n        return {\n            'min': np.min(channel),\n            'max': np.max(channel),\n            'mean': np.mean(channel)\n        }\n    \n    return {\n        'rgb_stats': {\n            'red': get_channel_stats(r),\n            'green': get_channel_stats(g),\n            'blue': get_channel_stats(b)\n        },\n        'hsv_stats': {\n            'hue': get_channel_stats(h),\n            'saturation': get_channel_stats(s),\n            'value': get_channel_stats(v)\n        },\n        'grayscale_stats': get_channel_stats(gray)\n    }\n\n# Example usage\ncolor_info = explore_color_spaces('sample.jpg')\nprint(\"RGB Channel Statistics:\")\nprint(color_info['rgb_stats'])",
+            "quiz": {
+                "question": "Why might you convert an image from RGB to HSV color space?",
+                "options": {
+                    "a": "To make the image smaller",
+                    "b": "To make color-based object detection more robust to lighting changes",
+                    "c": "To improve image quality",
+                    "d": "To compress the image"
+                },
+                "correct": "b",
+                "explanation": "HSV color space separates color (hue) from intensity (value), making it more robust for color-based detection under varying lighting conditions."
+            }
+        },
+        {
+            "title": "Basic Image Processing",
+            "explanation": "Basic image processing operations modify pixel values to enhance images or extract useful information. Common operations include filtering, thresholding, and edge detection.",
+            "metaphor": {
+                "title": "The Photo Editor",
+                "description": "Think of image processing like a photo editor adjusting a photograph. Just as an editor might adjust brightness, contrast, or apply filters to enhance certain features, computer vision algorithms apply mathematical operations to modify or analyze images.",
+                "points": [
+                    "Filtering is like using photo editing tools",
+                    "Thresholding is like converting to black and white",
+                    "Edge detection is like tracing the outlines",
+                    "Noise reduction is like smoothing rough areas"
+                ]
+            },
+            "technical_example": "import cv2\nimport numpy as np\n\ndef basic_processing(image_path):\n    # Read image\n    img = cv2.imread(image_path)\n    \n    # Convert to grayscale\n    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)\n    \n    # Apply Gaussian blur\n    blurred = cv2.GaussianBlur(gray, (5, 5), 0)\n    \n    # Apply binary thresholding\n    _, thresh = cv2.threshold(blurred, 127, 255, cv2.THRESH_BINARY)\n    \n    # Detect edges using Canny\n    edges = cv2.Canny(blurred, 100, 200)\n    \n    # Apply basic morphological operations\n    kernel = np.ones((5,5), np.uint8)\n    dilated = cv2.dilate(thresh, kernel, iterations=1)\n    eroded = cv2.erode(thresh, kernel, iterations=1)\n    \n    return {\n        'original': img,\n        'grayscale': gray,\n        'blurred': blurred,\n        'threshold': thresh,\n        'edges': edges,\n        'dilated': dilated,\n        'eroded': eroded\n    }\n\n# Example usage\nprocessed_images = basic_processing('sample.jpg')\n# Display or save the processed images as needed",
+            "quiz": {
+                "question": "What is the purpose of applying a Gaussian blur to an image?",
+                "options": {
+                    "a": "To make the image sharper",
+                    "b": "To reduce noise and smooth the image",
+                    "c": "To detect edges",
+                    "d": "To increase image contrast"
+                },
+                "correct": "b",
+                "explanation": "Gaussian blur is used to reduce noise and smooth an image by averaging pixel values with their neighbors, weighted by a Gaussian distribution."
+            }
+        }
+    ],
+    "key_takeaways": [
+        "Digital images are represented as matrices of pixels containing color or intensity information",
+        "Different color spaces provide different ways of representing and analyzing color information",
+        "Basic image processing operations can enhance images or extract useful features",
+        "Understanding these fundamentals is crucial for more advanced computer vision tasks"
+    ],
+    "prev_module": null,
+    "next_module": "cv-002"
+}
