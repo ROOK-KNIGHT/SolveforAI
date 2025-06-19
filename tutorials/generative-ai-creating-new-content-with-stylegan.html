@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI: Creating New Content with StyleGAN | Solve for AI</title>
+    <meta name="description" content="Get hands-on experience with Generative Adversarial Networks (GANs). Learn how to create novel content with StyleGAN.">
+    <meta name="keywords" content="Generative AI, StyleGAN, GANs">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html">Solve<span> for AI</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../tutorials.html" class="active">Tutorials</a></li>
+                    <li><a href="../learning-paths.html">Learning Paths</a></li>
+                    <li><a href="../tools.html">AI Tools</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="tutorial-container">
+        <article class="tutorial-content">
+            <header class="tutorial-header">
+                <h1>Generative AI: Creating New Content with StyleGAN</h1>
+                <div class="tutorial-meta">
+                    <span class="category">Generative-ai</span>
+                    <span class="reading-time">17 min read</span>
+                    <span class="publish-date">Updated: June 18, 2025</span>
+                </div>
+
+                <div class="author-info">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author photo" class="author-photo">
+                    <div class="author-details">
+                        <span class="author-name">AI Content Team</span>
+                        <span class="author-title">AI Research Engineer</span>
+                    </div>
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Generative AI: Creating New Content with StyleGAN" class="hero-image">
+
+                <div class="table-of-contents">
+                    <h3>Table of Contents</h3>
+                    <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#understanding-generative-adversarial-networks-gans">Understanding Generative Adversarial Networks (GANs)</a></li>
+        <ul>
+            <li><a href="#understanding-generative-adversarial-networks-gans-core-concepts-of-gan-architecture">Core concepts of GAN architecture</a></li>
+            <li><a href="#understanding-generative-adversarial-networks-gans-training-dynamics-between-generator-and-discriminator">Training dynamics between Generator and Discriminator</a></li>
+            <li><a href="#understanding-generative-adversarial-networks-gans-challenges-in-training-gans">Challenges in training GANs</a></li>
+            <li><a href="#understanding-generative-adversarial-networks-gans-applications-of-gans-in-various-fields">Applications of GANs in various fields</a></li>
+        </ul>
+    <li><a href="#diving-into-stylegan-architecture-and-features">Diving into StyleGAN: Architecture and Features</a></li>
+        <ul>
+            <li><a href="#diving-into-stylegan-architecture-and-features-key-innovations-introduced-with-stylegan">Key innovations introduced with StyleGAN</a></li>
+            <li><a href="#diving-into-stylegan-architecture-and-features-architecture-deep-dive-mapping-network-synthesis-network-and-style-mixing">Architecture deep dive: Mapping Network, Synthesis Network, and Style Mixing</a></li>
+            <li><a href="#diving-into-stylegan-architecture-and-features-understanding-the-role-of-adaptive-instance-normalization-adain">Understanding the role of Adaptive Instance Normalization (AdaIN)</a></li>
+            <li><a href="#diving-into-stylegan-architecture-and-features-comparison-with-earlier-gan-models">Comparison with earlier GAN models</a></li>
+        </ul>
+    <li><a href="#setting-up-the-environment-and-data">Setting Up the Environment and Data</a></li>
+        <ul>
+            <li><a href="#setting-up-the-environment-and-data-installing-necessary-libraries-and-frameworks">Installing necessary libraries and frameworks</a></li>
+            <li><a href="#setting-up-the-environment-and-data-choosing-and-preparing-datasets-for-training-stylegan">Choosing and preparing datasets for training StyleGAN</a></li>
+            <li><a href="#setting-up-the-environment-and-data-exploring-pre-trained-models-for-quick-starts">Exploring pre-trained models for quick starts</a></li>
+            <li><a href="#setting-up-the-environment-and-data-data-augmentation-techniques-for-better-training-outcomes">Data augmentation techniques for better training outcomes</a></li>
+        </ul>
+    <li><a href="#implementing-stylegan-with-practical-examples">Implementing StyleGAN with Practical Examples</a></li>
+        <ul>
+            <li><a href="#implementing-stylegan-with-practical-examples-step-by-step-guide-to-building-a-stylegan-model">Step-by-step guide to building a StyleGAN model</a></li>
+            <li><a href="#implementing-stylegan-with-practical-examples-code-sample-configuring-the-generator-and-discriminator-networks">Code sample: Configuring the generator and discriminator networks</a></li>
+            <li><a href="#implementing-stylegan-with-practical-examples-training-stylegan-on-a-specific-dataset-eg-faces-landscapes">Training StyleGAN on a specific dataset (e.g., faces, landscapes)</a></li>
+            <li><a href="#implementing-stylegan-with-practical-examples-visualizing-and-analyzing-the-generated-results">Visualizing and analyzing the generated results</a></li>
+        </ul>
+    <li><a href="#advanced-topics-and-best-practices-in-stylegan-implementation">Advanced Topics and Best Practices in StyleGAN Implementation</a></li>
+        <ul>
+            <li><a href="#advanced-topics-and-best-practices-in-stylegan-implementation-techniques-to-stabilize-training-and-improve-output-quality">Techniques to stabilize training and improve output quality</a></li>
+            <li><a href="#advanced-topics-and-best-practices-in-stylegan-implementation-exploring-different-loss-functions-and-their-impacts">Exploring different loss functions and their impacts</a></li>
+            <li><a href="#advanced-topics-and-best-practices-in-stylegan-implementation-best-practices-in-hyperparameter-tuning-for-optimal-results">Best practices in hyperparameter tuning for optimal results</a></li>
+            <li><a href="#advanced-topics-and-best-practices-in-stylegan-implementation-common-pitfalls-and-how-to-avoid-them">Common pitfalls and how to avoid them</a></li>
+        </ul>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#code-examples">Code Examples</a></li>
+</ul>
+                </div>
+            </header>
+
+            <section class="tutorial-body">
+                
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <p># Introduction to Generative AI: Creating New Content with StyleGAN</p><p>Welcome to the cutting-edge world of <strong>Generative AI</strong>, a domain where artificial intelligence transcends traditional boundaries to create something entirely novel. In this advanced tutorial, we dive deep into one of the most fascinating aspects of generative models: <strong>StyleGAN</strong>. This powerful variant of <strong>Generative Adversarial Networks (GANs)</strong> has revolutionized how we think about and implement AI in creative processes. Whether it’s generating breathtakingly realistic images or altering existing ones with nuanced style shifts, StyleGAN stands as a cornerstone technology in the AI-generated content arena.</p><p>## Why StyleGAN?</p><p>In an era where content is king, the ability to generate high-quality, unique visual content quickly and efficiently is invaluable. StyleGAN offers this capability, pushing the boundaries of what's possible in digital imagery. Its applications range from fashion and design to entertainment and beyond, making it a highly relevant skill for professionals in these fields. By mastering StyleGAN, you're not just learning to use a tool; you're stepping into a realm of endless creative potential.</p><p>## What You Will Learn</p><p>This tutorial is designed to transform your understanding and skills in working with Generative AI. You will:</p><p>- <strong>Understand the fundamentals</strong> of how GANs work, with a particular focus on the architecture and functionality of StyleGAN.<br>- <strong>Explore advanced techniques</strong> in training StyleGAN models, including tips on stabilizing the training process and improving output quality.<br>- <strong>Experiment with real-world applications</strong>, where you will use StyleGAN to generate novel content and modify existing images with new styles.<br>- <strong>Tackle common challenges</strong> encountered when working with generative models and learn how to overcome them efficiently.</p><p>## Prerequisites</p><p>To get the most out of this tutorial, you should have:</p><p>- A solid understanding of <strong>Python programming</strong>.<br>- Basic knowledge of <strong>machine learning principles</strong> and familiarity with <strong>neural networks</strong>.<br>- Experience with deep learning frameworks such as <strong>TensorFlow</strong> or <strong>PyTorch</strong> is highly recommended.</p><p>## Overview of the Tutorial</p><p>We will start with a brief recap of GANs to set the stage for newcomers and provide a refresher for those already familiar. Following this, we will delve into the mechanics of StyleGAN, studying its unique features such as style mixing and noise injection techniques. The hands-on sessions will guide you through setting up your development environment, preparing datasets, training your models, and finally, generating new content.</p><p>By the end of this tutorial, you will not only be proficient in using StyleGAN but also gain a broader perspective on how Generative AI can be leveraged for creative and commercial purposes. Join us as we explore this exciting frontier of AI technology, where your imagination is the only limit to what you can create!</p>
+                </section>
+                
+                <div class="advertisement">
+                    <h4>Your Ad Could Be Here</h4>
+                    <p>This is where a real content advertisement would appear.</p>
+                    <a href="#" class="ad-link">Learn More</a>
+                </div>
+                
+
+                
+                  <section id="understanding-generative-adversarial-networks-gans">
+                      <h2>Understanding Generative Adversarial Networks (GANs)</h2>
+                      <img src="https://images.unsplash.com/photo-1550000000000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Understanding Generative Adversarial Networks (GANs)" class="section-image">
+                      <p># Understanding Generative Adversarial Networks (GANs)</p><p>Generative Adversarial Networks (GANs) are a cornerstone of generative AI, offering powerful methods to generate new, synthetic instances of data that are indistinguishable from real data. This section delves into the core concepts of GAN architecture, the intricate training dynamics between the generator and discriminator, common challenges faced during training, and the diverse applications of GANs across various fields.</p><p>## 1. Core Concepts of GAN Architecture</p><p>The architecture of a GAN is fundamentally composed of two main components: the <strong>Generator</strong> and the <strong>Discriminator</strong>. These two neural networks compete in what is akin to a cat-and-mouse game, where each network's success depends on the failure of the other.</p><p>- <strong>Generator (G)</strong>: This component of a GAN takes random noise as input and generates data (such as images). The goal of the Generator is to produce data so convincing that the Discriminator cannot distinguish it from real data.<br>- <strong>Discriminator (D)</strong>: The Discriminator examines samples to determine whether they are generated by the Generator or are actual data from the dataset. It is essentially a binary classifier.</p><p><code></code>`python<br>import tensorflow as tf<br>from tensorflow.keras import layers</p><p>def build_generator(latent_dim):<br>    model = tf.keras.Sequential([<br>        layers.Dense(128, activation='relu', input_dim=latent_dim),<br>        layers.Dense(256, activation='relu'),<br>        layers.Dense(512, activation='relu'),<br>        layers.Dense(1024, activation='relu'),<br>        layers.Dense(784, activation='sigmoid')  # Assuming image size is 28x28<br>    ])<br>    return model</p><p>def build_discriminator(image_shape):<br>    model = tf.keras.Sequential([<br>        layers.Flatten(input_shape=image_shape),<br>        layers.Dense(512, activation='relu'),<br>        layers.Dense(256, activation='relu'),<br>        layers.Dense(1, activation='sigmoid')<br>    ])<br>    return model<br><code></code>`</p><p>## 2. Training Dynamics between Generator and Discriminator</p><p>Training GANs involves alternately updating the Discriminator and the Generator. The Discriminator is trained to maximize the probability of assigning the correct label to both real and fake images. Meanwhile, the Generator is trained to minimize the probability that the Discriminator makes the correct predictions.</p><p>This training process can be visualized as a minimax game where the Generator tries to minimize a loss function, while the Discriminator tries to maximize it:</p><p><code></code>`python<br>def train_step(generator, discriminator, images_real, latent_dim):<br>    noise = tf.random.normal([batch_size, latent_dim])<br>    with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:<br>        images_fake = generator(noise, training=True)<br>        <br>        real_output = discriminator(images_real, training=True)<br>        fake_output = discriminator(images_fake, training=True)<br>        <br>        gen_loss = generator_loss(fake_output)<br>        disc_loss = discriminator_loss(real_output, fake_output)</p><p>    gradients_of_generator = gen_tape.gradient(gen_loss, generator.trainable_variables)<br>    gradients_of_discriminator = disc_tape.gradient(disc_loss, discriminator.trainable_variables)</p><p>    generator_optimizer.apply_gradients(zip(gradients_of_generator, generator.trainable_variables))<br>    discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, discriminator.trainable_variables))<br><code></code>`</p><p>## 3. Challenges in Training GANs</p><p>Training GANs is notoriously difficult. One major challenge is <strong>mode collapse</strong>, where the Generator starts producing a limited diversity of samples. Another issue is <strong>non-convergence</strong>, where the Generator and Discriminator keep oscillating without finding equilibrium.</p><p>### Best Practices:<br>- Use different learning rates for the Discriminator and Generator.<br>- Implement normalization techniques like Batch Normalization.<br>- Employ different architectures for Generator and Discriminator to balance their power.</p><p>## 4. Applications of GANs in Various Fields</p><p>GANs have found applications across a broad spectrum of fields:</p><p>- <strong>Art</strong>: StyleGAN has been used to create new artworks by learning from styles of existing painters.<br>- <strong>Entertainment</strong>: In film production for creating realistic environments or characters.<br>- <strong>Healthcare</strong>: Generating synthetic medical imagery for training machine learning models without privacy issues.<br>- <strong>Fashion</strong>: Designing new clothing items by learning from current fashion trends.</p><p>Each application leverages the ability of GANs to generate high-quality, realistic outputs, showcasing their versatility and power in enhancing creative processes across industries.</p><p>In conclusion, understanding the intricacies of GAN architecture and training dynamics is crucial for harnessing their full potential. By addressing training challenges and exploring new applications, we can push the boundaries of what's possible with Generative AI and StyleGAN.</p>
+                      
+                      <h3 id="understanding-generative-adversarial-networks-gans-core-concepts-of-gan-architecture">Core concepts of GAN architecture</h3><h3 id="understanding-generative-adversarial-networks-gans-training-dynamics-between-generator-and-discriminator">Training dynamics between Generator and Discriminator</h3><h3 id="understanding-generative-adversarial-networks-gans-challenges-in-training-gans">Challenges in training GANs</h3><h3 id="understanding-generative-adversarial-networks-gans-applications-of-gans-in-various-fields">Applications of GANs in various fields</h3>
+                  </section>
+                  
+                  
+                  <section id="diving-into-stylegan-architecture-and-features">
+                      <h2>Diving into StyleGAN: Architecture and Features</h2>
+                      <img src="https://images.unsplash.com/photo-1550000001000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Diving into StyleGAN: Architecture and Features" class="section-image">
+                      <p>## Diving into StyleGAN: Architecture and Features</p><p>Generative AI has taken significant strides in recent years, and StyleGAN, developed by NVIDIA, represents a pinnacle in the architecture of Generative Adversarial Networks (GANs). In this section, we will explore the key innovations and architectural elements that set StyleGAN apart from its predecessors, focusing on its unique components and operational mechanisms.</p><p>### 1. Key Innovations Introduced with StyleGAN</p><p>StyleGAN introduced several groundbreaking innovations that enhanced the quality and control of the generated images. These include:</p><p>- <strong>Style-Based Generator:</strong> Unlike traditional GANs that input a latent code directly to the generator, StyleGAN introduces an intermediate mapping network. This network transforms the input latent code into an intermediate latent space (style) that controls the image synthesis process more distinctly at different scales.</p><p>- <strong>Progressive Growing:</strong> Although originally introduced in their earlier work, NVIDIA refined this technique in StyleGAN to stabilize the training process. By progressively increasing the resolution of the generated images, it allows the model to learn fine details step by step, enhancing image quality.</p><p>- <strong>Mixed Regularization Techniques:</strong> StyleGAN uses a novel approach combining different regularization methods like path length regularization and stochastic variation to ensure that small changes in the latent space result in realistic and predictable changes in the output.</p><p>### 2. Architecture Deep Dive: Mapping Network, Synthesis Network, and Style Mixing</p><p>#### Mapping Network<br>The mapping network in StyleGAN is a series of fully connected layers that takes a random input vector <code>z</code> (from a normal distribution) and maps it to an intermediate latent space <code>w</code>. This space is disentangled, meaning changes in certain dimensions correspond to specific variations in the generated images, providing more control over the synthesis process.</p><p><code></code>`python<br># Example of a simple mapping network in PyTorch<br>import torch<br>import torch.nn as nn</p><p>class MappingNetwork(nn.Module):<br>    def __init__(self, input_dim, feature_dim, layers):<br>        super(MappingNetwork, self).__init__()<br>        model = [nn.Linear(input_dim, feature_dim)]<br>        model += [nn.ReLU()] + [nn.Linear(feature_dim, feature_dim) for _ in range(layers - 1)]<br>        self.model = nn.Sequential(*model)</p><p>    def forward(self, x):<br>        return self.model(x)<br><code></code>`</p><p>#### Synthesis Network<br>The synthesis network generates the final image from the intermediate latent code <code>w</code>. It uses a series of convolutional layers, but unlike conventional GANs, each layer is modulated by style parameters derived from <code>w</code> using AdaIN. This allows fine control over specific features at different scales of the image.</p><p>#### Style Mixing<br>StyleGAN can mix styles by using different <code>w</code> vectors at different layers of the synthesis network. This technique allows the blending of characteristics from various sources, such as taking the pose from one image and the facial features from another.</p><p>### 3. Understanding the Role of Adaptive Instance Normalization (AdaIN)</p><p>AdaIN is crucial in StyleGAN's ability to inject style into the synthesis network. It normalizes the feature maps of each layer using mean and variance derived from the style <code>w</code>, effectively aligning the distribution of these features with those specified by the style. This operation is key to controlling the stylization at different levels of the generated image.</p><p><code></code>`python<br># Example of AdaIN in PyTorch<br>def adaptive_instance_normalization(content_feat, style_feat):<br>    size = content_feat.size()<br>    style_mean, style_std = style_feat.mean([2, 3]), style_feat.std([2, 3])<br>    content_mean, content_std = content_feat.mean([2, 3]), content_feat.std([2, 3])</p><p>    normalized_feat = (content_feat - content_mean.unsqueeze(-1).unsqueeze(-1)) / content_std.unsqueeze(-1).unsqueeze(-1)<br>    stylized_feat = normalized_feat * style_std.unsqueeze(-1).unsqueeze(-1) + style_mean.unsqueeze(-1).unsqueeze(-1)<br>    return stylized_feat<br><code></code>`</p><p>### 4. Comparison with Earlier GAN Models</p><p>StyleGAN represents a significant evolution over earlier GAN architectures like DCGAN or WGAN. The introduction of a mapping network and AdaIN allows for greater control over the generation process and leads to higher quality outputs. Furthermore, techniques like progressive growing and mixed regularization address common training challenges such as mode collapse and non-convergence.</p><p>In practice, StyleGAN has been used to generate highly realistic images that can be fine-tuned to an unprecedented degree. For developers working with Generative AI, understanding and leveraging these innovations can provide powerful tools for creating new content across various domains.</p><p>In conclusion, StyleGAN's sophisticated architecture offers a nuanced control over image generation that sets it apart from previous models, making it a cornerstone example of innovation in Generative AI.</p>
+                      
+                      <h3 id="diving-into-stylegan-architecture-and-features-key-innovations-introduced-with-stylegan">Key innovations introduced with StyleGAN</h3><h3 id="diving-into-stylegan-architecture-and-features-architecture-deep-dive-mapping-network-synthesis-network-and-style-mixing">Architecture deep dive: Mapping Network, Synthesis Network, and Style Mixing</h3><h3 id="diving-into-stylegan-architecture-and-features-understanding-the-role-of-adaptive-instance-normalization-adain">Understanding the role of Adaptive Instance Normalization (AdaIN)</h3><h3 id="diving-into-stylegan-architecture-and-features-comparison-with-earlier-gan-models">Comparison with earlier GAN models</h3>
+                  </section>
+                  
+                  
+                  <section id="setting-up-the-environment-and-data">
+                      <h2>Setting Up the Environment and Data</h2>
+                      <img src="https://images.unsplash.com/photo-1550000002000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Setting Up the Environment and Data" class="section-image">
+                      <p>## Setting Up the Environment and Data for StyleGAN</p><p>When embarking on a project involving Generative AI, specifically using StyleGAN, a robust setup is crucial for efficient and effective model training and generation. This section will guide you through the essential steps of setting up your environment and preparing your data to leverage StyleGAN for creating new content.</p><p>### 1. Installing Necessary Libraries and Frameworks</p><p>StyleGAN, developed by NVIDIA, is an advanced version of Generative Adversarial Networks (GANs) that requires specific libraries and frameworks to function correctly. Here is how you can set up your environment:</p><p>#### Prerequisites:<br>- Python 3.6 or later<br>- TensorFlow 1.15 or TensorFlow 2.x<br>- NVIDIA GPU with CUDA and cuDNN support (recommended for faster computation)</p><p>#### Installation Steps:</p><p>First, ensure that you have an NVIDIA GPU with the latest drivers installed. Then, install CUDA and cuDNN from NVIDIA's official site. Once these dependencies are in place, you can install TensorFlow. It's recommended to use a virtual environment for Python to avoid conflicts between dependencies:</p><p><code></code>`bash<br># Create a virtual environment<br>python -m venv stylegan-env</p><p># Activate the environment<br>source stylegan-env/bin/activate</p><p># Install TensorFlow GPU version<br>pip install tensorflow-gpu==2.x<br><code></code>`</p><p>Next, install other necessary libraries:<br><code></code>`bash<br>pip install numpy pandas matplotlib<br><code></code>`</p><p>Finally, clone the StyleGAN repository from GitHub to access the pre-trained models and training scripts:<br><code></code>`bash<br>git clone https://github.com/NVlabs/stylegan.git<br>cd stylegan<br><code></code>`</p><p>### 2. Choosing and Preparing Datasets for Training StyleGAN</p><p>Selecting the right dataset is pivotal in training any AI model, especially in the context of Generative AI. For StyleGAN, high-quality images with consistent dimensions are crucial. Common datasets used include CelebA for human faces or LSUN for various scenes.</p><p>#### Dataset Preparation:<br>Ensure all images are of the same resolution and format (typically 1024x1024 PNGs for best results). Use the following script to preprocess images:</p><p><code></code>`python<br>import os<br>from PIL import Image</p><p>def resize_images(source_folder, target_folder, size=(1024, 1024)):<br>    os.makedirs(target_folder, exist_ok=True)<br>    images = os.listdir(source_folder)<br>    for img in images:<br>        im = Image.open(os.path.join(source_folder, img))<br>        im_resized = im.resize(size, Image.ANTIALIAS)<br>        im_resized.save(os.path.join(target_folder, img))</p><p>resize_images('raw_images', 'preprocessed_images')<br><code></code>`</p><p>### 3. Exploring Pre-trained Models for Quick Starts</p><p>Using pre-trained models can significantly speed up the development process by leveraging previously learned features and weights. NVIDIA has provided several pre-trained StyleGAN models that you can experiment with.</p><p>Load a pre-trained model as follows:<br><code></code>`python<br>import dnnlib</p><p>url = 'https://.../stylegan2-ffhq-config-f.pkl' # URL to a pre-trained model<br>with dnnlib.util.open_url(url) as fp:<br>    _G, _D, Gs = pickle.load(fp) # Generator, Discriminator and Generator Stochastic<br><code></code>`</p><p>### 4. Data Augmentation Techniques for Better Training Outcomes</p><p>Data augmentation is a powerful technique to increase the diversity of your training data without actually collecting new data. This is particularly useful in training GANs where diversity can lead to more robust generation capabilities.</p><p>#### Augmentation Techniques:<br>- <strong>Flipping</strong>: Mirror images horizontally.<br>- <strong>Rotation</strong>: Slightly rotate images by a few degrees.<br>- <strong>Scaling</strong>: Zoom in and out on images.<br>- <strong>Color variation</strong>: Adjust brightness, contrast, and saturation.</p><p>Implementing basic augmentation using TensorFlow:<br><code></code>`python<br>import tensorflow as tf</p><p>def augment_images(image):<br>    image = tf.image.random_flip_left_right(image)<br>    image = tf.image.random_brightness(image, max_delta=0.05)<br>    return image</p><p># Assuming 'dataset' is your TensorFlow dataset object<br>augmented_dataset = dataset.map(augment_images)<br><code></code>`</p><p>### Conclusion</p><p>Setting up the right environment and preparing your data meticulously are crucial steps that underpin the success of projects involving StyleGAN. By following the detailed instructions and utilizing the provided code snippets, you can ensure a smooth start to your Generative AI projects. Always remember to experiment with different configurations and techniques to find what best suits your specific project needs.</p>
+                      
+                      <h3 id="setting-up-the-environment-and-data-installing-necessary-libraries-and-frameworks">Installing necessary libraries and frameworks</h3><h3 id="setting-up-the-environment-and-data-choosing-and-preparing-datasets-for-training-stylegan">Choosing and preparing datasets for training StyleGAN</h3><h3 id="setting-up-the-environment-and-data-exploring-pre-trained-models-for-quick-starts">Exploring pre-trained models for quick starts</h3><h3 id="setting-up-the-environment-and-data-data-augmentation-techniques-for-better-training-outcomes">Data augmentation techniques for better training outcomes</h3>
+                  </section>
+                  
+                  <div class="advertisement">
+                      <h4>Your Ad Could Be Here</h4>
+                      <p>This is where a real content advertisement would appear.</p>
+                      <a href="#" class="ad-link">Learn More</a>
+                  </div>
+                  
+                  
+                  <section id="implementing-stylegan-with-practical-examples">
+                      <h2>Implementing StyleGAN with Practical Examples</h2>
+                      <img src="https://images.unsplash.com/photo-1550000003000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Implementing StyleGAN with Practical Examples" class="section-image">
+                      <p>## Implementing StyleGAN with Practical Examples</p><p>Generative Adversarial Networks (GANs) have revolutionized the field of artificial intelligence, particularly in the domain of image generation. StyleGAN, an advanced variant of GANs, is particularly renowned for its ability to generate highly realistic images. In this section, we will delve into implementing StyleGAN with a focus on practical applications like generating faces or landscapes.</p><p>### 1. Step-by-Step Guide to Building a StyleGAN Model</p><p>Implementing a StyleGAN involves understanding its unique architecture which includes a style-based generator that allows for fine control over the synthesis process. Here’s how you can start building your own StyleGAN model:</p><p>#### <strong>Set Up Your Environment</strong><br>First, ensure you have Python installed along with libraries like TensorFlow, NumPy, and Matplotlib. You can install these using pip:</p><p><code></code>`bash<br>pip install tensorflow numpy matplotlib<br><code></code>`</p><p>#### <strong>Structure the Generator and Discriminator</strong><br>StyleGAN consists of two main components: the generator and discriminator. The generator creates images, while the discriminator evaluates them. Setting up these networks requires careful configuration which we'll detail in the next subsection.</p><p>#### <strong>Prepare Your Dataset</strong><br>Choose a dataset that suits your project needs. For generative tasks, high-quality and large datasets lead to better model performance. Datasets like CelebA for faces or LSUN for landscapes are commonly used.</p><p>#### <strong>Train the Model</strong><br>Training a StyleGAN is computationally intensive and typically requires a GPU. Ensure you monitor the training process to prevent mode collapse, where the generator starts producing limited varieties of outputs.</p><p>### 2. Code Sample: Configuring the Generator and Discriminator Networks</p><p>Here’s a basic snippet to configure both networks using TensorFlow’s Keras API:</p><p><code></code>`python<br>from tensorflow.keras import layers, models</p><p>def build_generator(latent_dim):<br>    model = models.Sequential([<br>        layers.Dense(8<em>8</em>256, use_bias=False, input_shape=(latent_dim,)),<br>        layers.BatchNormalization(),<br>        layers.LeakyReLU(),<br>        layers.Reshape((8, 8, 256)),<br>        # Upsample to 16x16<br>        layers.Conv2DTranspose(128, (5,5), strides=(1,1), padding='same', use_bias=False),<br>        layers.BatchNormalization(),<br>        layers.LeakyReLU(),<br>        # Upsample to 32x32<br>        layers.Conv2DTranspose(64, (5,5), strides=(2,2), padding='same', use_bias=False),<br>        layers.BatchNormalization(),<br>        layers.LeakyReLU(),<br>        # Output layer: Upsample to 64x64<br>        layers.Conv2DTranspose(3, (5,5), strides=(2,2), padding='same', use_bias=False, activation='tanh')<br>    ])<br>    return model</p><p>def build_discriminator(image_shape):<br>    model = models.Sequential([<br>        layers.Conv2D(64, (5,5), strides=(2,2), padding='same', input_shape=image_shape),<br>        layers.LeakyReLU(),<br>        layers.Dropout(0.3),<br>        layers.Conv2D(128, (5,5), strides=(2,2), padding='same'),<br>        layers.LeakyReLU(),<br>        layers.Dropout(0.3),<br>        layers.Flatten(),<br>        layers.Dense(1)<br>    ])<br>    return model<br><code></code>`</p><p>### 3. Training StyleGAN on a Specific Dataset</p><p>To train your StyleGAN on a dataset like CelebA for faces:</p><p><code></code>`python<br>import tensorflow as tf</p><p># Load and preprocess your dataset<br>(train_images, _), (_, _) = tf.keras.datasets.fashion_mnist.load_data()<br>train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('float32')<br>train_images = (train_images - 127.5) / 127.5  # Normalize to [-1, 1]</p><p># Instantiate the generator and discriminator<br>generator = build_generator(100)<br>discriminator = build_discriminator((28,28,1))</p><p># Compile the model<br># This step includes configuring optimizers and loss functions</p><p># Train the model<br># Implement training loops that handle batch processing of images,<br># feeding them through the generator and discriminator.<br><code></code>`</p><p>### 4. Visualizing and Analyzing the Generated Results</p><p>After training your StyleGAN model, it's crucial to visualize and analyze the generated images to assess the quality and diversity:</p><p><code></code>`python<br>import matplotlib.pyplot as plt</p><p>def display_images(images):<br>    plt.figure(figsize=(10,10))<br>    for i in range(images.shape[0]):<br>        plt.subplot(4, 4, i+1)<br>        plt.imshow(images[i, :, :, 0] * 127.5 + 127.5, cmap='gray')<br>        plt.axis('off')<br>    plt.show()</p><p>generated_images = generator.predict(tf.random.normal([16, 100]))<br>display_images(generated_images)<br><code></code>`</p><p>This code generates and displays sixteen random images from the trained generator. It’s an effective way to quickly visualize what your network has learned.</p><p>#### Best Practices:<br>- Regularly save and back up your model during training.<br>- Use TensorBoard or similar tools to monitor training progress.<br>- Experiment with different architectures and training parameters.</p><p>### Conclusion</p><p>Implementing StyleGAN can be challenging but highly rewarding. This tutorial provides a foundational framework that you can expand upon with more complex datasets and refined training strategies to generate stunningly realistic images using Generative AI techniques.<br></p>
+                      
+                      <h3 id="implementing-stylegan-with-practical-examples-step-by-step-guide-to-building-a-stylegan-model">Step-by-step guide to building a StyleGAN model</h3><h3 id="implementing-stylegan-with-practical-examples-code-sample-configuring-the-generator-and-discriminator-networks">Code sample: Configuring the generator and discriminator networks</h3><h3 id="implementing-stylegan-with-practical-examples-training-stylegan-on-a-specific-dataset-eg-faces-landscapes">Training StyleGAN on a specific dataset (e.g., faces, landscapes)</h3><h3 id="implementing-stylegan-with-practical-examples-visualizing-and-analyzing-the-generated-results">Visualizing and analyzing the generated results</h3>
+                  </section>
+                  
+                  
+                  <section id="advanced-topics-and-best-practices-in-stylegan-implementation">
+                      <h2>Advanced Topics and Best Practices in StyleGAN Implementation</h2>
+                      <img src="https://images.unsplash.com/photo-1550000004000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Advanced Topics and Best Practices in StyleGAN Implementation" class="section-image">
+                      <p># Advanced Topics and Best Practices in StyleGAN Implementation</p><p>When delving into the world of Generative AI, particularly with StyleGAN, achieving high-quality outputs and stable training processes can be quite challenging. This section of the tutorial explores advanced techniques and best practices that can enhance your StyleGAN models. We'll discuss methods to stabilize training, experiment with various loss functions, fine-tune hyperparameters, and identify common pitfalls to avoid.</p><p>## 1. Techniques to Stabilize Training and Improve Output Quality</p><p>Training Generative Adversarial Networks (GANs), including StyleGAN, often suffers from instability leading to mode collapse or failure to converge. Here are some techniques to enhance training stability and output quality:</p><p>### Progressive Growing of GANs<br>Originally introduced in StyleGAN, progressive growing involves gradually increasing the resolution of images generated by the GAN. Start training with low-resolution images, and incrementally add layers to the generator and discriminator as training progresses. This method allows the model to first learn large-scale structure and progressively learn finer details.</p><p><code></code>`python<br># Example: Add a new layer<br>model.add_layer()<br><code></code>`</p><p>### Feature Normalization<br>Employing normalization techniques such as PixelNorm or Instance Normalization within the generator can prevent signal magnitudes from escalating, leading to more stable training.</p><p><code></code>`python<br># Example: PixelNorm Layer in Keras<br>from keras.layers import Layer<br>import keras.backend as K</p><p>class PixelNorm(Layer):<br>    def __init__(self, <em></em>kwargs):<br>        super(PixelNorm, self).__init__(<em></em>kwargs)</p><p>    def call(self, inputs):<br>        return inputs / K.sqrt(K.mean(K.square(inputs), axis=-1, keepdims=True) + 1e-8)<br><code></code>`</p><p>### Regularization Techniques<br>Adding noise to the inputs of discriminator layers or employing dropout can help in stabilizing the training by preventing the discriminator from overfitting.</p><p>## 2. Exploring Different Loss Functions and Their Impacts</p><p>The choice of loss function significantly affects the performance of GANs. StyleGAN uses a modified version of the Wasserstein Loss with gradient penalty (WGAN-GP) which helps in providing better training stability and convergence properties.</p><p>### WGAN-GP<br>This loss function mitigates issues related to the traditional GAN loss by using a gradient penalty term to enforce Lipschitz continuity.</p><p><code></code>`python<br># Example: Wasserstein Loss with Gradient Penalty<br>def wasserstein_gp_loss(y_true, y_pred, averaged_samples, lambda_gp=10):<br>    gradients = K.gradients(y_pred, averaged_samples)[0]<br>    gradient_l2_norm = K.sqrt(K.sum(K.square(gradients), axis=[1]))<br>    gradient_penalty = lambda_gp * K.square(1 - gradient_l2_norm)<br>    return K.mean(y_true * y_pred) + K.mean(gradient_penalty)<br><code></code>`</p><p>### Exploring Alternatives<br>Other loss functions like Least Squares GAN (LSGAN) or Hinge loss can also be experimented with to see if they offer any benefits in terms of output quality or training stability.</p><p>## 3. Best Practices in Hyperparameter Tuning for Optimal Results</p><p>Hyperparameter tuning is crucial in extracting the best performance out of StyleGAN models. Key parameters include the learning rate, batch size, and the number of layers.</p><p>### Learning Rate Scheduling<br>Implementing a dynamic adjustment of learning rates—increasing during certain phases of training and decreasing in others—can lead to more robust convergence.</p><p>### Batch Size Considerations<br>Larger batch sizes generally provide more stable gradients but at the cost of increased computational overhead. It's often a balance between resource availability and desired stability.</p><p>## 4. Common Pitfalls and How to Avoid Them</p><p>Lastly, be aware of common pitfalls:</p><p>### Overfitting<br>This occurs especially in smaller datasets. Augmenting your dataset or using different forms of regularization can mitigate this.</p><p>### Ignoring Hardware Limitations<br>Always tailor your model's complexity based on the computational resources at hand. Overloading your GPU can cause unnecessary training interruptions or failures.</p><p>### Neglecting Model Monitoring<br>Regularly check the loss curves and sample outputs from both generator and discriminator during training to catch and rectify any issues early.</p><p>Implementing these advanced techniques and best practices will not only stabilize your StyleGAN training but also enhance the quality of the outputs generated. This knowledge enables you to push the boundaries of what's possible with Generative AI using StyleGANs, leading to innovative applications and discoveries.</p>
+                      
+                      <h3 id="advanced-topics-and-best-practices-in-stylegan-implementation-techniques-to-stabilize-training-and-improve-output-quality">Techniques to stabilize training and improve output quality</h3><h3 id="advanced-topics-and-best-practices-in-stylegan-implementation-exploring-different-loss-functions-and-their-impacts">Exploring different loss functions and their impacts</h3><h3 id="advanced-topics-and-best-practices-in-stylegan-implementation-best-practices-in-hyperparameter-tuning-for-optimal-results">Best practices in hyperparameter tuning for optimal results</h3><h3 id="advanced-topics-and-best-practices-in-stylegan-implementation-common-pitfalls-and-how-to-avoid-them">Common pitfalls and how to avoid them</h3>
+                  </section>
+                  
+                  
+
+                
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>### Conclusion</p><p>Throughout this advanced tutorial on "Generative AI: Creating New Content with StyleGAN," we have journeyed through the fascinating world of Generative Adversarial Networks (GANs), focusing specifically on the StyleGAN architecture. We started with a foundational understanding of GANs, emphasizing their unique capability to generate high-quality, novel content. We then delved deeper into the specific features and architecture of StyleGAN, which sets it apart as a powerful tool for creating highly realistic and customizable outputs.</p><p>In our practical sessions, we covered setting up the necessary environment and preparing data, which are crucial steps to ensure the success of any machine learning project. The hands-on implementation of StyleGAN provided you with direct experience in manipulating and steering the model to produce desired results. We also discussed advanced topics and best practices, aiming to equip you with the knowledge to optimize your implementations and tackle common challenges in working with generative models.</p><p><strong>Key Takeaways:</strong><br>- <strong>Understanding GANs and StyleGAN's Architecture:</strong> Mastery of these concepts is vital for any AI practitioner looking to work in the field of generative AI.<br>- <strong>Practical Experience:</strong> Through setting up and implementing StyleGAN, you've gained valuable skills that can be applied in various AI-driven projects.<br>- <strong>Continuous Learning:</strong> The field of AI is ever-evolving, and staying updated with the latest advancements and best practices is crucial for success.</p><p><strong>Next Steps:</strong><br>I encourage you to continue exploring the potential of StyleGAN and other GAN architectures. Consider participating in online forums, contributing to open-source projects, or pursuing further readings such as the original papers by Nvidia on StyleGAN. Additionally, experimenting with different datasets or even creating your own can provide deeper insights and enhance your proficiency.</p><p>Finally, I urge you to apply what you've learned in this tutorial to real-world problems or creative projects. The skills you have acquired here are not only academically rewarding but also immensely applicable in various sectors needing innovative content generation solutions. Your journey in generative AI is just beginning, and the possibilities are as limitless as your imagination.</p><p>Happy generating!</p>
+                </section>
+                
+
+                
+                <section id="code-examples">
+                    <h2>Code Examples</h2>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-1">Code Example</h3>
+                        <p>This example demonstrates how to set up your Python environment to work with StyleGAN, including installing necessary libraries.</p>
+                        <pre><code class="language-python"># Importing necessary libraries
+import sys
+!{sys.executable} -m pip install tensorflow==2.3.0
+!{sys.executable} -m pip install torch torchvision
+!{sys.executable} -m pip install kaggle
+
+# Setting up Kaggle API for dataset download
+import os
+os.environ[&#39;KAGGLE_USERNAME&#39;] = &#39;your_kaggle_username&#39; # replace with your Kaggle username
+os.environ[&#39;KAGGLE_KEY&#39;] = &#39;your_kaggle_key&#39; # replace with your Kaggle API key
+
+# Downloading the dataset
+!kaggle datasets download -d your_dataset_name</code></pre>
+                        <p class="explanation">Run this code in a Python environment. It installs TensorFlow, Torch, and Kaggle, and sets up the Kaggle API for downloading datasets. Replace 'your_kaggle_username', 'your_kaggle_key', and 'your_dataset_name' with appropriate values.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-2">Code Example</h3>
+                        <p>This example demonstrates how to load a dataset, preprocess it, and train a StyleGAN model on it.</p>
+                        <pre><code class="language-python"># Loading and preprocessing the dataset
+import numpy as np
+from PIL import Image
+from torchvision import transforms
+
+# Transformation for image preprocessing
+tform = transforms.Compose([
+    transforms.Resize((1024, 1024)),
+    transforms.ToTensor(),
+])
+
+# Load images and apply transformations
+images = [tform(Image.open(f&#39;path_to_images/{filename}&#39;)) for filename in os.listdir(&#39;path_to_images&#39;)]
+images = torch.stack(images)
+
+# Training the model
+import stylegan2_pytorch as sg2
+model = sg2.Trainer(name=&#39;stylegan2&#39;, results_dir=&#39;results&#39;, models_dir=&#39;models&#39;, image_size=1024, network_capacity=16)
+model.train(data=images, batch_size=4, num_train_steps=10000)</code></pre>
+                        <p class="explanation">This code loads images from a specified directory, resizes them to 1024x1024 pixels, converts them to tensors, and then trains a StyleGAN model. Adjust 'path_to_images', batch_size, and num_train_steps according to your dataset and training requirements.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-3">Code Example</h3>
+                        <p>This example shows how to generate new images using a pretrained StyleGAN model.</p>
+                        <pre><code class="language-python"># Load the trained model
+from stylegan2_pytorch import Generator
+
+generator = Generator(image_size=1024, latent_dim=512, network_capacity=16).load_from_checkpoint(&#39;path_to_checkpoint.pt&#39;)
+
+# Generate images
+latent = torch.randn(10, 512) # Generate 10 random latent vectors
+generated_images = generator(latent)
+
+# Save generated images to disk
+for i, img in enumerate(generated_images):
+    img = (img.permute(1, 2, 0).clip(0, 1) * 255).numpy().astype(np.uint8)
+    Image.fromarray(img).save(f&#39;generated_image_{i}.png&#39;)</code></pre>
+                        <p class="explanation">This script loads a StyleGAN generator from a checkpoint and generates 10 random images. Generated images are saved in the current directory. Update 'path_to_checkpoint.pt' with the path to your model's checkpoint file.</p>
+                    </div>
+                    
+                </section>
+                
+
+                <div class="tutorial-rating">
+                    <h3>Was this tutorial helpful?</h3>
+                    <div class="stars">★ ★ ★ ★ ★</div>
+                </div>
+
+                <div class="related-tutorials">
+                    <h3>Related Tutorials</h3>
+                    <div class="tutorial-grid">
+                        <a href="../tutorials/building-custom-gpt-applications.html" class="tutorial-card">
+                            <img src="https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Building Custom GPT Applications">
+                            <h4>Building Custom GPT Applications</h4>
+                        </a>
+                        <a href="../tutorials/neural-networks-explained.html" class="tutorial-card">
+                            <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Neural Networks Explained">
+                            <h4>Neural Networks Explained</h4>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <aside class="sidebar">
+            <div class="newsletter-signup">
+                <h3>Subscribe for More AI & ML Tutorials</h3>
+                <p>Get weekly tutorials, guides, and AI resources delivered directly to your inbox.</p>
+                <form>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="advertisement sidebar-ad">
+                <h4>Your Ad Could Be Here</h4>
+                <p>This is where a real sidebar advertisement would appear.</p>
+                <a href="#" class="ad-link">Learn More</a>
+            </div>
+
+            <div class="category-info">
+                <h3>Category</h3>
+                <a href="../categories/generative-ai.html">Generative-ai</a>
+            </div>
+
+            <div class="popular-tutorials">
+                <h3>Popular Tutorials</h3>
+                <ul>
+                    <li><a href="../tutorials/machine-learning-beginners-guide.html">Machine Learning: A Complete Beginner's Guide</a> 45K views</li>
+                    <li><a href="../tutorials/pytorch-vs-tensorflow.html">PyTorch vs TensorFlow: Which One Should You Learn?</a> 32K views</li>
+                    <li><a href="../tutorials/deep-learning-image-classification.html">Image Classification with Deep Learning</a> 28K views</li>
+                    <li><a href="../tutorials/natural-language-processing-basics.html">NLP Basics: Understanding Language with AI</a> 24K views</li>
+                </ul>
+            </div>
+
+            <div class="topics">
+                <h3>Explore Topics</h3>
+                <ul>
+                    <li><a href="../categories/deep-learning.html">Deep Learning <span>42</span></a></li>
+                    <li><a href="../categories/computer-vision.html">Computer Vision <span>38</span></a></li>
+                    <li><a href="../categories/nlp.html">Natural Language Processing <span>35</span></a></li>
+                    <li><a href="../categories/reinforcement-learning.html">Reinforcement Learning <span>24</span></a></li>
+                    <li><a href="../categories/data-science.html">Data Science <span>56</span></a></li>
+                    <li><a href="../categories/ai-ethics.html">AI Ethics <span>18</span></a></li>
+                </ul>
+            </div>
+
+            <div class="advertisement sidebar-ad">
+                <h4>Your Ad Could Be Here</h4>
+                <p>This is where a real sidebar advertisement would appear.</p>
+                <a href="#" class="ad-link">Learn More</a>
+            </div>
+
+            <div class="social-share">
+                <h3>Share</h3>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fgenerative-ai-creating-new-content-with-stylegan&text=Generative%20AI%3A%20Creating%20New%20Content%20with%20StyleGAN%20%7C%20Solve%20for%20AI" title="Share on Twitter">🐦</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fgenerative-ai-creating-new-content-with-stylegan" title="Share on Facebook">📘</a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fgenerative-ai-creating-new-content-with-stylegan&title=Generative%20AI%3A%20Creating%20New%20Content%20with%20StyleGAN%20%7C%20Solve%20for%20AI" title="Share on LinkedIn">💼</a>
+                    <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fgenerative-ai-creating-new-content-with-stylegan&title=Generative%20AI%3A%20Creating%20New%20Content%20with%20StyleGAN%20%7C%20Solve%20for%20AI" title="Share on Reddit">🔴</a>
+                    <a href="mailto:?subject=Generative%20AI%3A%20Creating%20New%20Content%20with%20StyleGAN%20%7C%20Solve%20for%20AI&body=Check out this article: https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fgenerative-ai-creating-new-content-with-stylegan" title="Share via Email">📧</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
