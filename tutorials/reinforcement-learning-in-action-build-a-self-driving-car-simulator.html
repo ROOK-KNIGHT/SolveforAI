@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinforcement Learning in Action: Build a Self-Driving Car Simulator | Solve for AI</title>
+    <meta name="description" content="Discover how reinforcement learning is used in creating intelligent systems, by building a self-driving car simulator.">
+    <meta name="keywords" content="Reinforcement Learning, Self-Driving Car, Simulation">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html">Solve<span> for AI</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../tutorials.html" class="active">Tutorials</a></li>
+                    <li><a href="../learning-paths.html">Learning Paths</a></li>
+                    <li><a href="../tools.html">AI Tools</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="tutorial-container">
+        <article class="tutorial-content">
+            <header class="tutorial-header">
+                <h1>Reinforcement Learning in Action: Build a Self-Driving Car Simulator</h1>
+                <div class="tutorial-meta">
+                    <span class="category">Reinforcement-learning</span>
+                    <span class="reading-time">18 min read</span>
+                    <span class="publish-date">Updated: June 18, 2025</span>
+                </div>
+
+                <div class="author-info">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author photo" class="author-photo">
+                    <div class="author-details">
+                        <span class="author-name">AI Content Team</span>
+                        <span class="author-title">AI Research Engineer</span>
+                    </div>
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Reinforcement Learning in Action: Build a Self-Driving Car Simulator" class="hero-image">
+
+                <div class="table-of-contents">
+                    <h3>Table of Contents</h3>
+                    <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#fundamentals-of-reinforcement-learning">Fundamentals of Reinforcement Learning</a></li>
+        <ul>
+            <li><a href="#fundamentals-of-reinforcement-learning-key-concepts-agents-environments-states-actions-and-rewards">Key concepts: agents, environments, states, actions, and rewards</a></li>
+            <li><a href="#fundamentals-of-reinforcement-learning-exploring-different-types-of-reinforcement-learning-q-learning-deep-q-networks-dqn-and-policy-gradient-methods">Exploring different types of reinforcement learning: Q-learning, Deep Q-Networks (DQN), and Policy Gradient methods</a></li>
+            <li><a href="#fundamentals-of-reinforcement-learning-setting-up-the-python-environment-with-necessary-libraries-tensorflow-keras-openai-gym">Setting up the Python environment with necessary libraries (TensorFlow, Keras, OpenAI Gym)</a></li>
+        </ul>
+    <li><a href="#designing-the-simulation-environment">Designing the Simulation Environment</a></li>
+        <ul>
+            <li><a href="#designing-the-simulation-environment-introduction-to-openai-gym-and-creating-custom-environments">Introduction to OpenAI Gym and creating custom environments</a></li>
+            <li><a href="#designing-the-simulation-environment-defining-the-state-space-and-action-space-for-the-self-driving-car">Defining the state space and action space for the self-driving car</a></li>
+            <li><a href="#designing-the-simulation-environment-integrating-real-world-physics-into-the-simulation">Integrating real-world physics into the simulation</a></li>
+        </ul>
+    <li><a href="#developing-the-learning-agent">Developing the Learning Agent</a></li>
+        <ul>
+            <li><a href="#developing-the-learning-agent-implementing-a-basic-q-learning-algorithm">Implementing a basic Q-learning algorithm</a></li>
+            <li><a href="#developing-the-learning-agent-advancing-to-a-deep-q-network-dqn-architecture-and-training">Advancing to a Deep Q-Network (DQN): architecture and training</a></li>
+            <li><a href="#developing-the-learning-agent-enhancing-the-dqn-with-improvements-double-dqn-dueling-dqn">Enhancing the DQN with improvements: Double DQN, Dueling DQN</a></li>
+        </ul>
+    <li><a href="#training-and-evaluating-the-model">Training and Evaluating the Model</a></li>
+        <ul>
+            <li><a href="#training-and-evaluating-the-model-setting-up-training-loops-and-logging-mechanisms">Setting up training loops and logging mechanisms</a></li>
+            <li><a href="#training-and-evaluating-the-model-analyzing-performance-metrics-and-visualization-of-learning-progress">Analyzing performance metrics and visualization of learning progress</a></li>
+            <li><a href="#training-and-evaluating-the-model-troubleshooting-common-issues-convergence-problems-overfitting-and-sample-inefficiency">Troubleshooting common issues: convergence problems, overfitting, and sample inefficiency</a></li>
+        </ul>
+    <li><a href="#advanced-topics-and-best-practices">Advanced Topics and Best Practices</a></li>
+        <ul>
+            <li><a href="#advanced-topics-and-best-practices-exploring-further-enhancements-policy-gradient-methods-and-actor-critic-models">Exploring further enhancements: Policy Gradient methods and Actor-Critic models</a></li>
+            <li><a href="#advanced-topics-and-best-practices-incorporating-safety-and-ethical-considerations-in-training-ai-for-autonomous-vehicles">Incorporating safety and ethical considerations in training AI for autonomous vehicles</a></li>
+            <li><a href="#advanced-topics-and-best-practices-best-practices-in-reinforcement-learning-projects-and-avoiding-common-pitfalls">Best practices in reinforcement learning projects and avoiding common pitfalls</a></li>
+        </ul>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#code-examples">Code Examples</a></li>
+</ul>
+                </div>
+            </header>
+
+            <section class="tutorial-body">
+                
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <p># Reinforcement Learning in Action: Build a Self-Driving Car Simulator</p><p>Welcome to an exciting journey where technology meets the road—quite literally! In this advanced tutorial, we are going to dive into the fascinating world of <strong>Reinforcement Learning (RL)</strong>, a powerful branch of machine learning that teaches computers to make decisions by trying different strategies and learning from the outcomes. Our focus will be on one of the most thrilling applications of RL: <strong>Self-Driving Cars</strong>. By building a <strong>simulator</strong>, you will gain hands-on experience in how these autonomous vehicles learn and make decisions in real-time.</p><p>## Why Reinforcement Learning for Self-Driving Cars?</p><p>Imagine a world where your car chauffeurs you safely while you read, work, or relax. Self-driving cars promise to transform our lives, reducing traffic accidents, optimizing transportation costs, and reshaping urban environments. At the heart of these vehicles' decision-making processes is Reinforcement Learning. It enables cars to observe their environment and learn optimal behaviors through trial and error, much like a human learning to drive. This tutorial not only aims to build your understanding but also to equip you with the practical skills to implement these technologies.</p><p>## What Will You Learn?</p><p>This tutorial is designed to guide you through the creation of a self-driving car simulator using Reinforcement Learning. Here’s what you’ll learn:<br>- <strong>Fundamentals of Reinforcement Learning</strong>: Understand the key concepts including agents, environments, actions, states, and rewards.<br>- <strong>Simulation Tools and Techniques</strong>: Explore how simulations provide a safe and controlled environment for training self-driving models.<br>- <strong>Implementation of RL Algorithms</strong>: Get hands-on experience with implementing algorithms that will teach your simulated car to make decisions.<br>- <strong>Testing and Optimization</strong>: Learn how to test and refine your model to improve its decision-making accuracy and reliability.</p><p>## Prerequisites and Background Knowledge</p><p>This tutorial is tailored for individuals with a solid foundation in machine learning, particularly those who are comfortable with Python programming and basic principles of machine learning. Familiarity with foundational machine learning algorithms and previous experience with any programming or simulation tool will be beneficial but not mandatory.</p><p>## Overview of the Tutorial</p><p>We will start by setting up our simulation environment, followed by an introduction to the key RL concepts. After implementing the basic RL algorithms, we'll integrate them into our self-driving car model within the simulator. Each section includes practical exercises and challenges to help consolidate your learning and give you confidence in applying these techniques.</p><p>Ready to put your skills to the test and pave the way towards futuristic transportation solutions? Let's get started on this thrilling ride into the world of Reinforcement Learning and autonomous vehicles!</p>
+                </section>
+                
+                <div class="advertisement">
+                    <h4>Your Ad Could Be Here</h4>
+                    <p>This is where a real content advertisement would appear.</p>
+                    <a href="#" class="ad-link">Learn More</a>
+                </div>
+                
+
+                
+                  <section id="fundamentals-of-reinforcement-learning">
+                      <h2>Fundamentals of Reinforcement Learning</h2>
+                      <img src="https://images.unsplash.com/photo-1550000000000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Fundamentals of Reinforcement Learning" class="section-image">
+                      <p># Fundamentals of Reinforcement Learning</p><p>In this section of our tutorial on "Reinforcement Learning in Action: Build a Self-Driving Car Simulator," we delve into the core principles and methodologies that underpin reinforcement learning (RL). This advanced-level guide will help you grasp the essential concepts needed to develop an intelligent agent for a self-driving car simulation.</p><p>## Key Concepts: Agents, Environments, States, Actions, and Rewards</p><p>Reinforcement Learning involves several key components: the agent, environment, states, actions, and rewards. Understanding these elements is crucial for implementing RL in the context of a self-driving car.</p><p>- <strong>Agent</strong>: In the realm of our self-driving car simulation, the agent is the model or algorithm that makes decisions. Its goal is to learn the best actions to take in various driving scenarios to maximize safety and efficiency.<br>  <br>- <strong>Environment</strong>: The environment is the world through which the agent interacts. In this case, it includes the simulated road conditions, traffic, weather, and all external factors that affect driving.<br>  <br>- <strong>States</strong>: A state represents the current situation of the environment. For a self-driving car, this could include data such as the car's speed, the proximity of other vehicles, road type, and traffic signals.<br>  <br>- <strong>Actions</strong>: Actions are the set of possible moves that the agent can make. In a driving simulator, actions might include accelerating, braking, steering angles, or changing lanes.<br>  <br>- <strong>Rewards</strong>: Rewards are given to the agent based on the actions it chooses in response to the state of the environment. Positive rewards could be given for maintaining safe distances from other vehicles, while negative rewards could be used for collisions or traffic law infractions.</p><p>By interacting with the environment, receiving states, taking actions, and receiving rewards, the agent learns to navigate the complexities of driving autonomously.</p><p>## Exploring Different Types of Reinforcement Learning</p><p>There are several approaches to reinforcement learning that can be applied to self-driving car simulations. Let’s explore three prominent methods: Q-learning, Deep Q-Networks (DQN), and Policy Gradient methods.</p><p>### Q-learning</p><p>Q-learning is a value-based and off-policy RL algorithm. It learns the value of an action taken in a given state. Here's a simple example in Python using a hypothetical state-action table (Q-table):</p><p><code></code>`python<br>import numpy as np</p><p># Initialize Q-table with zeros<br>Q_table = np.zeros([state_space, action_space])</p><p># Update Q-table<br>Q_table[state, action] = Q_table[state, action] + alpha <em> (reward + gamma </em> np.max(Q_table[new_state]) - Q_table[state, action])<br><code></code>`</p><p>### Deep Q-Networks (DQN)</p><p>DQN extends Q-learning by using a deep neural network to approximate the Q-value function. This is particularly useful in environments with high-dimensional state spaces, like images from a camera on a self-driving car.</p><p><code></code>`python<br>from keras.models import Sequential<br>from keras.layers import Dense</p><p># Create a simple DQN model<br>model = Sequential()<br>model.add(Dense(24, input_dim=state_size, activation='relu'))<br>model.add(Dense(24, activation='relu'))<br>model.add(Dense(action_size, activation='linear'))<br>model.compile(loss='mse', optimizer='adam')<br><code></code>`</p><p>### Policy Gradient Methods</p><p>Unlike Q-learning that approximates a value function, policy gradient methods directly learn the policy function that maps state to action. This approach is useful when the action space is continuous or very large.</p><p><code></code>`python<br>import tensorflow as tf</p><p># Example of a simple policy gradient model<br>model = tf.keras.models.Sequential([<br>    tf.keras.layers.Dense(128, activation='relu', input_shape=(state_size,)),<br>    tf.keras.layers.Dense(action_size, activation='softmax')<br>])</p><p>optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)<br>model.compile(optimizer=optimizer, loss='categorical_crossentropy')<br><code></code>`</p><p>## Setting Up the Python Environment with Necessary Libraries</p><p>To implement RL algorithms effectively, you'll need an appropriate setup with Python libraries such as TensorFlow, Keras, and OpenAI Gym.</p><p>Here's how to set up your environment:</p><p>1. <strong>Install Python</strong>: Ensure you have Python 3.x installed.<br>2. <strong>Install libraries</strong>: Use pip to install TensorFlow, Keras, and OpenAI Gym.</p><p><code></code>`bash<br>pip install tensorflow keras gym<br><code></code>`</p><p>3. <strong>Verify Installation</strong>: Import the libraries in Python to confirm installation.</p><p><code></code>`python<br>import tensorflow as tf<br>import keras<br>import gym<br><code></code>`</p><p>OpenAI Gym provides an extensive toolkit for developing and comparing reinforcement learning algorithms. It includes a wide variety of environments that simulate different tasks which can be used for training and testing RL agents.</p><p>By following these steps and understanding these concepts and methodologies, you are well on your way to creating a robust self-driving car simulator using reinforcement learning. Remember to experiment with different algorithms and tune your models for optimal performance!</p>
+                      
+                      <h3 id="fundamentals-of-reinforcement-learning-key-concepts-agents-environments-states-actions-and-rewards">Key concepts: agents, environments, states, actions, and rewards</h3><h3 id="fundamentals-of-reinforcement-learning-exploring-different-types-of-reinforcement-learning-q-learning-deep-q-networks-dqn-and-policy-gradient-methods">Exploring different types of reinforcement learning: Q-learning, Deep Q-Networks (DQN), and Policy Gradient methods</h3><h3 id="fundamentals-of-reinforcement-learning-setting-up-the-python-environment-with-necessary-libraries-tensorflow-keras-openai-gym">Setting up the Python environment with necessary libraries (TensorFlow, Keras, OpenAI Gym)</h3>
+                  </section>
+                  
+                  
+                  <section id="designing-the-simulation-environment">
+                      <h2>Designing the Simulation Environment</h2>
+                      <img src="https://images.unsplash.com/photo-1550000001000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Designing the Simulation Environment" class="section-image">
+                      <p># Designing the Simulation Environment</p><p>In this section of our tutorial, "Reinforcement Learning in Action: Build a Self-Driving Car Simulator," we will explore how to design and implement a robust simulation environment that is pivotal for training reinforcement learning (RL) models effectively. The focus will be on using OpenAI Gym for creating custom environments, defining appropriate state and action spaces for a self-driving car, and integrating real-world physics to enhance the realism and efficacy of the simulation.</p><p>## Introduction to OpenAI Gym and Creating Custom Environments</p><p>[OpenAI Gym](https://gym.openai.com/) is a toolkit for developing and comparing reinforcement learning algorithms. It provides a wide variety of environments that mimic real-world or fantastical settings, which are essential for training agents in a controlled and replicable manner.</p><p>To create a custom environment for our self-driving car simulator, you'll need to inherit from the <code>gym.Env</code> class and implement a few key methods:</p><p>- <code>__init__(self)</code>: Initialize the environment's state.<br>- <code>step(self, action)</code>: Apply an action to the environment, which returns the next state, a reward, done (a boolean indicating if the episode is finished), and optional info.<br>- <code>reset(self)</code>: Reset the environment to an initial state.<br>- <code>render(self, mode='human')</code>: Provide a visual representation of the environment.</p><p>Here's a simplified example of what this might look like:</p><p><code></code>`python<br>import gym<br>from gym import spaces<br>import numpy as np</p><p>class SelfDrivingCarEnv(gym.Env):<br>    def __init__(self):<br>        super(SelfDrivingCarEnv, self).__init__()<br>        # Define action and state space<br>        self.action_space = spaces.Discrete(3)  # actions: turn left, go straight, turn right<br>        self.observation_space = spaces.Box(low=0, high=255, shape=(640, 480, 3), dtype=np.uint8)  # state: RGB image from camera</p><p>    def step(self, action):<br>        # Implement logic to handle actions and update the state<br>        state = np.zeros((640, 480, 3))<br>        reward = 0<br>        done = False<br>        return state, reward, done, {}</p><p>    def reset(self):<br>        # Return to initial state<br>        return np.zeros((640, 480, 3))</p><p>    def render(self, mode='human'):<br>        # Show current state<br>        pass<br><code></code>`</p><p>This framework sets the stage for a more complex implementation where you can incorporate specific details about sensor data and vehicle dynamics.</p><p>## Defining the State Space and Action Space for the Self-Driving Car</p><p>The <strong>state space</strong> in a self-driving car simulation represents all possible situations the car might encounter. Commonly, this could be represented by images from cameras (as shown above), but could also include data from other sensors like LIDAR, radar, and GPS. It's crucial to choose a representation that captures enough detail for effective learning but remains computationally manageable.</p><p>The <strong>action space</strong> defines what the car can do at any given moment. For simplicity, you might start with discrete actions like:<br>- 0: Turn left<br>- 1: Go straight<br>- 2: Turn right</p><p>As you scale up the complexity, these actions could become continuous values representing steering angle and acceleration.</p><p>## Integrating Real-World Physics into the Simulation</p><p>To ensure that your simulation reflects real-world driving as closely as possible, integrating physics is critical. This includes modeling vehicle dynamics such as acceleration, braking, friction, and handling. You can use libraries like [PyBullet](https://pybullet.org/) or [Box2D](https://box2d.org/) for physics calculations.</p><p>Here’s an example snippet integrating basic vehicle dynamics:</p><p><code></code>`python<br>def update_car_position(self, action):<br>    if action == 0:  # turn left<br>        self.steering_angle -= 5<br>    elif action == 2:  # turn right<br>        self.steering_angle += 5</p><p>    # Update car's position based on current speed and steering angle<br>    self.position_x += self.speed * np.cos(np.radians(self.steering_angle))<br>    self.position_y += self.speed * np.sin(np.radians(self.steering_angle))<br><code></code>`</p><p>Incorporating realistic physics not only makes your simulation more credible but also ensures that strategies learned in the simulator are more likely to be effective in real-world applications.</p><p>### Best Practices</p><p>1. <strong>Start simple</strong>: Begin with minimal complexity in your state and action spaces. Expand as necessary based on initial testing.<br>2. <strong>Iterate rapidly</strong>: Use simple versions of your environment to test ideas quickly before adding layers of complexity.<br>3. <strong>Leverage existing tools</strong>: Utilize libraries and tools available for physics simulation and visualization to enhance your development speed and quality.</p><p>By following these guidelines and structuring your simulator effectively, you pave the way for developing a sophisticated reinforcement learning model capable of navigating the complexities of real-world driving.</p>
+                      
+                      <h3 id="designing-the-simulation-environment-introduction-to-openai-gym-and-creating-custom-environments">Introduction to OpenAI Gym and creating custom environments</h3><h3 id="designing-the-simulation-environment-defining-the-state-space-and-action-space-for-the-self-driving-car">Defining the state space and action space for the self-driving car</h3><h3 id="designing-the-simulation-environment-integrating-real-world-physics-into-the-simulation">Integrating real-world physics into the simulation</h3>
+                  </section>
+                  
+                  
+                  <section id="developing-the-learning-agent">
+                      <h2>Developing the Learning Agent</h2>
+                      <img src="https://images.unsplash.com/photo-1550000002000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Developing the Learning Agent" class="section-image">
+                      <p># Developing the Learning Agent</p><p>In this section of our tutorial on "Reinforcement Learning in Action: Build a Self-Driving Car Simulator," we'll dive deep into the development of the learning agent that will navigate our simulated environment. We start by implementing a basic Q-learning algorithm, then advance to a more sophisticated Deep Q-Network (DQN), and finally enhance the DQN with recent improvements such as Double DQN and Dueling DQN.</p><p>## 1. Implementing a Basic Q-Learning Algorithm</p><p>Q-learning is a model-free reinforcement learning algorithm to learn the value of an action in a particular state. It does not require a model of the environment and can handle problems with stochastic transitions and rewards, without requiring adaptations.</p><p>Here’s a brief rundown on how to implement a basic Q-learning algorithm:</p><p>### Key Elements:<br>- <strong>State</strong>: The current situation of the agent.<br>- <strong>Action</strong>: All possible moves the agent can take.<br>- <strong>Reward</strong>: Feedback from the environment.</p><p>### Q-Learning Formula:<br>The core of Q-learning is a simple value iteration update, using the weighted average of the old value and the new information:</p><p><code></code>`python<br>Q[state, action] = Q[state, action] + alpha <em> (reward + gamma </em> max(Q[new_state]) - Q[state, action])<br><code></code>`</p><p>Where:<br>- <code>alpha</code> is the learning rate.<br>- <code>gamma</code> is the discount factor.</p><p>### Practical Example:<br><code></code>`python<br>def update_q_table(prev_state, action, reward, next_state, alpha, gamma):<br>    qa_old = Q[prev_state][action]<br>    qa_new = qa_old + alpha <em> (reward + gamma </em> max(Q[next_state]) - qa_old)<br>    Q[prev_state][action] = qa_new<br><code></code>`</p><p>Use this function to update the Q-table after each action taken in the environment. This step is crucial for learning from the actions' consequences.</p><p>## 2. Advancing to a Deep Q-Network (DQN): Architecture and Training</p><p>As the complexity of our environment increases (like in a Self-Driving Car simulation), a basic Q-learning algorithm might struggle due to the large state space. Here, Deep Q-Networks (DQNs) come into play. DQNs use deep neural networks to approximate the Q-function, which maps state-action pairs to rewards.</p><p>### Architecture:<br>Typically, a DQN architecture consists of:<br>- Input layer: Size corresponds to the state space.<br>- Several hidden layers: Non-linear processing of features.<br>- Output layer: Represents the predicted Q-values for all actions.</p><p>### Code Example:<br>Here’s how you might set up a simple DQN using TensorFlow/Keras:</p><p><code></code>`python<br>from tensorflow.keras.models import Sequential<br>from tensorflow.keras.layers import Dense</p><p>model = Sequential([<br>    Dense(24, input_dim=state_size, activation='relu'),<br>    Dense(24, activation='relu'),<br>    Dense(action_size, activation='linear')<br>])<br>model.compile(loss='mse', optimizer='adam')<br><code></code>`</p><p>### Training Process:<br>1. Initialize replay memory capacity.<br>2. Initialize the policy network with random weights.<br>3. Clone the policy network to create target network.<br>4. Iterate through game episodes:<br>    - Update state from environment.<br>    - Select an action via exploration or exploitation.<br>    - Store transition in replay memory.<br>    - Sample random batch from replay memory.<br>    - Compute target and train the network.</p><p>## 3. Enhancing the DQN with Improvements: Double DQN, Dueling DQN</p><p>To further enhance performance, modifications like Double DQN and Dueling DQN are introduced:</p><p>### Double DQN (DDQN):<br>Addresses the issue of overestimation by decoupling selection and evaluation of the action.</p><p><code></code>`python<br># Using two networks to decouple action selection and evaluation<br>Q1 = policy_net(state, action)<br>Q2 = target_net(next_state, np.argmax(policy_net(next_state)))<br>update_target = reward + gamma * Q2<br><code></code>`</p><p>### Dueling DQN:<br>Separates the representation of state values and advantages for each action, which helps to learn which states are valuable without having to learn the effect of each action.</p><p><code></code>`python<br>from tensorflow.keras.layers import Input, Lambda<br>from tensorflow.keras.models import Model</p><p>input_layer = Input(shape=(state_size,))<br>common = Dense(128, activation='relu')(input_layer)</p><p># State Value tower - V<br>state_value = Dense(1)(common)<br>state_value = Lambda(lambda s: K.expand_dims(s[:, 0], -1), output_shape=(action_size,))(state_value)</p><p># Action Advantage tower - A<br>action_advantage = Dense(action_size)(common)<br>action_advantage = Lambda(lambda a: a[:, :] - K.mean(a[:, :], keepdims=True), output_shape=(action_size,))(action_advantage)</p><p># Combine V and A<br>output_layer = Lambda(lambda x: x[0] + x[1])([state_value, action_advantage])</p><p>model = Model(input_layer, output_layer)<br>model.compile(loss='mse', optimizer='adam')<br><code></code>`</p><p>By implementing these enhancements, our agent becomes more robust and efficient in learning policies for complex tasks like navigating a Self-Driving Car in a simulation environment.</p><p>Remember to experiment with different architectures and hyperparameters to find what works best for your specific scenario. Reinforcement Learning is highly empirical and often requires careful tuning and ample training time.</p>
+                      
+                      <h3 id="developing-the-learning-agent-implementing-a-basic-q-learning-algorithm">Implementing a basic Q-learning algorithm</h3><h3 id="developing-the-learning-agent-advancing-to-a-deep-q-network-dqn-architecture-and-training">Advancing to a Deep Q-Network (DQN): architecture and training</h3><h3 id="developing-the-learning-agent-enhancing-the-dqn-with-improvements-double-dqn-dueling-dqn">Enhancing the DQN with improvements: Double DQN, Dueling DQN</h3>
+                  </section>
+                  
+                  <div class="advertisement">
+                      <h4>Your Ad Could Be Here</h4>
+                      <p>This is where a real content advertisement would appear.</p>
+                      <a href="#" class="ad-link">Learn More</a>
+                  </div>
+                  
+                  
+                  <section id="training-and-evaluating-the-model">
+                      <h2>Training and Evaluating the Model</h2>
+                      <img src="https://images.unsplash.com/photo-1550000003000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Training and Evaluating the Model" class="section-image">
+                      <p># Training and Evaluating the Model</p><p>In this section of our tutorial on "Reinforcement Learning in Action: Build a Self-Driving Car Simulator," we will explore critical aspects of training and evaluating your reinforcement learning model. We'll delve into setting up training loops and logging, analyzing performance metrics, and troubleshooting common issues like convergence problems, overfitting, and sample inefficiency. Let's begin by establishing a robust framework for our simulation's training process.</p><p>## Setting up Training Loops and Logging Mechanisms</p><p>Training a reinforcement learning (RL) model for a self-driving car in a simulation environment requires careful monitoring and adjustments throughout the learning process. Here’s how you can set up effective training loops and logging mechanisms.</p><p>### Code Example: Training Loop Setup<br><code></code>`python<br>import logging<br>from stable_baselines3 import PPO</p><p># Initialize the simulation environment and the RL agent<br>env = SelfDrivingCarEnv()<br>model = PPO("MlpPolicy", env, verbose=1)</p><p># Setup logging<br>logging.basicConfig(level=logging.INFO)</p><p>for i in range(10000):<br>    model.learn(total_timesteps=1000)<br>    if i % 100 == 0:<br>        performance = evaluate_model(model, env)<br>        logging.info(f"Episode {i}: Reward - {performance['reward']}")</p><p># Save the trained model<br>model.save("ppo_self_driving_car")<br><code></code>`</p><p>In the above example, we use the PPO algorithm from the Stable Baselines3 library, learning in batches of 1000 timesteps. Logging at regular intervals helps monitor the progress and effectiveness of training.</p><p>### Best Practice: Regular Evaluation<br>Regularly evaluating the model against the environment ensures that the learning is on the right track. Implement checkpoints to save and possibly rollback to earlier model states if performance degrades.</p><p>## Analyzing Performance Metrics and Visualization of Learning Progress</p><p>Evaluating the performance of an RL model in a self-driving car simulation involves analyzing various metrics such as average rewards, number of collisions, or distance traveled without human intervention.</p><p>### Visualization Example: Learning Curves<br><code></code>`python<br>import matplotlib.pyplot as plt</p><p># Assuming 'rewards_over_time' is a list of rewards collected after each episode<br>plt.plot(rewards_over_time)<br>plt.title('Learning Progress of Self-Driving Car')<br>plt.xlabel('Episode')<br>plt.ylabel('Average Reward')<br>plt.show()<br><code></code>`</p><p>This simple plot can provide immediate visual feedback on whether the learning process is improving, stagnating, or degrading over time.</p><p>### Tip: Use Advanced Metrics<br>Consider incorporating more sophisticated metrics like Precision-Recall for specific events (e.g., avoiding obstacles) to get deeper insights into the model’s capabilities and weaknesses.</p><p>## Troubleshooting Common Issues</p><p>### Convergence Problems<br>If the model fails to improve after several iterations, it might be experiencing convergence issues. This can often be addressed by adjusting the learning rate or altering the reward structure to ensure appropriate incentives for desired behaviors.</p><p>### Overfitting<br>In the context of a self-driving car simulator, overfitting occurs when the model performs well in simulated scenarios but fails in real-world conditions. Regularly testing the model in varied, unseen environments can help mitigate this risk.</p><p>### Sample Inefficiency<br>RL models, especially in complex environments like self-driving simulations, can suffer from needing too many interactions to learn effectively. Techniques such as Experience Replay or implementing more complex algorithms like Rainbow or IMPALA might help improve sample efficiency.</p><p><code></code>`python<br>from stable_baselines3.common.buffers import ReplayBuffer</p><p>buffer = ReplayBuffer(size=10000)<br>observation = env.reset()<br>for _ in range(10000):<br>    action = model.predict(observation)<br>    new_observation, reward, done, info = env.step(action)<br>    buffer.add(observation, action, reward, done, new_observation)<br>    observation = new_observation if not done else env.reset()<br><code></code>`</p><p>The above snippet demonstrates how to implement a basic Replay Buffer that stores past experiences to reuse past lessons and speed up the learning process.</p><p>### Conclusion<br>By understanding these fundamentals in setting up training loops, analyzing performance, and troubleshooting, you are well on your way to developing a robust RL model for a self-driving car simulator. Remember, iterative experimentation and tuning are key to success in reinforcement learning.<br></p>
+                      
+                      <h3 id="training-and-evaluating-the-model-setting-up-training-loops-and-logging-mechanisms">Setting up training loops and logging mechanisms</h3><h3 id="training-and-evaluating-the-model-analyzing-performance-metrics-and-visualization-of-learning-progress">Analyzing performance metrics and visualization of learning progress</h3><h3 id="training-and-evaluating-the-model-troubleshooting-common-issues-convergence-problems-overfitting-and-sample-inefficiency">Troubleshooting common issues: convergence problems, overfitting, and sample inefficiency</h3>
+                  </section>
+                  
+                  
+                  <section id="advanced-topics-and-best-practices">
+                      <h2>Advanced Topics and Best Practices</h2>
+                      <img src="https://images.unsplash.com/photo-1550000004000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Advanced Topics and Best Practices" class="section-image">
+                      <p># Advanced Topics and Best Practices in Reinforcement Learning for Self-Driving Car Simulators</p><p>In this section, we delve into advanced reinforcement learning (RL) strategies, ethical considerations, and best practices specifically tailored for developing self-driving car simulators. Our focus will be on enhancing the intelligence of autonomous systems through sophisticated methods and ensuring that these systems are safe and ethical.</p><p>## Exploring Further Enhancements: Policy Gradient Methods and Actor-Critic Models</p><p>Reinforcement Learning has several advanced techniques that can significantly improve the learning efficiency and decision-making quality of self-driving car AI. Two prominent approaches are Policy Gradient methods and Actor-Critic models.</p><p>### Policy Gradient Methods</p><p>Policy Gradient methods focus directly on optimizing the policy that dictates the car's actions without necessarily estimating the value function. This approach is beneficial in environments with high-dimensional action spaces, such as continuous control tasks involved in driving.</p><p>#### Example: Implementing REINFORCE Algorithm<br>Here's a basic example of a Policy Gradient method known as REINFORCE:<br><code></code>`python<br>import numpy as np<br>import tensorflow as tf</p><p>class REINFORCE:<br>    def __init__(self, learning_rate=0.01):<br>        self.policy_network = self.build_network()<br>        self.optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)</p><p>    def build_network(self):<br>        model = tf.keras.models.Sequential([<br>            tf.keras.layers.Dense(24, activation='relu'),<br>            tf.keras.layers.Dense(12, activation='relu'),<br>            tf.keras.layers.Dense(1, activation='sigmoid')<br>        ])<br>        return model</p><p>    def train(self, states, actions, rewards):<br>        with tf.GradientTape() as tape:<br>            probabilities = self.policy_network(states)<br>            log_probs = tf.math.log(probabilities)<br>            loss = -tf.reduce_mean(rewards * log_probs)<br>        gradients = tape.gradient(loss, self.policy_network.trainable_variables)<br>        self.optimizer.apply_gradients(zip(gradients, self.policy_network.trainable_variables))<br><code></code>`<br>This simplistic version of REINFORCE updates the policy by using the gradients of the log probabilities weighted by the rewards.</p><p>### Actor-Critic Models</p><p>Actor-Critic models combine the benefits of value-based and policy-based methods. The "Actor" updates the policy distribution in the direction suggested by the "Critic," which evaluates the action taken by the Actor.</p><p>#### Example: Simple Actor-Critic<br><code></code>`python<br>class ActorCritic(tf.keras.Model):<br>    def __init__(self):<br>        super().__init__()<br>        self.state_layer = tf.keras.layers.Dense(24, activation='relu')<br>        self.actor_layer = tf.keras.layers.Dense(2, activation='softmax')<br>        self.critic_layer = tf.keras.layers.Dense(1)</p><p>    def call(self, state):<br>        x = self.state_layer(state)<br>        return self.actor_layer(x), self.critic_layer(x)<br><code></code>`<br>This model predicts both action probabilities and state value, which are used to adjust the actor’s policy and estimate the critic’s value function.</p><p>## Incorporating Safety and Ethical Considerations in Training AI for Autonomous Vehicles</p><p>Safety and ethical considerations are paramount when training AI models for autonomous vehicles. It is crucial to incorporate these aspects during the simulation phase to prevent real-world mishaps.</p><p>### Ensuring Robustness Against Failures<br>One should implement rigorous testing scenarios that cover a wide range of potential real-world occurrences, including rare and dangerous situations. Utilizing adversarial training can enhance the model's robustness by exposing it to worst-case scenarios.</p><p>### Ethical Decision Making<br>The incorporation of ethical decision-making in AI systems is a complex but necessary challenge. For example, how should an autonomous vehicle react to unavoidable accidents? Embedding ethical guidelines into the decision-making process of AI systems is crucial.</p><p>## Best Practices in Reinforcement Learning Projects and Avoiding Common Pitfalls</p><p>### Regular Evaluation<br>Continuously evaluate the performance of your RL models against baseline models and real-world criteria to ensure that learning is progressing as expected.</p><p>### Scalable and Maintainable Code<br>Keep your code modular to allow easy testing, debugging, and scaling. Use version control systems to manage changes and maintain documentation up-to-date.</p><p>### Avoid Reward Hacking<br>Ensure that the reward system cannot be exploited by the AI in unintended ways. This involves careful design of reward mechanisms and frequent checks during training.</p><p>### Data Efficiency<br>Use techniques such as experience replay or curriculum learning to make the most out of your training data. This is especially important in complex environments like those needed for training self-driving cars.</p><p>By integrating these advanced methods, ethical considerations, and best practices, you can enhance the sophistication and safety of your reinforcement learning projects focused on autonomous vehicles.</p>
+                      
+                      <h3 id="advanced-topics-and-best-practices-exploring-further-enhancements-policy-gradient-methods-and-actor-critic-models">Exploring further enhancements: Policy Gradient methods and Actor-Critic models</h3><h3 id="advanced-topics-and-best-practices-incorporating-safety-and-ethical-considerations-in-training-ai-for-autonomous-vehicles">Incorporating safety and ethical considerations in training AI for autonomous vehicles</h3><h3 id="advanced-topics-and-best-practices-best-practices-in-reinforcement-learning-projects-and-avoiding-common-pitfalls">Best practices in reinforcement learning projects and avoiding common pitfalls</h3>
+                  </section>
+                  
+                  
+
+                
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>### Conclusion</p><p>Throughout this advanced tutorial titled "Reinforcement Learning in Action: Build a Self-Driving Car Simulator," we have embarked on a comprehensive journey exploring the intricate world of reinforcement learning (RL) and its practical application in autonomous driving technology. Starting with the <strong>Fundamentals of Reinforcement Learning</strong>, we established a solid foundation by understanding the key concepts and algorithms that power RL systems. This knowledge was pivotal as we moved into the more hands-on sections of the tutorial.</p><p>In <strong>Designing the Simulation Environment</strong> and <strong>Developing the Learning Agent</strong>, we tackled the core challenges of creating a realistic simulation where our RL agents could safely learn and improve. By iteratively <strong>Training and Evaluating the Model</strong>, we observed how theoretical principles translate into real-world skills, refining our agent's ability to navigate complex driving scenarios effectively.</p><p>The section on <strong>Advanced Topics and Best Practices</strong> provided deeper insights into scaling up our RL solutions and fine-tuning them for optimal performance, ensuring that you are equipped with cutting-edge knowledge to handle practical challenges in RL projects.</p><p><strong>Key takeaways</strong> from this tutorial include understanding the depth and breadth of reinforcement learning applications, mastering the development of an RL agent, and appreciating the iterative nature of training and evaluating AI models in a simulated environment.</p><p>As you move forward, consider diving deeper into specific areas such as multi-agent environments, transfer learning, or exploring alternative neural network architectures to enhance your models. Further resources can be found in scholarly articles, online courses from platforms like Coursera or Udacity, and participation in AI-focused communities such as GitHub or Stack Overflow.</p><p>We encourage you to apply the knowledge gained here by experimenting with different simulation parameters, or perhaps by trying to simulate different types of vehicles or traffic conditions. Each modification provides a valuable learning opportunity, pushing the boundaries of what is possible with reinforcement learning.</p><p>Embark on these next steps with confidence and curiosity, continuously challenging and refining your skills in this exciting field of artificial intelligence.</p>
+                </section>
+                
+
+                
+                <section id="code-examples">
+                    <h2>Code Examples</h2>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-1">Code Example</h3>
+                        <p>This example demonstrates how to set up a basic simulation environment using Python and OpenAI Gym for a self-driving car.</p>
+                        <pre><code class="language-python"># Import necessary libraries
+import gym
+from gym import spaces
+
+# Define the simulation environment class
+class SelfDrivingCarEnv(gym.Env):
+    def __init__(self):
+        super(SelfDrivingCarEnv, self).__init__()
+        # Define action and observation space
+        # Actions: accelerate, brake, turn left, turn right
+        self.action_space = spaces.Discrete(4)
+        # Observations: position, velocity, and obstacle distance
+        self.observation_space = spaces.Box(low=0, high=255, shape=(3,), dtype=np.float32)
+
+    def step(self, action):
+        # Implement action logic and state update
+        return self.state, reward, done, {}
+
+    def reset(self):
+        # Reset the environment state
+        self.state = np.zeros((3,))
+        return self.state
+
+    def render(self, mode=&#39;human&#39;):
+        # Render the environment to the screen or other interfaces
+        pass</code></pre>
+                        <p class="explanation">To run this code, ensure you have the 'gym' library installed. Use 'pip install gym' to install. After setting up, instantiate the environment with 'env = SelfDrivingCarEnv()' and use 'env.reset()' to initialize the state.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-2">Code Example</h3>
+                        <p>This example shows how to implement a basic Deep Q-Network (DQN) agent for controlling a self-driving car in the simulation environment.</p>
+                        <pre><code class="language-python"># Import necessary libraries
+import numpy as np
+import random
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+
+# Define the DQN Agent class
+class DQNAgent:
+    def __init__(self, state_size, action_size):
+        self.state_size = state_size
+        self.action_size = action_size
+        self.memory = [] # Memory for experience replay
+        self.gamma = 0.95 # Discount factor
+        self.epsilon = 1.0 # Exploration rate
+        self.epsilon_min = 0.01
+        self.epsilon_decay = 0.995
+        self.learning_rate = 0.001
+        self.model = self._build_model()
+
+    def _build_model(self):
+        # Neural network for Deep Q learning Model
+        model = Sequential()
+        model.add(Dense(24, input_dim=self.state_size, activation=&#39;relu&#39;))
+        model.add(Dense(24, activation=&#39;relu&#39;))
+        model.add(Dense(self.action_size, activation=&#39;linear&#39;))
+        model.compile(loss=&#39;mse&#39;, optimizer=Adam(lr=self.learning_rate))
+        return model
+
+    def remember(self, state, action, reward, next_state, done):
+        # Store experience in memory
+        self.memory.append((state, action, reward, next_state, done))
+
+    def act(self, state):
+        # Return action based on model prediction or random choice for exploration
+        if np.random.rand() &lt;= self.epsilon:
+            return random.randrange(self.action_size)
+        act_values = self.model.predict(state)
+        return np.argmax(act_values[0])</code></pre>
+                        <p class="explanation">To run this code, install Keras with 'pip install keras'. Instantiate the agent with 'agent = DQNAgent(state_size=3, action_size=4)', where 'state_size' is the dimension of the observation space and 'action_size' is the number of possible actions.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-3">Code Example</h3>
+                        <p>This example illustrates how to train the DQN agent using experiences stored in the replay buffer.</p>
+                        <pre><code class="language-python"># Define function to train the agent from previous experiences
+def replay(agent, batch_size):
+    minibatch = random.sample(agent.memory, batch_size)
+    for state, action, reward, next_state, done in minibatch:
+        target = reward # if done
+        if not done:
+            target = reward + agent.gamma * np.amax(agent.model.predict(next_state)[0])
+        target_f = agent.model.predict(state)
+        target_f[0][action] = target
+        agent.model.fit(state, target_f, epochs=1, verbose=0)
+    if agent.epsilon &gt; agent.epsilon_min:
+        agent.epsilon *= agent.epsilon_decay
+
+# Example usage of replay function:
+# Assuming an instance of DQNAgent called &#39;agent&#39; has been created and populated with some memory
+def example_train():
+    if len(agent.memory) &gt; 32: # Ensure there are enough samples in memory to create a minibatch
+        replay(agent, 32)</code></pre>
+                        <p class="explanation">To execute this training function, ensure your agent has accumulated experiences in its memory. Call 'example_train()' during the training loop after each episode or after a set number of steps.</p>
+                    </div>
+                    
+                </section>
+                
+
+                <div class="tutorial-rating">
+                    <h3>Was this tutorial helpful?</h3>
+                    <div class="stars">★ ★ ★ ★ ★</div>
+                </div>
+
+                <div class="related-tutorials">
+                    <h3>Related Tutorials</h3>
+                    <div class="tutorial-grid">
+                        <a href="../tutorials/building-custom-gpt-applications.html" class="tutorial-card">
+                            <img src="https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Building Custom GPT Applications">
+                            <h4>Building Custom GPT Applications</h4>
+                        </a>
+                        <a href="../tutorials/neural-networks-explained.html" class="tutorial-card">
+                            <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Neural Networks Explained">
+                            <h4>Neural Networks Explained</h4>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <aside class="sidebar">
+            <div class="newsletter-signup">
+                <h3>Subscribe for More AI & ML Tutorials</h3>
+                <p>Get weekly tutorials, guides, and AI resources delivered directly to your inbox.</p>
+                <form>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="advertisement sidebar-ad">
+                <h4>Your Ad Could Be Here</h4>
+                <p>This is where a real sidebar advertisement would appear.</p>
+                <a href="#" class="ad-link">Learn More</a>
+            </div>
+
+            <div class="category-info">
+                <h3>Category</h3>
+                <a href="../categories/reinforcement-learning.html">Reinforcement-learning</a>
+            </div>
+
+            <div class="popular-tutorials">
+                <h3>Popular Tutorials</h3>
+                <ul>
+                    <li><a href="../tutorials/machine-learning-beginners-guide.html">Machine Learning: A Complete Beginner's Guide</a> 45K views</li>
+                    <li><a href="../tutorials/pytorch-vs-tensorflow.html">PyTorch vs TensorFlow: Which One Should You Learn?</a> 32K views</li>
+                    <li><a href="../tutorials/deep-learning-image-classification.html">Image Classification with Deep Learning</a> 28K views</li>
+                    <li><a href="../tutorials/natural-language-processing-basics.html">NLP Basics: Understanding Language with AI</a> 24K views</li>
+                </ul>
+            </div>
+
+            <div class="topics">
+                <h3>Explore Topics</h3>
+                <ul>
+                    <li><a href="../categories/deep-learning.html">Deep Learning <span>42</span></a></li>
+                    <li><a href="../categories/computer-vision.html">Computer Vision <span>38</span></a></li>
+                    <li><a href="../categories/nlp.html">Natural Language Processing <span>35</span></a></li>
+                    <li><a href="../categories/reinforcement-learning.html">Reinforcement Learning <span>24</span></a></li>
+                    <li><a href="../categories/data-science.html">Data Science <span>56</span></a></li>
+                    <li><a href="../categories/ai-ethics.html">AI Ethics <span>18</span></a></li>
+                </ul>
+            </div>
+
+            <div class="advertisement sidebar-ad">
+                <h4>Your Ad Could Be Here</h4>
+                <p>This is where a real sidebar advertisement would appear.</p>
+                <a href="#" class="ad-link">Learn More</a>
+            </div>
+
+            <div class="social-share">
+                <h3>Share</h3>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Freinforcement-learning-in-action-build-a-self-driving-car-simulator&text=Reinforcement%20Learning%20in%20Action%3A%20Build%20a%20Self-Driving%20Car%20Simulator%20%7C%20Solve%20for%20AI" title="Share on Twitter">🐦</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Freinforcement-learning-in-action-build-a-self-driving-car-simulator" title="Share on Facebook">📘</a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Freinforcement-learning-in-action-build-a-self-driving-car-simulator&title=Reinforcement%20Learning%20in%20Action%3A%20Build%20a%20Self-Driving%20Car%20Simulator%20%7C%20Solve%20for%20AI" title="Share on LinkedIn">💼</a>
+                    <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Freinforcement-learning-in-action-build-a-self-driving-car-simulator&title=Reinforcement%20Learning%20in%20Action%3A%20Build%20a%20Self-Driving%20Car%20Simulator%20%7C%20Solve%20for%20AI" title="Share on Reddit">🔴</a>
+                    <a href="mailto:?subject=Reinforcement%20Learning%20in%20Action%3A%20Build%20a%20Self-Driving%20Car%20Simulator%20%7C%20Solve%20for%20AI&body=Check out this article: https%3A%2F%2Fsolveforai.com%2Ftutorials%2Freinforcement-learning-in-action-build-a-self-driving-car-simulator" title="Share via Email">📧</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
