@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Transformers: Beyond BERT and GPT-3 | Solve for AI</title>
+    <meta name="description" content="Learn the intricacies of transformer models and how to optimize them for various NLP tasks.">
+    <meta name="keywords" content="Transformers, BERT, GPT-3">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tutorials.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html">Solve<span> for AI</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../tutorials.html" class="active">Tutorials</a></li>
+                    <li><a href="../learning-paths.html">Learning Paths</a></li>
+                    <li><a href="../tools.html">AI Tools</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="tutorial-container">
+        <article class="tutorial-content">
+            <header class="tutorial-header">
+                <h1>Mastering Transformers: Beyond BERT and GPT-3</h1>
+                <div class="tutorial-meta">
+                    <span class="category">Nlp</span>
+                    <span class="reading-time">17 min read</span>
+                    <span class="publish-date">Updated: June 18, 2025</span>
+                </div>
+
+                <div class="author-info">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author photo" class="author-photo">
+                    <div class="author-details">
+                        <span class="author-name">AI Content Team</span>
+                        <span class="author-title">AI Research Engineer</span>
+                    </div>
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Mastering Transformers: Beyond BERT and GPT-3" class="hero-image">
+
+                <div class="table-of-contents">
+                    <h3>Table of Contents</h3>
+                    <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#understanding-transformer-architecture">Understanding Transformer Architecture</a></li>
+        <ul>
+            <li><a href="#understanding-transformer-architecture-core-components-of-transformers">Core Components of Transformers</a></li>
+            <li><a href="#understanding-transformer-architecture-attention-mechanisms-self-attention-and-multi-head-attention">Attention Mechanisms: Self-Attention and Multi-Head Attention</a></li>
+            <li><a href="#understanding-transformer-architecture-positional-encoding-and-layer-normalization">Positional Encoding and Layer Normalization</a></li>
+            <li><a href="#understanding-transformer-architecture-transformer-model-variants-exploring-differences">Transformer Model Variants: Exploring Differences</a></li>
+        </ul>
+    <li><a href="#advanced-transformer-models">Advanced Transformer Models</a></li>
+        <ul>
+            <li><a href="#advanced-transformer-models-t5-text-to-text-transfer-transformer">T5 (Text-to-Text Transfer Transformer)</a></li>
+            <li><a href="#advanced-transformer-models-xlnet-generalized-autoregressive-pretraining">XLNet: Generalized Autoregressive Pretraining</a></li>
+            <li><a href="#advanced-transformer-models-electra-efficiency-enhanced-techniques">ELECTRA: Efficiency Enhanced Techniques</a></li>
+            <li><a href="#advanced-transformer-models-distilbert-distillation-into-smaller-models">DistilBERT: Distillation into Smaller Models</a></li>
+        </ul>
+    <li><a href="#practical-implementations-and-fine-tuning">Practical Implementations and Fine-Tuning</a></li>
+        <ul>
+            <li><a href="#practical-implementations-and-fine-tuning-setting-up-the-environment-and-libraries">Setting Up the Environment and Libraries</a></li>
+            <li><a href="#practical-implementations-and-fine-tuning-loading-and-preprocessing-data-for-nlp-tasks">Loading and Preprocessing Data for NLP Tasks</a></li>
+            <li><a href="#practical-implementations-and-fine-tuning-fine-tuning-techniques-on-specific-tasks-eg-text-classification-question-answering">Fine-Tuning Techniques on Specific Tasks (e.g., Text Classification, Question Answering)</a></li>
+            <li><a href="#practical-implementations-and-fine-tuning-code-samples-for-implementing-custom-transformers">Code Samples for Implementing Custom Transformers</a></li>
+        </ul>
+    <li><a href="#optimization-and-best-practices">Optimization and Best Practices</a></li>
+        <ul>
+            <li><a href="#optimization-and-best-practices-improving-model-performance-with-hyperparameter-tuning">Improving Model Performance with Hyperparameter Tuning</a></li>
+            <li><a href="#optimization-and-best-practices-utilizing-mixed-precision-training-and-quantization">Utilizing Mixed Precision Training and Quantization</a></li>
+            <li><a href="#optimization-and-best-practices-handling-overfitting-and-underfitting-in-transformer-models">Handling Overfitting and Underfitting in Transformer Models</a></li>
+            <li><a href="#optimization-and-best-practices-common-pitfalls-and-how-to-avoid-them">Common Pitfalls and How to Avoid Them</a></li>
+        </ul>
+    <li><a href="#real-world-applications-and-case-studies">Real-World Applications and Case Studies</a></li>
+        <ul>
+            <li><a href="#real-world-applications-and-case-studies-transformers-in-sentiment-analysis">Transformers in Sentiment Analysis</a></li>
+            <li><a href="#real-world-applications-and-case-studies-application-in-machine-translation">Application in Machine Translation</a></li>
+            <li><a href="#real-world-applications-and-case-studies-use-cases-in-automated-summarization">Use Cases in Automated Summarization</a></li>
+            <li><a href="#real-world-applications-and-case-studies-ethical-considerations-and-bias-in-transformer-models">Ethical Considerations and Bias in Transformer Models</a></li>
+        </ul>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#code-examples">Code Examples</a></li>
+</ul>
+                </div>
+            </header>
+
+            <section class="tutorial-body">
+                
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <p># Mastering Transformers: Beyond BERT and GPT-3</p><p>Welcome to a world where understanding the nuances of <strong>Transformers</strong> can dramatically enhance how we interact with technology. As we delve into the realms of advanced natural language processing (NLP), the impact of models like <strong>BERT</strong> and <strong>GPT-3</strong> cannot be overstated. However, the journey doesn't end there. These models are just the beginning. This tutorial is designed to take you beyond the basics, exploring deeper and broader applications of Transformer models that continue to revolutionize the field of NLP.</p><p>### Why This Matters</p><p>In today's data-driven environment, the ability to harness the power of advanced NLP models is invaluable. Transformers, in particular, have been pivotal in pushing the boundaries of what machines can understand and how they can interact with us through language. From improving search engine results to enabling more coherent and context-aware chatbots, the applications are as impactful as they are varied. By mastering these tools, you position yourself at the forefront of one of the most exciting advancements in AI.</p><p>### What You Will Learn</p><p>This tutorial is structured to not only deepen your understanding of the foundational concepts of Transformers but also to expand your skills in applying these models to a variety of NLP tasks. You'll learn about:</p><p>- <strong>Advanced Architectures</strong>: Dig deeper into the mechanics of newer Transformer models that build on or improve the architectures of BERT and GPT-3.<br>- <strong>Optimization Techniques</strong>: Explore strategies to enhance model performance, from data preprocessing to fine-tuning training processes.<br>- <strong>Application Scenarios</strong>: Apply these models to real-world NLP tasks, understanding both their strengths and their limitations in practical scenarios.<br>- <strong>Ethical Considerations</strong>: Discuss the ethical implications of deploying powerful NLP models, including bias and fairness in automated language understanding.</p><p>### Prerequisites</p><p>Before embarking on this journey, it’s ideal to have:<br>- A basic understanding of machine learning concepts<br>- Familiarity with Python and common machine learning libraries like TensorFlow or PyTorch<br>- An introductory knowledge of NLP and previous transformer models like BERT and GPT-3 will be beneficial but not mandatory.</p><p>### Overview of the Tutorial</p><p>We will start with a refresher on the core concepts behind Transformers before moving on to more advanced topics. Each section is designed to build upon the last, ensuring a comprehensive understanding of not just how these models work, but how to effectively implement them. Practical exercises and case studies will be interspersed throughout to provide hands-on experience and real-world context.</p><p>Prepare to transform your understanding of NLP with this deep dive into the next generation of Transformer models. Whether you’re looking to enhance your career in AI or simply eager to explore the cutting edge of technology, this tutorial promises valuable insights and skills development in one of AI’s most dynamic arenas.</p>
+                </section>
+                
+                <div class="advertisement">
+                    <h4>Your Ad Could Be Here</h4>
+                    <p>This is where a real content advertisement would appear.</p>
+                    <a href="#" class="ad-link">Learn More</a>
+                </div>
+                
+
+                
+                  <section id="understanding-transformer-architecture">
+                      <h2>Understanding Transformer Architecture</h2>
+                      <img src="https://images.unsplash.com/photo-1550000000000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Understanding Transformer Architecture" class="section-image">
+                      <p># Understanding Transformer Architecture</p><p>Transformers have revolutionized the field of natural language processing (NLP) and beyond, powering models like BERT and GPT-3 with unprecedented capabilities. This section delves into the core components and mechanisms of the Transformer architecture, providing a deeper understanding of how these models process data and why they are so effective.</p><p>## 1. Core Components of Transformers</p><p>Transformers consist of two main parts: the encoder and the decoder. Each part is made up of multiple layers that include several key components:</p><p>- <strong>Attention Mechanisms</strong>: These allow the model to focus on different parts of the input sequence for prediction.<br>- <strong>Feed-Forward Neural Networks</strong>: Each layer contains a fully connected feed-forward network applied to each position separately and identically.<br>- <strong>Residual Connections</strong>: Also known as skip connections, they help in avoiding the vanishing gradient problem by allowing gradients to flow through the network directly.<br>- <strong>Layer Normalization</strong>: This component normalizes the inputs across the features for each layer, stabilizing the learning process.</p><p>The encoder processes the input data and passes its output to the decoder, which generates the prediction. Let's now explore one of the standout features of Transformers, the attention mechanisms.</p><p>## 2. Attention Mechanisms: Self-Attention and Multi-Head Attention</p><p>### Self-Attention</p><p>The self-attention mechanism allows the model to weigh the importance of different words in the input data relative to each other. For instance, in the sentence "The cat sat on the mat," it helps the model determine which words ("cat" and "mat") are most relevant when generating embeddings for "sat".</p><p>Here is a simplified pseudo-code snippet representing self-attention:</p><p><code></code>`python<br>def self_attention(query, key, value):<br>    scores = np.dot(query, key.T) / sqrt(key.size(-1))<br>    weights = softmax(scores)<br>    output = np.dot(weights, value)<br>    return output<br><code></code>`</p><p>### Multi-Head Attention</p><p>While self-attention looks at one set of weightings at a time, multi-head attention runs several self-attention operations in parallel, merging their outputs. This diversifies the attention mechanism, allowing the model to capture different aspects of semantic and syntactic information from the same input. In practice, this is how it is implemented:</p><p><code></code>`python<br>def multi_head_attention(query, key, value, num_heads):<br>    split_heads = lambda x: np.split(x, num_heads, axis=-1)<br>    query, key, value = map(split_heads, [query, key, value])<br>    attended_heads = [self_attention(q, k, v) for q, k, v in zip(query, key, value)]<br>    concatenated_output = np.concatenate(attended_heads, axis=-1)<br>    return concatenated_output<br><code></code>`</p><p>## 3. Positional Encoding and Layer Normalization</p><p>### Positional Encoding</p><p>Since Transformers do not inherently process sequential data as sequences (unlike RNNs), they require positional encodings to maintain the order of the input data. Positional encodings are added to the input embeddings at the bottom of the encoder stack. They may use sine and cosine functions of different frequencies:</p><p><code></code>`python<br>def positional_encoding(position, d_model):<br>    angle_rates = 1 / np.power(10000, (2 * (np.arange(d_model)[np.newaxis, :] // 2)) / np.d_model)<br>    angle_rads = position[:, np.newaxis] * angle_rates<br>    sines = np.sin(angle_rads[:, 0::2])<br>    cosines = np.cos(angle_rads[:, 1::2])<br>    pos_encoding = np.concatenate([sines, cosines], axis=-1)<br>    return pos_encoding<br><code></code>`</p><p>### Layer Normalization</p><p>Layer normalization is critical in stabilizing the training process. It normalizes the inputs across the features instead of across the batch:</p><p><code></code>`python<br>def layer_normalization(inputs):<br>    mean = np.mean(inputs, axis=-1, keepdims=True)<br>    std = np.std(inputs, axis=-1, keepdims=True)<br>    normalized = (inputs - mean) / (std + 1e-6)<br>    return normalized<br><code></code>`</p><p>## 4. Transformer Model Variants: Exploring Differences</p><p>Several variants of the original Transformer model have been developed since its introduction. For instance:</p><p>- <strong>BERT (Bidirectional Encoder Representations from Transformers)</strong> uses only the encoder part of the Transformer for tasks like classification and named entity recognition.<br>- <strong>GPT-3 (Generative Pre-trained Transformer 3)</strong> utilizes only the decoder component for generating human-like text based on a given prompt.</p><p>Each variant adapts the Transformer architecture to better suit specific applications or improve performance. For example, BERT's bidirectional nature allows it to understand context from both previous and following tokens in a sequence, enhancing its understanding of language.</p><p>---</p><p>In conclusion, understanding these core components and mechanisms is crucial for mastering Transformers and leveraging their power in various AI applications. By exploring different model variants and their specific enhancements or modifications, developers can choose or innovate solutions tailored for their particular needs in fields ranging from natural language processing to more broadly applicable AI tasks.</p>
+                      
+                      <h3 id="understanding-transformer-architecture-core-components-of-transformers">Core Components of Transformers</h3><h3 id="understanding-transformer-architecture-attention-mechanisms-self-attention-and-multi-head-attention">Attention Mechanisms: Self-Attention and Multi-Head Attention</h3><h3 id="understanding-transformer-architecture-positional-encoding-and-layer-normalization">Positional Encoding and Layer Normalization</h3><h3 id="understanding-transformer-architecture-transformer-model-variants-exploring-differences">Transformer Model Variants: Exploring Differences</h3>
+                  </section>
+                  
+                  
+                  <section id="advanced-transformer-models">
+                      <h2>Advanced Transformer Models</h2>
+                      <img src="https://images.unsplash.com/photo-1550000001000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Advanced Transformer Models" class="section-image">
+                      <p># Advanced Transformer Models</p><p>As we delve deeper into the realm of Transformer models, moving beyond the well-known BERT and GPT-3, several innovative architectures have emerged. These models enhance performance, efficiency, and applicability across a wide range of natural language processing tasks. This section will explore four significant advancements: T5, XLNet, ELECTRA, and DistilBERT, providing insights into their mechanisms, applications, and practical implementation tips.</p><p>## 1. T5 (Text-to-Text Transfer Transformer)</p><p>T5, or the Text-to-Text Transfer Transformer, redefines the approach to NLP tasks by framing them as a unified text-to-text problem. Everything from translation to summarization is treated as converting one form of text into another, which simplifies the processing pipeline.</p><p>### Key Features:<br>- <strong>Unified Framework:</strong> By using a consistent text-to-text format, T5 can be trained across multiple tasks simultaneously, improving its generalization.<br>- <strong>Pre-training Objectives:</strong> It uses a span-corruption objective where random contiguous spans of text are replaced with a sentinel token, and the model must predict the missing text.</p><p>### Practical Example:<br><code></code>`python<br>from transformers import T5Tokenizer, T5ForConditionalGeneration</p><p>tokenizer = T5Tokenizer.from_pretrained('t5-small')<br>model = T5ForConditionalGeneration.from_pretrained('t5-small')</p><p>input_text = "translate English to German: How are you?"<br>inputs = tokenizer(input_text, return_tensors="pt")<br>output_sequences = model.generate(input_ids=inputs['input_ids'])</p><p>translated_text = tokenizer.decode(output_sequences[0], skip_special_tokens=True)<br>print(translated_text)<br><code></code>`</p><p>This example demonstrates how to use T5 for translation, showcasing its versatility for different types of text transformations.</p><p>## 2. XLNet: Generalized Autoregressive Pretraining</p><p>XLNet introduces a novel twist to the Transformer landscape by combining the best aspects of autoregressive (like GPT-3) and autoencoding (like BERT) models through a mechanism called permutation-based training.</p><p>### Key Features:<br>- <strong>Permutation Language Modeling:</strong> Unlike traditional models that predict words in a fixed order, XLNet predicts words in random order, capturing bidirectional context and reducing biases associated with specific sequences.<br>- <strong>Two-Stream Self-Attention:</strong> This unique feature allows XLNet to model the target word without seeing it directly during training, enhancing prediction accuracy.</p><p>### Practical Example:<br><code></code>`python<br>from transformers import XLNetTokenizer, XLNetLMHeadModel</p><p>tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')<br>model = XLNetLMHeadModel.from_pretrained('xlnet-base-cased')</p><p>input_ids = tokenizer.encode("Hello, how are you doing?", add_special_tokens=True, return_tensors="pt")<br>outputs = model(input_ids=input_ids)<br>last_hidden_states = outputs.last_hidden_state<br><code></code>`</p><p>This code snippet illustrates how to encode text and retrieve hidden states using XLNet, demonstrating its capability for complex understanding and prediction tasks.</p><p>## 3. ELECTRA: Efficiency Enhanced Techniques</p><p>ELECTRA stands out by its approach to training more efficient NLP models that are both smaller and faster without compromising performance.</p><p>### Key Features:<br>- <strong>Replaced Token Detection:</strong> Unlike masked language modeling used in BERT, ELECTRA trains a discriminator to distinguish between "real" and "replaced" tokens generated by a small generator network, which is more sample-efficient.<br>  <br>### Practical Example:<br><code></code>`python<br>from transformers import ElectraTokenizer, ElectraForPreTraining</p><p>tokenizer = ElectraTokenizer.from_pretrained('google/electra-small-discriminator')<br>model = ElectraForPreTraining.from_pretrained('google/electra-small-discriminator')</p><p>inputs = tokenizer("The quick brown fox jumps over the lazy dog", return_tensors="pt")<br>outputs = model(<em></em>inputs)<br>logits = outputs.logits<br><code></code>`</p><p>This example shows how to prepare inputs and get model outputs, highlighting ELECTRA's unique pre-training via the discriminator mechanism.</p><p>## 4. DistilBERT: Distillation into Smaller Models</p><p>DistilBERT is an optimized version of BERT that retains most of its predecessor's effectiveness but with fewer parameters and enhanced speed.</p><p>### Key Features:<br>- <strong>Knowledge Distillation:</strong> During training, DistilBERT learns from a full-sized BERT model. This process involves transferring the "knowledge" from the larger model to the smaller one, effectively compressing the model size while maintaining robust performance.</p><p>### Practical Example:<br><code></code>`python<br>from transformers import DistilBertTokenizer, DistilBertModel</p><p>tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')<br>model = DistilBertModel.from_pretrained('distilbert-base-uncased')</p><p>inputs = tokenizer("Hello, world!", return_tensors="pt")<br>outputs = model(<em></em>inputs)<br>hidden_states = outputs.last_hidden_state<br><code></code>`</p><p>This snippet provides a basic usage example of DistilBERT for embedding generation, showcasing its efficiency in processing.</p><p>## Conclusion</p><p>These advanced Transformer models offer unique advantages and capabilities that extend beyond the foundational BERT and GPT-3 frameworks. By understanding and leveraging these models, practitioners can tackle a broader spectrum of NLP challenges more effectively. Whether it's through more efficient training processes or novel neural network architectures, each model presents opportunities for innovation and optimization in AI-driven applications.<br></p>
+                      
+                      <h3 id="advanced-transformer-models-t5-text-to-text-transfer-transformer">T5 (Text-to-Text Transfer Transformer)</h3><h3 id="advanced-transformer-models-xlnet-generalized-autoregressive-pretraining">XLNet: Generalized Autoregressive Pretraining</h3><h3 id="advanced-transformer-models-electra-efficiency-enhanced-techniques">ELECTRA: Efficiency Enhanced Techniques</h3><h3 id="advanced-transformer-models-distilbert-distillation-into-smaller-models">DistilBERT: Distillation into Smaller Models</h3>
+                  </section>
+                  
+                  
+                  <section id="practical-implementations-and-fine-tuning">
+                      <h2>Practical Implementations and Fine-Tuning</h2>
+                      <img src="https://images.unsplash.com/photo-1550000002000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Practical Implementations and Fine-Tuning" class="section-image">
+                      <p># Practical Implementations and Fine-Tuning</p><p>Mastering the implementation and fine-tuning of transformers such as BERT and GPT-3 can significantly enhance the performance of NLP models across various tasks. This section delves into practical steps and strategies needed to effectively use these advanced models. We will cover setting up the environment, data preprocessing, fine-tuning techniques for specific tasks, and how to implement custom transformers.</p><p>## Setting Up the Environment and Libraries</p><p>To start working with transformers, you need a Python environment and several key libraries. Here’s how to set it up:</p><p>1. <strong>Python Environment</strong>: It is recommended to use a virtual environment to avoid conflicts between library versions. You can create one using Anaconda or virtualenv.</p><p>   <code></code>`bash<br>   # Using Anaconda<br>   conda create --name transformers python=3.8<br>   conda activate transformers</p><p>   # Using virtualenv<br>   virtualenv transformers -p python3.8<br>   source transformers/bin/activate<br>   <code></code>`</p><p>2. <strong>Install Libraries</strong>: The primary library we need is <code>transformers</code> by Hugging Face. Install it along with other necessary libraries like <code>torch</code> for PyTorch or <code>tensorflow</code> for TensorFlow implementations.</p><p>   <code></code>`bash<br>   pip install transformers torch datasets<br>   <code></code>`</p><p>3. <strong>Jupyter Notebook</strong>: For interactive coding, install Jupyter:</p><p>   <code></code>`bash<br>   pip install notebook<br>   <code></code>`</p><p>With your environment set, you’re ready to start loading and preprocessing data.</p><p>## Loading and Preprocessing Data for NLP Tasks</p><p>Data loading and preprocessing are crucial for effective model training. Here’s a typical workflow:</p><p>1. <strong>Load Data</strong>: Use the <code>datasets</code> library from Hugging Face for loading standard NLP datasets.</p><p>   <code></code>`python<br>   from datasets import load_dataset</p><p>   dataset = load_dataset('glue', 'mrpc')<br>   <code></code>`</p><p>2. <strong>Preprocess Data</strong>: Tokenization is a critical step where text is converted into tokens that the model can understand.</p><p>   <code></code>`python<br>   from transformers import AutoTokenizer</p><p>   tokenizer = AutoTokenizer.from_pretrained('bert-base-cased')</p><p>   def tokenize_function(examples):<br>       return tokenizer(examples['text'], padding="max_length", truncation=True)</p><p>   tokenized_datasets = dataset.map(tokenize_function, batched=True)<br>   <code></code>`</p><p>Good preprocessing improves model training efficiency and effectiveness.</p><p>## Fine-Tuning Techniques on Specific Tasks</p><p>Fine-tuning transformers like BERT or GPT-3 involves adjusting pre-trained models to specific tasks like text classification or question answering. Here’s an example using BERT for text classification:</p><p>1. <strong>Model Selection</strong>: Choose a model suitable for your task.</p><p>    <code></code>`python<br>    from transformers import BertForSequenceClassification</p><p>    model = BertForSequenceClassification.from_pretrained('bert-base-cased')<br>    <code></code>`</p><p>2. <strong>Training Setup</strong>: Define the training parameters using <code>Trainer</code> or similar utilities.</p><p>    <code></code>`python<br>    from transformers import Trainer, TrainingArguments</p><p>    training_args = TrainingArguments(<br>        output_dir='./results',<br>        num_train_epochs=3,<br>        per_device_train_batch_size=16,<br>        per_device_eval_batch_size=64,<br>        warmup_steps=500,<br>        weight_decay=0.01,<br>        logging_dir='./logs',<br>        logging_steps=10,<br>    )</p><p>    trainer = Trainer(<br>        model=model,<br>        args=training_args,<br>        train_dataset=tokenized_datasets['train'],<br>        eval_dataset=tokenized_datasets['validation']<br>    )</p><p>    trainer.train()<br>    <code></code>`</p><p>This setup helps the model learn task-specific nuances, significantly boosting its performance.</p><p>## Code Samples for Implementing Custom Transformers</p><p>Sometimes, pre-built models don’t fit specific requirements, and you might need to create custom transformer models. Here's a basic framework:</p><p><code></code>`python<br>from transformers import PreTrainedModel, BertModel, PretrainedConfig</p><p>class CustomBertModel(PreTrainedModel):<br>    config_class = PretrainedConfig</p><p>    def __init__(self, config):<br>        super().__init__(config)<br>        self.bert = BertModel(config)<br>        # Add custom layers if needed</p><p>    def forward(self, input_ids, attention_mask=None):<br>        outputs = self.bert(input_ids, attention_mask=attention_mask)<br>        # Implement custom forward pass<br>        return outputs<br><code></code>`</p><p>This example extends the <code>PreTrainedModel</code> class from Hugging Face, allowing you to integrate custom behaviors into the forward pass.</p><p>By mastering these practical aspects of working with transformers, you can enhance your NLP models' capabilities and adapt them to a wide range of applications. Remember that fine-tuning and customization require experimentation and patience but can lead to significantly improved results.</p>
+                      
+                      <h3 id="practical-implementations-and-fine-tuning-setting-up-the-environment-and-libraries">Setting Up the Environment and Libraries</h3><h3 id="practical-implementations-and-fine-tuning-loading-and-preprocessing-data-for-nlp-tasks">Loading and Preprocessing Data for NLP Tasks</h3><h3 id="practical-implementations-and-fine-tuning-fine-tuning-techniques-on-specific-tasks-eg-text-classification-question-answering">Fine-Tuning Techniques on Specific Tasks (e.g., Text Classification, Question Answering)</h3><h3 id="practical-implementations-and-fine-tuning-code-samples-for-implementing-custom-transformers">Code Samples for Implementing Custom Transformers</h3>
+                  </section>
+                  
+                  <div class="advertisement">
+                      <h4>Your Ad Could Be Here</h4>
+                      <p>This is where a real content advertisement would appear.</p>
+                      <a href="#" class="ad-link">Learn More</a>
+                  </div>
+                  
+                  
+                  <section id="optimization-and-best-practices">
+                      <h2>Optimization and Best Practices</h2>
+                      <img src="https://images.unsplash.com/photo-1550000003000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Optimization and Best Practices" class="section-image">
+                      <p>## Optimization and Best Practices for Transformers</p><p>When working with advanced transformer models like BERT and GPT-3, achieving optimal performance requires more than just fine-tuning model parameters. This section delves into essential practices and optimization techniques that can significantly enhance the efficiency and efficacy of your transformer models.</p><p>### 1. Improving Model Performance with Hyperparameter Tuning</p><p>Hyperparameter tuning is crucial for optimizing model performance. Key hyperparameters in transformer models include learning rate, batch size, number of layers, and the number of attention heads. Consider using automated tools like Hyperopt or Optuna for systematic hyperparameter optimization.</p><p><strong>Example: Tuning Learning Rate</strong></p><p>A practical approach is to use a learning rate scheduler. Here’s how you can implement this in PyTorch:</p><p><code></code>`python<br>from torch.optim.lr_scheduler import LambdaLR</p><p># Define a simple decay function<br>def lr_decay(epoch):<br>    return 0.95 <em></em> epoch</p><p># Assuming optimizer has been defined<br>scheduler = LambdaLR(optimizer, lr_lambda=lr_decay)</p><p>for epoch in range(10):<br>    scheduler.step()<br>    train()  # Your training loop here<br><code></code>`</p><p>This scheduler decreases the learning rate by a factor of 0.95 each epoch, helping in fine-tuning the learning process as training progresses.</p><p>### 2. Utilizing Mixed Precision Training and Quantization</p><p>Mixed precision training involves using both 16-bit and 32-bit floating-point types during training to reduce memory usage and speed up model computations. This is particularly beneficial with large models like GPT-3.</p><p><strong>Example: Enabling Mixed Precision in PyTorch</strong></p><p><code></code>`python<br>from torch.cuda.amp import GradScaler, autocast</p><p>scaler = GradScaler()<br>with autocast():<br>    output = model(input)<br>    loss = loss_fn(output, target)</p><p>scaler.scale(loss).backward()<br>scaler.step(optimizer)<br>scaler.update()<br><code></code>`</p><p>Quantization involves converting a model from floating point to integer, which can reduce model size and increase inference speed without significantly affecting accuracy.</p><p>### 3. Handling Overfitting and Underfitting in Transformer Models</p><p><strong>Overfitting</strong> occurs when a model learns the detail and noise in the training data to the extent that it negatively impacts the performance of the model on new data. <strong>Underfitting</strong> happens when a model cannot capture the underlying trend of the data.</p><p>- <strong>Regularization Techniques:</strong> Techniques such as dropout can be effective. For instance, increasing the dropout rate in BERT’s attention layers can help mitigate overfitting.<br>- <strong>Data Augmentation:</strong> Increasing the diversity of the training data through techniques like text augmentation can improve model robustness.</p><p><strong>Example: Configuring Dropout in Transformers</strong></p><p><code></code>`python<br>from transformers import BertConfig, BertModel</p><p>config = BertConfig(hidden_dropout_prob=0.2, attention_probs_dropout_prob=0.2)<br>model = BertModel(config)<br><code></code>`</p><p>### 4. Common Pitfalls and How to Avoid Them</p><p>When working with transformers, some common pitfalls include not normalizing data properly, ignoring the importance of batch size, or neglecting thorough validation during training.</p><p>- <strong>Batch Size Impact:</strong> Smaller batches often lead to unstable gradient estimates, while very large batches may impair the generalization ability of the model. Experiment with batch sizes to find an optimal number.<br>- <strong>Validation Checks:</strong> Regularly monitor validation loss along with training loss. If validation loss increases while training loss decreases, you might be facing overfitting.</p><p><strong>Best Practice: Use Early Stopping</strong></p><p>Here’s how you might implement early stopping in a training loop:</p><p><code></code>`python<br>early_stop_counter = 0<br>min_val_loss = float('inf')</p><p>for epoch in range(max_epochs):<br>    train_loss = train()<br>    val_loss = validate()<br>    <br>    if val_loss < min_val_loss:<br>        min_val_loss = val_loss<br>        early_stop_counter = 0<br>    else:<br>        early_stop_counter += 1<br>    <br>    if early_stop_counter > patience_threshold:<br>        break<br><code></code>`</p><p>In conclusion, mastering these optimization techniques and best practices can drastically improve the performance and efficiency of your transformer-based models. Experimentation and continual learning are key, as the field of AI is ever-evolving.</p>
+                      
+                      <h3 id="optimization-and-best-practices-improving-model-performance-with-hyperparameter-tuning">Improving Model Performance with Hyperparameter Tuning</h3><h3 id="optimization-and-best-practices-utilizing-mixed-precision-training-and-quantization">Utilizing Mixed Precision Training and Quantization</h3><h3 id="optimization-and-best-practices-handling-overfitting-and-underfitting-in-transformer-models">Handling Overfitting and Underfitting in Transformer Models</h3><h3 id="optimization-and-best-practices-common-pitfalls-and-how-to-avoid-them">Common Pitfalls and How to Avoid Them</h3>
+                  </section>
+                  
+                  
+                  <section id="real-world-applications-and-case-studies">
+                      <h2>Real-World Applications and Case Studies</h2>
+                      <img src="https://images.unsplash.com/photo-1550000004000-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Illustration for Real-World Applications and Case Studies" class="section-image">
+                      <p>### Real-World Applications and Case Studies of Transformers</p><p>Transformers have revolutionized the field of natural language processing (NLP) with their ability to capture complex patterns in data efficiently. In this section, we will explore practical applications of transformer models like BERT and GPT-3 in various domains, focusing on sentiment analysis, machine translation, automated summarization, and the ethical considerations involved.</p><p>#### 1. Transformers in Sentiment Analysis</p><p>Sentiment analysis is a critical application in NLP where transformers have shown significant impact. By understanding the sentiment behind texts, businesses can gauge public opinion on products, services, or topics. Transformer models like BERT have been particularly effective due to their deep contextual understanding.</p><p><strong>Example</strong>: Consider a company that wants to analyze customer reviews on their product. Using BERT, we can classify sentiments as positive, neutral, or negative with high accuracy. Here's a simplified code snippet using BERT for sentiment analysis:</p><p><code></code>`python<br>from transformers import BertTokenizer, BertForSequenceClassification<br>from torch.nn.functional import softmax</p><p>tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')<br>model = BertForSequenceClassification.from_pretrained('bert-base-uncased')</p><p># Example review<br>review = "The product was outstanding and the customer service was excellent!"<br>inputs = tokenizer(review, return_tensors="pt", padding=True, truncation=True)</p><p># Predict sentiment<br>outputs = model(<em></em>inputs)<br>probs = softmax(outputs.logits, dim=-1)<br>sentiment = ['Negative', 'Neutral', 'Positive'][probs.argmax()]<br>print(f"Sentiment: {sentiment}")<br><code></code>`</p><p>#### 2. Application in Machine Translation</p><p>Machine translation is another area where transformers excel by providing more accurate and contextually relevant translations. Models like Google's BERT and OpenAI's GPT-3 have been pivotal in this advancement.</p><p><strong>Example</strong>: A business needs to translate user manuals from English to French efficiently. Using a transformer model trained on multiple languages can achieve this with greater nuance and less error than traditional methods:</p><p><code></code>`python<br>from transformers import pipeline</p><p>translator = pipeline("translation_en_to_fr", model="t5-base")<br>translated_text = translator("This user manual is essential for proper setup.", max_length=40)<br>print(f"Translated text: {translated_text[0]['translation_text']}")<br><code></code>`</p><p>#### 3. Use Cases in Automated Summarization</p><p>Automated summarization helps distill long articles, reports, or documents into concise summaries. Transformers are particularly suited for this task due to their ability to understand and generate human-like text.</p><p><strong>Example</strong>: An organization needs to summarize daily news articles for quick updates. Using a model like GPT-3 can provide coherent and relevant summaries:</p><p><code></code>`python<br>from transformers import GPT2Tokenizer, GPT2LMHeadModel</p><p>tokenizer = GPT2Tokenizer.from_pretrained('gpt2')<br>model = GPT2LMHeadModel.from_pretrained('gpt2')</p><p>text = """Long article text..."""<br>inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)<br>summary_ids = model.generate(inputs['input_ids'], max_length=100, num_beams=5, early_stopping=True)<br>summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)</p><p>print(f"Summary: {summary}")<br><code></code>`</p><p>#### 4. Ethical Considerations and Bias in Transformer Models</p><p>While transformers offer numerous benefits, it's crucial to address the ethical implications and potential biases they may introduce. Since these models are trained on vast datasets often sourced from the internet, they can inadvertently learn and perpetuate biases present in the training data.</p><p><strong>Best Practices</strong>:<br>- Regularly audit and update training datasets to ensure diversity and representativeness.<br>- Implement fairness-aware algorithms that can detect and mitigate bias in model predictions.<br>- Engage diverse teams in the development and deployment of transformer models to gain different perspectives on potential biases.</p><p>By considering these ethical aspects, we can harness the power of transformers more responsibly and effectively.</p><p>In conclusion, transformer models like BERT and GPT-3 are driving significant advancements across various domains in NLP. By understanding their applications and potential issues, developers and businesses can better utilize these powerful tools for their specific needs.</p>
+                      
+                      <h3 id="real-world-applications-and-case-studies-transformers-in-sentiment-analysis">Transformers in Sentiment Analysis</h3><h3 id="real-world-applications-and-case-studies-application-in-machine-translation">Application in Machine Translation</h3><h3 id="real-world-applications-and-case-studies-use-cases-in-automated-summarization">Use Cases in Automated Summarization</h3><h3 id="real-world-applications-and-case-studies-ethical-considerations-and-bias-in-transformer-models">Ethical Considerations and Bias in Transformer Models</h3>
+                  </section>
+                  
+                  
+
+                
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>### Conclusion</p><p>As we conclude our journey through the fascinating world of transformer models in "Mastering Transformers: Beyond BERT and GPT-3," it's essential to reflect on the breadth and depth of knowledge we've explored. From the foundational understanding of Transformer architecture to diving into advanced models that build on or diverge from giants like BERT and GPT-3, we have covered substantial ground. We've also stepped into the practical arena, learning how to implement, fine-tune, and optimize these models for real-world applications.</p><p><strong>Key Takeaways:</strong><br>- <strong>Transformer Architecture:</strong> At the core, the transformer model revolutionizes sequence-to-sequence tasks by utilizing self-attention mechanisms, proving to be more efficient than prior models based on recurrent or convolutional layers.<br>- <strong>Advanced Models:</strong> We expanded our knowledge base beyond the popular BERT and GPT-3 to include newer and more specialized transformers that cater to diverse NLP needs and scenarios.<br>- <strong>Practical Implementations and Fine-Tuning:</strong> Hands-on examples demonstrated how to adapt these models to specific tasks, emphasizing the importance of fine-tuning on task-specific datasets.<br>- <strong>Optimization Techniques:</strong> We discussed strategies to enhance model performance and efficiency, which are crucial in deploying scalable AI solutions.<br>- <strong>Real-World Applications:</strong> Through various case studies, we saw the transformative impact of transformers across industries, underscoring their versatility and power in solving complex linguistic tasks.</p><p><strong>Next Steps:</strong><br>To continue your learning journey, consider delving deeper into the emerging variants of transformer models and their applications in other areas of AI. Participating in forums like Stack Overflow, attending webinars, and contributing to open-source projects can also enhance your understanding and keep you updated with the latest advancements.</p><p><strong>Encouragement to Apply Knowledge:</strong><br>I encourage you to apply the concepts and techniques learned here in your projects. Experimentation is key in the AI field — test different models, tweak hyperparameters, and explore novel applications. Your next breakthrough could be just one project away!</p><p>Remember, the field of AI is ever-evolving, and staying curious and informed is your gateway to becoming an expert in transformer technologies.</p>
+                </section>
+                
+
+                
+                <section id="code-examples">
+                    <h2>Code Examples</h2>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-1">Code Example</h3>
+                        <p>This example demonstrates how to fine-tune the T5 transformer model on a custom dataset for text summarization using the Hugging Face Transformers library.</p>
+                        <pre><code class="language-python"># Importing necessary libraries
+from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
+import torch
+
+# Load the pretrained T5 model and tokenizer
+model = T5ForConditionalGeneration.from_pretrained(&#39;t5-small&#39;)
+tokenizer = T5Tokenizer.from_pretrained(&#39;t5-small&#39;)
+
+# Example dataset
+train_data = [
+    {&#39;text&#39;: &#39;Transformers are models that handle sequence-based data.&#39;, &#39;summary&#39;: &#39;Transformers handle sequence data.&#39;},
+    {&#39;text&#39;: &#39;T5 can be used for multiple tasks including summarization.&#39;, &#39;summary&#39;: &#39;T5 useful for multiple tasks.&#39;}
+]
+
+# Preprocess the data
+def preprocess(data):
+    return tokenizer(data[&#39;text&#39;], padding=&#39;max_length&#39;, truncation=True, max_length=512, return_tensors=&#39;pt&#39;), tokenizer(data[&#39;summary&#39;], padding=&#39;max_length&#39;, truncation=True, max_length=128, return_tensors=&#39;pt&#39;)
+
+train_dataset = [{&#39;input_ids&#39;: preprocess(item)[0][&#39;input_ids&#39;].squeeze(), &#39;labels&#39;: preprocess(item)[1][&#39;input_ids&#39;].squeeze()} for item in train_data]
+
+# Training arguments
+training_args = TrainingArguments(output_dir=&#39;./results&#39;, num_train_epochs=3, per_device_train_batch_size=4, warmup_steps=500, weight_decay=0.01, logging_dir=&#39;./logs&#39;)
+
+# Initialize Trainer
+trainer = Trainer(model=model, args=training_args, train_dataset=train_dataset)
+
+# Start training
+trainer.train()</code></pre>
+                        <p class="explanation">This script sets up a T5 model for fine-tuning on a small dataset for summarization. Replace 'train_data' with your dataset. Adjust hyperparameters in 'TrainingArguments' as needed. Run this in a Python environment with the Hugging Face Transformers library installed. Expect the model to learn summarization specific to the training data provided.</p>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h3 id="code-example-2">Code Example</h3>
+                        <p>This code snippet shows how to use DistilBERT, a lighter version of BERT, for the task of sentence classification.</p>
+                        <pre><code class="language-python"># Importing the necessary libraries
+from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
+import torch
+
+# Load DistilBERT tokenizer and model
+tokenizer = DistilBertTokenizer.from_pretrained(&#39;distilbert-base-uncased&#39;)
+model = DistilBertForSequenceClassification.from_pretrained(&#39;distilbert-base-uncased&#39;)
+
+# Sample data (list of sentences)
+sentences = [&#39;I love machine learning&#39;, &#39;The weather is great today&#39;, &#39;Transformers are excellent for NLP&#39;]
+classes = [1, 0, 1]  # 1 for positive sentiment, 0 for neutral/negative sentiment
+
+# Tokenize and encode sentences for DistilBERT input
+inputs = tokenizer(sentences, padding=True, truncation=True, return_tensors=&#39;pt&#39;)
+labels = torch.tensor(classes)
+
+# Create a TensorDataset and DataLoader
+dataset = TensorDataset(inputs[&#39;input_ids&#39;], inputs[&#39;attention_mask&#39;], labels)
+dataloader = DataLoader(dataset, sampler=RandomSampler(dataset), batch_size=2)
+
+# Define a simple function to evaluate the model on this data
+def evaluate_model(dataloader):
+    model.eval()
+    with torch.no_grad():
+        for batch in dataloader:
+            outputs = model(input_ids=batch[0], attention_mask=batch[1])
+            print(outputs.logits)
+
+# Running evaluation
+evaluate_model(dataloader)</code></pre>
+                        <p class="explanation">This Python script uses DistilBERT for categorizing sentences into classes based on sentiment. The 'sentences' list can be expanded with more examples for robust training. The function 'evaluate_model' demonstrates a simple evaluation loop. Run this script in an environment with PyTorch and Hugging Face's Transformers.</p>
+                    </div>
+                    
+                </section>
+                
+
+                <div class="tutorial-rating">
+                    <h3>Was this tutorial helpful?</h3>
+                    <div class="stars">★ ★ ★ ★ ★</div>
+                </div>
+
+                <div class="related-tutorials">
+                    <h3>Related Tutorials</h3>
+                    <div class="tutorial-grid">
+                        <a href="../tutorials/building-custom-gpt-applications.html" class="tutorial-card">
+                            <img src="https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Building Custom GPT Applications">
+                            <h4>Building Custom GPT Applications</h4>
+                        </a>
+                        <a href="../tutorials/neural-networks-explained.html" class="tutorial-card">
+                            <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Neural Networks Explained">
+                            <h4>Neural Networks Explained</h4>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <aside class="sidebar">
+            <div class="newsletter-signup">
+                <h3>Subscribe for More AI & ML Tutorials</h3>
+                <p>Get weekly tutorials, guides, and AI resources delivered directly to your inbox.</p>
+                <form>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="advertisement sidebar-ad">
+                <h4>Your Ad Could Be Here</h4>
+                <p>This is where a real sidebar advertisement would appear.</p>
+                <a href="#" class="ad-link">Learn More</a>
+            </div>
+
+            <div class="category-info">
+                <h3>Category</h3>
+                <a href="../categories/nlp.html">Nlp</a>
+            </div>
+
+            <div class="popular-tutorials">
+                <h3>Popular Tutorials</h3>
+                <ul>
+                    <li><a href="../tutorials/machine-learning-beginners-guide.html">Machine Learning: A Complete Beginner's Guide</a> 45K views</li>
+                    <li><a href="../tutorials/pytorch-vs-tensorflow.html">PyTorch vs TensorFlow: Which One Should You Learn?</a> 32K views</li>
+                    <li><a href="../tutorials/deep-learning-image-classification.html">Image Classification with Deep Learning</a> 28K views</li>
+                    <li><a href="../tutorials/natural-language-processing-basics.html">NLP Basics: Understanding Language with AI</a> 24K views</li>
+                </ul>
+            </div>
+
+            <div class="topics">
+                <h3>Explore Topics</h3>
+                <ul>
+                    <li><a href="../categories/deep-learning.html">Deep Learning <span>42</span></a></li>
+                    <li><a href="../categories/computer-vision.html">Computer Vision <span>38</span></a></li>
+                    <li><a href="../categories/nlp.html">Natural Language Processing <span>35</span></a></li>
+                    <li><a href="../categories/reinforcement-learning.html">Reinforcement Learning <span>24</span></a></li>
+                    <li><a href="../categories/data-science.html">Data Science <span>56</span></a></li>
+                    <li><a href="../categories/ai-ethics.html">AI Ethics <span>18</span></a></li>
+                </ul>
+            </div>
+
+            <div class="advertisement sidebar-ad">
+                <h4>Your Ad Could Be Here</h4>
+                <p>This is where a real sidebar advertisement would appear.</p>
+                <a href="#" class="ad-link">Learn More</a>
+            </div>
+
+            <div class="social-share">
+                <h3>Share</h3>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fmastering-transformers-beyond-bert-and-gpt-3&text=Mastering%20Transformers%3A%20Beyond%20BERT%20and%20GPT-3%20%7C%20Solve%20for%20AI" title="Share on Twitter">🐦</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fmastering-transformers-beyond-bert-and-gpt-3" title="Share on Facebook">📘</a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fmastering-transformers-beyond-bert-and-gpt-3&title=Mastering%20Transformers%3A%20Beyond%20BERT%20and%20GPT-3%20%7C%20Solve%20for%20AI" title="Share on LinkedIn">💼</a>
+                    <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fmastering-transformers-beyond-bert-and-gpt-3&title=Mastering%20Transformers%3A%20Beyond%20BERT%20and%20GPT-3%20%7C%20Solve%20for%20AI" title="Share on Reddit">🔴</a>
+                    <a href="mailto:?subject=Mastering%20Transformers%3A%20Beyond%20BERT%20and%20GPT-3%20%7C%20Solve%20for%20AI&body=Check out this article: https%3A%2F%2Fsolveforai.com%2Ftutorials%2Fmastering-transformers-beyond-bert-and-gpt-3" title="Share via Email">📧</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Solve for AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
