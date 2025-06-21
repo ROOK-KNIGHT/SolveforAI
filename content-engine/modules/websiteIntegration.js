@@ -24,15 +24,18 @@ async function uploadContent(localPath, metadata) {
     const htmlContent = await fs.readFile(localPath, 'utf8');
     
     // Create a new file in the tutorials directory
-    const filename = `${metadata.slug}.html`;
-    const destPath = path.join(config.website.tutorialsPath, filename);
+    const filename = `${metadata.slug}`;
+    const publicPath = path.join(process.cwd(), 'tutorials', `${filename}.html`);
     
-    // Ensure destination directory exists
-    await fs.mkdir(config.website.tutorialsPath, { recursive: true });
+    // Ensure directory exists
+    await fs.mkdir(path.join(process.cwd(), 'tutorials'), { recursive: true });
     
-    // Write the file to the tutorials directory
-    await fs.writeFile(destPath, htmlContent, 'utf8');
-    logger.info(`Saved tutorial file to: ${destPath}`);
+    // Write the file
+    await fs.writeFile(publicPath, htmlContent, 'utf8');
+    logger.info(`Saved tutorial file to: ${publicPath}`);
+    
+    // Update the tutorial grid
+    await updateTutorialGrid(metadata);
     
     // Update the website's tutorial index if needed
     await updateTutorialIndex(metadata);
@@ -41,7 +44,7 @@ async function uploadContent(localPath, metadata) {
     await updateSitemap(metadata);
     
     // Deploy content via git
-    await deployContentWithGit(metadata, [destPath]);
+    await deployContentWithGit(metadata, [publicPath]);
     
     // Determine the public URL
     const publicUrl = `${config.website.domain}/tutorials/${filename}`;
@@ -58,9 +61,61 @@ async function uploadContent(localPath, metadata) {
  * Update the tutorial index page with the new content
  * @param {object} metadata - Content metadata
  */
+/**
+ * Update the tutorial grid with the new content
+ * @param {object} metadata - Content metadata
+ */
+async function updateTutorialGrid(metadata) {
+  try {
+    const gridPath = path.join(process.cwd(), 'tutorials', 'index.html');
+    
+    // Check if the grid file exists
+    let gridContent;
+    try {
+      gridContent = await fs.readFile(gridPath, 'utf8');
+    } catch (error) {
+      logger.warn('Tutorial grid not found, skipping grid update');
+      return;
+    }
+    
+    // Create a tutorial card for the grid
+    const tutorialCard = `
+                    <article class="tutorial-card">
+                        <div class="card-img">
+                            <img src="/assets/images/tutorials/${metadata.slug}.jpg" alt="${metadata.title}">
+                            <span class="level-badge ${metadata.audience.toLowerCase()}">${metadata.audience}</span>
+                        </div>
+                        <div class="card-content">
+                            <h3><a href="/tutorials/${metadata.slug}">${metadata.title}</a></h3>
+                            <div class="meta">
+                                <span class="category">${metadata.category}</span>
+                                <span class="date">${metadata.publishDate}</span>
+                            </div>
+                            <p>${metadata.metaDescription}</p>
+                            <a href="/tutorials/${metadata.slug}" class="read-more">Read Tutorial <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>`;
+    
+    // Insert the new tutorial card at the beginning of the grid
+    const tutorialsListStartMarker = '<!-- Tutorials List Start -->';
+    const startIndex = gridContent.indexOf(tutorialsListStartMarker) + tutorialsListStartMarker.length;
+    
+    const newGridContent = 
+      gridContent.substring(0, startIndex) + 
+      '\n                    ' + tutorialCard + 
+      gridContent.substring(startIndex);
+    
+    await fs.writeFile(gridPath, newGridContent, 'utf8');
+    logger.info(`Updated tutorial grid with new content: ${metadata.title}`);
+  } catch (error) {
+    logger.error(`Failed to update tutorial grid: ${error.message}`);
+    // Continue despite error - this is not critical
+  }
+}
+
 async function updateTutorialIndex(metadata) {
   try {
-    const indexPath = path.join(process.cwd(), 'tutorials.html');
+    const indexPath = path.join(process.cwd(), 'tutorials', 'index.html');
     
     // Check if the index file exists
     let indexContent;
@@ -121,7 +176,7 @@ function createTutorialCard(metadata) {
                 <div class="tutorial-excerpt">
                     <p>${metadata.metaDescription}</p>
                 </div>
-                <a href="tutorials/${metadata.slug}.html" class="btn btn-primary">Read Tutorial</a>
+                <a href="/tutorials/${metadata.slug}" class="btn btn-primary">Read Tutorial</a>
             </div>
         </div>
   `;
@@ -324,7 +379,7 @@ async function updateSitemap(metadata) {
     // Create a new URL entry
     const urlEntry = `
   <url>
-    <loc>${config.website.domain}/tutorials/${metadata.slug}.html</loc>
+    <loc>${config.website.domain}/tutorials/${metadata.slug}</loc>
     <lastmod>${metadata.publishDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -437,7 +492,7 @@ async function updateHomepage(metadata) {
                         <div class="tutorial-excerpt">
                             <p>${metadata.metaDescription}</p>
                         </div>
-                        <a href="tutorials/${metadata.slug}.html" class="btn btn-primary">Read Tutorial</a>
+                        <a href="tutorials/${metadata.slug}" class="btn btn-primary">Read Tutorial</a>
                     </div>
                 </div>`;
       
